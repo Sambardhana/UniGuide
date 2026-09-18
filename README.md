@@ -1,0 +1,2 @@
+# UniGuide
+University information platform for new students without ERP access, featuring QR-based access, student information, hostel, academics, extracurricular activities, teacher dashboard, and PostgreSQL backend.
