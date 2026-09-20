@@ -1,16 +1,15 @@
 package com.uniguide.app
 
-
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
@@ -20,7 +19,6 @@ import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.common.InputImage
 import com.uniguide.app.databinding.ActivityMainBinding
 import java.util.concurrent.ExecutorService
-import androidx.camera.core.ImageProxy
 import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
@@ -117,10 +115,8 @@ class MainActivity : AppCompatActivity() {
 
             try {
 
-                // Remove previous camera use cases
                 cameraProvider.unbindAll()
 
-                // Connect camera to lifecycle
                 cameraProvider.bindToLifecycle(
                     this,
                     cameraSelector,
@@ -186,12 +182,10 @@ class MainActivity : AppCompatActivity() {
             .addOnFailureListener {
 
                 // QR processing failed.
-                // We don't show an error for every frame.
             }
             .addOnCompleteListener {
 
-                // Very important:
-                // release the camera frame
+                // Release camera frame
                 imageProxy.close()
             }
     }
@@ -205,7 +199,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Check whether QR contains a valid HTTP/HTTPS URL
-        val uri = Uri.parse(qrContent)
+        val uri = android.net.Uri.parse(qrContent)
 
         val isValidUrl =
             (uri.scheme == "http" || uri.scheme == "https") &&
@@ -215,13 +209,17 @@ class MainActivity : AppCompatActivity() {
 
             qrAlreadyScanned = true
 
-            Toast.makeText(
-                this,
-                "QR code detected! Opening UniGuide...",
-                Toast.LENGTH_SHORT
-            ).show()
+            runOnUiThread {
 
-            openBrowser(uri)
+                Toast.makeText(
+                    this,
+                    "QR code detected! Opening UniGuide...",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            // Open Student section
+            openStudentActivity()
 
         } else {
 
@@ -236,28 +234,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun openBrowser(uri: Uri) {
+    private fun openStudentActivity() {
 
-        val browserIntent =
+        val intent =
             Intent(
-                Intent.ACTION_VIEW,
-                uri
+                this,
+                StudentActivity::class.java
             )
 
-        try {
+        startActivity(intent)
 
-            startActivity(browserIntent)
-
-        } catch (exception: Exception) {
-
-            Toast.makeText(
-                this,
-                "No browser app found",
-                Toast.LENGTH_SHORT
-            ).show()
-
-            qrAlreadyScanned = false
-        }
+        finish()
     }
 
     override fun onDestroy() {
