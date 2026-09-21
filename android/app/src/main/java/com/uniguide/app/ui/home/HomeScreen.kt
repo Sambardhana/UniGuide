@@ -37,6 +37,7 @@ fun HomeScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
+<<<<<<< HEAD
             .padding(horizontal = 20.dp, vertical = 24.dp)
     ) {
 
@@ -45,6 +46,142 @@ fun HomeScreen() {
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
             color = Color(0xFF111827)
+=======
+            .background(Color(0xFFBFE8EC))
+    ) {
+
+        // -------------------------------
+        // TOP HEADER
+        // -------------------------------
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(235.dp)
+                .clip(
+                    RoundedCornerShape(
+                        bottomStart = 32.dp,
+                        bottomEnd = 32.dp
+                    )
+                )
+                .background(
+                    Brush.linearGradient(
+                        colors = listOf(
+                            Color(0xFF07516A),
+                             Color(0xFF1498AA),
+                             Color(0xFFBFE8EC)
+                        )
+                    )
+                )
+        ) {
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(
+                        start = 24.dp,
+                        end = 24.dp,
+                        top = 28.dp
+                    )
+            ) {
+
+                // Logo / App name
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    Box(
+                        modifier = Modifier
+                            .size(52.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(Color.White),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "🎓",
+                            fontSize = 27.sp
+                        )
+                    }
+
+                    Spacer(
+                        modifier = Modifier.width(14.dp)
+                    )
+
+                    Column {
+
+                        Text(
+                            text = "UniGuide",
+                            color = Color.White,
+                            fontSize = 25.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+
+                        Text(
+                            text = "Student Portal",
+                            color = Color.White.copy(alpha = 0.85f),
+                            fontSize = 13.sp
+                        )
+                    }
+                }
+
+                Spacer(
+                    modifier = Modifier.height(25.dp)
+                )
+
+                Text(
+                    text = "Hello, Student 👋",
+                    color = Color.White,
+                    fontSize = 29.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Spacer(
+                    modifier = Modifier.height(5.dp)
+                )
+
+                Text(
+                    text = "Everything you need to explore your university.",
+                    color = Color.White.copy(alpha = 0.9f),
+                    fontSize = 14.sp
+                )
+            }
+        }
+
+        // -------------------------------
+        // SEARCH
+        // -------------------------------
+
+        OutlinedTextField(
+            value = searchText,
+            onValueChange = {
+                searchText = it
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    horizontal = 20.dp
+                )
+                .padding(top = 16.dp),
+            placeholder = {
+                Text(
+                    text = "Search UniGuide"
+                )
+            },
+            leadingIcon = {
+                Text(
+                    text = "🔍",
+                    fontSize = 20.sp
+                )
+            },
+            singleLine = true,
+            shape = RoundedCornerShape(18.dp),
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                focusedIndicatorColor = Color(0xFF3B82F6),
+                unfocusedIndicatorColor = Color(0xFFE1E7EF)
+            )
+>>>>>>> 995fa08 (Update student UI theme and splash screen)
         )
 
         Text(
