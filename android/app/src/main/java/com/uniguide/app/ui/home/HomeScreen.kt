@@ -1,20 +1,37 @@
 package com.uniguide.app.ui.home
 
+
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -34,25 +51,23 @@ private val homeItems = listOf(
 @Composable
 fun HomeScreen() {
 
+    var searchText by remember {
+        mutableStateOf("")
+    }
+
+    val filteredItems = homeItems.filter {
+        it.contains(searchText, ignoreCase = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-<<<<<<< HEAD
-            .padding(horizontal = 20.dp, vertical = 24.dp)
+            .background(Color(0xFFF3FCFD))
     ) {
 
-        Text(
-            text = "Hello, Student 👋",
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF111827)
-=======
-            .background(Color(0xFFBFE8EC))
-    ) {
-
-        // -------------------------------
+        // ---------------------------------------------------------
         // TOP HEADER
-        // -------------------------------
+        // ---------------------------------------------------------
 
         Box(
             modifier = Modifier
@@ -68,8 +83,8 @@ fun HomeScreen() {
                     Brush.linearGradient(
                         colors = listOf(
                             Color(0xFF07516A),
-                             Color(0xFF1498AA),
-                             Color(0xFFBFE8EC)
+                            Color(0xFF1498AA),
+                            Color(0xFFBFE8EC)
                         )
                     )
                 )
@@ -85,7 +100,10 @@ fun HomeScreen() {
                     )
             ) {
 
-                // Logo / App name
+                // -------------------------------------------------
+                // APP LOGO + NAME
+                // -------------------------------------------------
+
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -93,10 +111,13 @@ fun HomeScreen() {
                     Box(
                         modifier = Modifier
                             .size(52.dp)
-                            .clip(RoundedCornerShape(16.dp))
+                            .clip(
+                                RoundedCornerShape(16.dp)
+                            )
                             .background(Color.White),
                         contentAlignment = Alignment.Center
                     ) {
+
                         Text(
                             text = "🎓",
                             fontSize = 27.sp
@@ -128,6 +149,10 @@ fun HomeScreen() {
                     modifier = Modifier.height(25.dp)
                 )
 
+                // -------------------------------------------------
+                // GREETING
+                // -------------------------------------------------
+
                 Text(
                     text = "Hello, Student 👋",
                     color = Color.White,
@@ -147,9 +172,9 @@ fun HomeScreen() {
             }
         }
 
-        // -------------------------------
-        // SEARCH
-        // -------------------------------
+        // ---------------------------------------------------------
+        // SEARCH BAR
+        // ---------------------------------------------------------
 
         OutlinedTextField(
             value = searchText,
@@ -161,7 +186,9 @@ fun HomeScreen() {
                 .padding(
                     horizontal = 20.dp
                 )
-                .padding(top = 16.dp),
+                .padding(
+                    top = 16.dp
+                ),
             placeholder = {
                 Text(
                     text = "Search UniGuide"
@@ -178,43 +205,114 @@ fun HomeScreen() {
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.White,
                 unfocusedContainerColor = Color.White,
-                focusedIndicatorColor = Color(0xFF3B82F6),
+                focusedIndicatorColor = Color(0xFF1498AA),
                 unfocusedIndicatorColor = Color(0xFFE1E7EF)
             )
->>>>>>> 995fa08 (Update student UI theme and splash screen)
         )
+
+        // ---------------------------------------------------------
+        // SECTION TITLE
+        // ---------------------------------------------------------
 
         Text(
             text = "What would you like to explore?",
-            modifier = Modifier.padding(top = 6.dp, bottom = 20.dp),
+            modifier = Modifier.padding(
+                start = 20.dp,
+                top = 18.dp,
+                bottom = 12.dp
+            ),
             fontSize = 16.sp,
-            color = Color(0xFF6B7280)
+            fontWeight = FontWeight.SemiBold,
+            color = Color(0xFF07516A)
         )
+
+        // ---------------------------------------------------------
+        // FEATURE GRID
+        // ---------------------------------------------------------
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            modifier = Modifier.fillMaxWidth(),
-            contentPadding = PaddingValues(bottom = 20.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            contentPadding = PaddingValues(
+                start = 20.dp,
+                end = 20.dp,
+                bottom = 20.dp
+            ),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            items(homeItems) { item ->
 
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color(0xFFF3F6FF)
-                    )
-                ) {
-                    Text(
-                        text = item,
-                        modifier = Modifier.padding(20.dp),
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color(0xFF1F2937)
-                    )
-                }
+            items(filteredItems) { item ->
+
+                HomeFeatureCard(
+                    title = item
+                )
             }
+        }
+    }
+}
+
+// -------------------------------------------------------------
+// HOME FEATURE CARD
+// -------------------------------------------------------------
+
+@Composable
+private fun HomeFeatureCard(
+    title: String
+) {
+
+    val icon = when (title) {
+        "University" -> "🏛️"
+        "Academics" -> "🎓"
+        "Hostel" -> "🏠"
+        "Facilities" -> "🏢"
+        "Activities" -> "⚽"
+        "Events" -> "📅"
+        "Campus Map" -> "🗺️"
+        "Emergency Contacts" -> "🚨"
+        else -> "📌"
+    }
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(125.dp),
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 2.dp
+        )
+    ) {
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+
+            // Icon
+            Text(
+                text = icon,
+                fontSize = 32.sp
+            )
+
+            Spacer(
+                modifier = Modifier.height(8.dp)
+            )
+
+            // Title
+            Text(
+                text = title,
+                fontSize = 15.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Color(0xFF07516A)
+            )
         }
     }
 }

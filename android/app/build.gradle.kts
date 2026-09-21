@@ -41,15 +41,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-<<<<<<< HEAD
-=======
 
     buildFeatures {
         viewBinding = true
         compose = true
 
     }
->>>>>>> 995fa08 (Update student UI theme and splash screen)
 }
 
 dependencies {

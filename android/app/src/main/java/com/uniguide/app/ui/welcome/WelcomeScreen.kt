@@ -1,34 +1,28 @@
 package com.uniguide.app.ui.welcome
 
 
-<<<<<<< HEAD
-import androidx.compose.foundation.background
-=======
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
->>>>>>> 995fa08 (Update student UI theme and splash screen)
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-<<<<<<< HEAD
-=======
 import androidx.compose.foundation.layout.size
->>>>>>> 995fa08 (Update student UI theme and splash screen)
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -44,11 +38,8 @@ fun WelcomeScreen(
     onTeacherClick: () -> Unit = {},
     onGetStartedClick: () -> Unit = {}
 ) {
-    val primaryBlue = Color(0xFF2563EB)
 
-    // ---------------------------------------------------------
     // UNIGUIDE COLORS
-    // ---------------------------------------------------------
 
     val darkTeal = Color(0xFF08758A)
     val mainTeal = Color(0xFF1498AA)
@@ -58,69 +49,11 @@ fun WelcomeScreen(
     val darkText = Color(0xFF07516A)
     val secondaryText = Color(0xFF5F7E86)
 
-    // ---------------------------------------------------------
-    // MAIN BACKGROUND
-    // ---------------------------------------------------------
+    // MAIN SCREEN
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-<<<<<<< HEAD
-            .background(Color.White)
-            .padding(horizontal = 28.dp)
-    ) {
-
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-
-            Text(
-                text = "UniGuide",
-                fontSize = 38.sp,
-                fontWeight = FontWeight.Bold,
-                color = primaryBlue
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            Text(
-                text = "Welcome to UniGuide",
-                fontSize = 25.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color(0xFF111827),
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = "Your university companion for campus information, academics, hostel, activities and more.",
-                fontSize = 16.sp,
-                color = Color(0xFF6B7280),
-                textAlign = TextAlign.Center,
-                lineHeight = 24.sp
-            )
-
-            Spacer(modifier = Modifier.height(40.dp))
-
-            Button(
-                onClick = onStudentClick,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                shape = RoundedCornerShape(14.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = primaryBlue
-                )
-            ) {
-                Text(
-                    text = "Student",
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.SemiBold
-                )
-=======
             .background(
                 Brush.verticalGradient(
                     colors = listOf(
@@ -139,24 +72,21 @@ fun WelcomeScreen(
                     horizontal = 20.dp,
                     vertical = 25.dp
                 ),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
         ) {
 
-            // =================================================
             // LANGUAGE SELECTOR
-            // =================================================
 
             Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically
             ) {
 
                 Box(
                     modifier = Modifier
-                        .clip(
-                            RoundedCornerShape(20.dp)
-                        )
+                        .clip(RoundedCornerShape(20.dp))
                         .background(Color.White)
                         .padding(
                             horizontal = 15.dp,
@@ -201,17 +131,14 @@ fun WelcomeScreen(
                 modifier = Modifier.height(20.dp)
             )
 
-            // =================================================
             // UNIGUIDE LOGO
-            // =================================================
 
             Image(
                 painter = painterResource(
                     id = R.drawable.uniguide_logo
                 ),
                 contentDescription = "UniGuide Logo",
-                modifier = Modifier
-                    .size(200.dp),
+                modifier = Modifier.size(200.dp),
                 contentScale = ContentScale.Fit
             )
 
@@ -219,9 +146,8 @@ fun WelcomeScreen(
                 modifier = Modifier.height(5.dp)
             )
 
-            // =================================================
             // WELCOME TEXT
-            // =================================================
+
 
             Text(
                 text = "Welcome to",
@@ -240,12 +166,22 @@ fun WelcomeScreen(
             )
 
             Spacer(
+                modifier = Modifier.height(10.dp)
+            )
+
+            Text(
+                text = "Your university companion for campus information, academics, hostel, activities and more.",
+                fontSize = 14.sp,
+                color = secondaryText,
+                textAlign = TextAlign.Center,
+                lineHeight = 21.sp
+            )
+
+            Spacer(
                 modifier = Modifier.height(18.dp)
             )
 
-            // =================================================
             // CAMPUS IMAGE
-            // =================================================
 
             Image(
                 painter = painterResource(
@@ -265,19 +201,16 @@ fun WelcomeScreen(
                 modifier = Modifier.height(18.dp)
             )
 
-            // =================================================
-            // STUDENT + TEACHER
-            // =================================================
+            // -------------------------------------------------
+            // STUDENT + TEACHER CARDS
+            // -------------------------------------------------
 
             Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
 
-                // -------------------------------------------------
-                // STUDENT
-                // -------------------------------------------------
+                // STUDENT CARD
 
                 Card(
                     modifier = Modifier
@@ -286,24 +219,18 @@ fun WelcomeScreen(
                         .clickable {
                             onStudentClick()
                         },
-
                     shape = RoundedCornerShape(20.dp),
-
                     colors = CardDefaults.cardColors(
                         containerColor = Color(0xFFE9F9FB)
                     ),
-
                     elevation = CardDefaults.cardElevation(
                         defaultElevation = 0.dp
                     )
                 ) {
 
                     Column(
-                        modifier = Modifier
-                            .fillMaxSize(),
-
+                        modifier = Modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally,
-
                         verticalArrangement = Arrangement.Center
                     ) {
 
@@ -325,9 +252,7 @@ fun WelcomeScreen(
                     }
                 }
 
-                // -------------------------------------------------
-                // TEACHER
-                // -------------------------------------------------
+                // TEACHER CARD
 
                 Card(
                     modifier = Modifier
@@ -336,24 +261,18 @@ fun WelcomeScreen(
                         .clickable {
                             onTeacherClick()
                         },
-
                     shape = RoundedCornerShape(20.dp),
-
                     colors = CardDefaults.cardColors(
                         containerColor = Color(0xFFE9F9FB)
                     ),
-
                     elevation = CardDefaults.cardElevation(
                         defaultElevation = 0.dp
                     )
                 ) {
 
                     Column(
-                        modifier = Modifier
-                            .fillMaxSize(),
-
+                        modifier = Modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally,
-
                         verticalArrangement = Arrangement.Center
                     ) {
 
@@ -380,9 +299,7 @@ fun WelcomeScreen(
                 modifier = Modifier.height(20.dp)
             )
 
-            // =================================================
             // GET STARTED BUTTON
-            // =================================================
 
             Box(
                 modifier = Modifier
@@ -402,7 +319,6 @@ fun WelcomeScreen(
                     .clickable {
                         onGetStartedClick()
                     },
-
                 contentAlignment = Alignment.Center
             ) {
 
@@ -428,29 +344,13 @@ fun WelcomeScreen(
                         color = Color.White
                     )
                 }
->>>>>>> 995fa08 (Update student UI theme and splash screen)
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(
+                modifier = Modifier.height(16.dp)
+            )
 
-<<<<<<< HEAD
-            OutlinedButton(
-                onClick = { },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                shape = RoundedCornerShape(14.dp)
-            ) {
-                Text(
-                    text = "Teacher",
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.SemiBold
-                )
-            }
-=======
-            // =================================================
             // BOTTOM TEXT
-            // =================================================
 
             Text(
                 text = "Explore • Connect • Build Your Future",
@@ -470,17 +370,6 @@ fun WelcomeScreen(
                 color = secondaryText,
                 textAlign = TextAlign.Center
             )
->>>>>>> 995fa08 (Update student UI theme and splash screen)
         }
-
-        Text(
-            text = "Your university information, all in one place.",
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 24.dp),
-            fontSize = 13.sp,
-            color = Color(0xFF9CA3AF),
-            textAlign = TextAlign.Center
-        )
     }
 }
