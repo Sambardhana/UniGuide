@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.uniguide.app.ui.home.HomeScreen
 import com.uniguide.app.ui.academics.AcademicsScreen
 import com.uniguide.app.ui.activities.ActivitiesScreen
 import com.uniguide.app.ui.campusmap.CampusMapScreen
@@ -47,6 +48,10 @@ fun UniGuideNavGraph() {
             )
         }
 
+        composable(Routes.HOME) {
+            HomeScreen(){
+
+            }
         // Student Home / Dashboard
         composable(Routes.HOME) {
             HomeScreen(
