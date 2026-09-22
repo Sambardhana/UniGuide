@@ -1,5 +1,3 @@
-//package com.uniguide.app.ui.navigation
-
 package com.uniguide.app.navigation
 
 import androidx.compose.runtime.Composable
