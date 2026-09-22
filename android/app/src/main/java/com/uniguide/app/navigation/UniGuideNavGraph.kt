@@ -33,7 +33,9 @@ fun UniGuideNavGraph() {
         }
 
         composable(Routes.HOME) {
-            HomeScreen()
+            HomeScreen(){
+
+            }
         }
     }
 }
