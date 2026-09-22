@@ -69,7 +69,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/contacts/**").permitAll()
 
                         // Role-specific protected endpoints
-                        .requestMatchers("/api/teacher/**").hasRole("TEACHER")
+                        .requestMatchers("/api/teacher/**").hasAnyRole("TEACHER", "ADMIN")
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
 
                         // All other endpoints require authentication
