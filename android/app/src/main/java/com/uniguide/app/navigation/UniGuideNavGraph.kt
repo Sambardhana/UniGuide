@@ -4,6 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+
+// ============================================================
+// STUDENT SCREENS
+// ============================================================
+
 import com.uniguide.app.ui.academics.AcademicsScreen
 import com.uniguide.app.ui.activities.ActivitiesScreen
 import com.uniguide.app.ui.campusmap.CampusMapScreen
@@ -16,45 +21,110 @@ import com.uniguide.app.ui.splash.SplashScreen
 import com.uniguide.app.ui.university.UniversityScreen
 import com.uniguide.app.ui.welcome.WelcomeScreen
 
+// ============================================================
+// TEACHER SCREENS
+// ============================================================
+
+import com.uniguide.app.ui.teacher.dashboard.TeacherDashboardScreen
+import com.uniguide.app.ui.teacher.department.DepartmentScreen
+import com.uniguide.app.ui.teacher.notices.TeacherNoticesScreen
+import com.uniguide.app.ui.teacher.profile.TeacherProfileScreen
+import com.uniguide.app.ui.teacher.resources.TeacherResourcesScreen
+import com.uniguide.app.ui.teacher.schedule.TeacherScheduleScreen
+
+
+// ============================================================
+// ROUTES
+// ============================================================
+
 object Routes {
 
+    // --------------------------------------------------------
+    // Common
+    // --------------------------------------------------------
+
     const val SPLASH = "splash"
+
     const val WELCOME = "welcome"
+
+
+    // --------------------------------------------------------
+    // Student
+    // --------------------------------------------------------
+
     const val HOME = "home"
 
     const val UNIVERSITY = "university"
+
     const val ACADEMICS = "academics"
+
     const val HOSTEL = "hostel"
+
     const val FACILITIES = "facilities"
+
     const val ACTIVITIES = "activities"
+
     const val EVENTS = "events"
+
     const val CAMPUS_MAP = "campus_map"
+
     const val EMERGENCY = "emergency"
+
+
+    // --------------------------------------------------------
+    // Teacher
+    // --------------------------------------------------------
+
+    const val TEACHER_DASHBOARD = "teacher_dashboard"
+
+    const val TEACHER_PROFILE = "teacher_profile"
+
+    const val TEACHER_SCHEDULE = "teacher_schedule"
+
+    const val TEACHER_NOTICES = "teacher_notices"
+
+    const val TEACHER_DEPARTMENT = "teacher_department"
+
+    const val TEACHER_RESOURCES = "teacher_resources"
 }
+
+
+// ============================================================
+// NAVIGATION GRAPH
+// ============================================================
 
 @Composable
 fun UniGuideNavGraph() {
 
     val navController = rememberNavController()
 
+
     NavHost(
+
         navController = navController,
+
         startDestination = Routes.SPLASH
     ) {
 
-        // ------------------------------------------------
-        // Splash Screen
-        // ------------------------------------------------
+
+        // ====================================================
+        // SPLASH
+        // ====================================================
 
         composable(Routes.SPLASH) {
 
             SplashScreen(
+
                 onSplashFinished = {
 
                     navController.navigate(
                         Routes.WELCOME
                     ) {
-                        popUpTo(Routes.SPLASH) {
+
+                        popUpTo(
+                            Routes.SPLASH
+                        ) {
+
                             inclusive = true
                         }
                     }
@@ -62,13 +132,18 @@ fun UniGuideNavGraph() {
             )
         }
 
-        // ------------------------------------------------
-        // Welcome Screen
-        // ------------------------------------------------
+
+        // ====================================================
+        // WELCOME
+        // ====================================================
 
         composable(Routes.WELCOME) {
 
             WelcomeScreen(
+
+                // --------------------------------------------
+                // STUDENT
+                // --------------------------------------------
 
                 onStudentClick = {
 
@@ -77,10 +152,22 @@ fun UniGuideNavGraph() {
                     )
                 },
 
+
+                // --------------------------------------------
+                // TEACHER
+                // --------------------------------------------
+
                 onTeacherClick = {
 
-                    // Teacher screen will be added later.
+                    navController.navigate(
+                        Routes.TEACHER_DASHBOARD
+                    )
                 },
+
+
+                // --------------------------------------------
+                // GET STARTED
+                // --------------------------------------------
 
                 onGetStartedClick = {
 
@@ -91,60 +178,77 @@ fun UniGuideNavGraph() {
             )
         }
 
-        // ------------------------------------------------
-        // Student Home
-        // ------------------------------------------------
+
+        // ====================================================
+        // STUDENT HOME
+        // ====================================================
 
         composable(Routes.HOME) {
 
             HomeScreen(
+
                 onItemClick = { item ->
 
                     when (item) {
 
                         "University" -> {
+
                             navController.navigate(
                                 Routes.UNIVERSITY
                             )
                         }
 
+
                         "Academics" -> {
+
                             navController.navigate(
                                 Routes.ACADEMICS
                             )
                         }
 
+
                         "Hostel" -> {
+
                             navController.navigate(
                                 Routes.HOSTEL
                             )
                         }
 
+
                         "Facilities" -> {
+
                             navController.navigate(
                                 Routes.FACILITIES
                             )
                         }
 
+
                         "Activities" -> {
+
                             navController.navigate(
                                 Routes.ACTIVITIES
                             )
                         }
 
+
                         "Events" -> {
+
                             navController.navigate(
                                 Routes.EVENTS
                             )
                         }
 
+
                         "Campus Map" -> {
+
                             navController.navigate(
                                 Routes.CAMPUS_MAP
                             )
                         }
 
+
                         "Emergency Contacts" -> {
+
                             navController.navigate(
                                 Routes.EMERGENCY
                             )
@@ -154,76 +258,211 @@ fun UniGuideNavGraph() {
             )
         }
 
-        // ------------------------------------------------
-        // University
-        // ------------------------------------------------
+
+        // ====================================================
+        // STUDENT UNIVERSITY
+        // ====================================================
 
         composable(Routes.UNIVERSITY) {
 
             UniversityScreen()
         }
 
-        // ------------------------------------------------
-        // Academics
-        // ------------------------------------------------
+
+        // ====================================================
+        // STUDENT ACADEMICS
+        // ====================================================
 
         composable(Routes.ACADEMICS) {
 
             AcademicsScreen()
         }
 
-        // ------------------------------------------------
-        // Hostel
-        // ------------------------------------------------
+
+        // ====================================================
+        // STUDENT HOSTEL
+        // ====================================================
 
         composable(Routes.HOSTEL) {
 
             HostelScreen()
         }
 
-        // ------------------------------------------------
-        // Facilities
-        // ------------------------------------------------
+
+        // ====================================================
+        // STUDENT FACILITIES
+        // ====================================================
 
         composable(Routes.FACILITIES) {
 
             FacilitiesScreen()
         }
 
-        // ------------------------------------------------
-        // Activities
-        // ------------------------------------------------
+
+        // ====================================================
+        // STUDENT ACTIVITIES
+        // ====================================================
 
         composable(Routes.ACTIVITIES) {
 
             ActivitiesScreen()
         }
 
-        // ------------------------------------------------
-        // Events
-        // ------------------------------------------------
+
+        // ====================================================
+        // STUDENT EVENTS
+        // ====================================================
 
         composable(Routes.EVENTS) {
 
             EventsScreen()
         }
 
-        // ------------------------------------------------
-        // Campus Map
-        // ------------------------------------------------
+
+        // ====================================================
+        // STUDENT CAMPUS MAP
+        // ====================================================
 
         composable(Routes.CAMPUS_MAP) {
 
             CampusMapScreen()
         }
 
-        // ------------------------------------------------
-        // Emergency Contacts
-        // ------------------------------------------------
+
+        // ====================================================
+        // STUDENT EMERGENCY
+        // ====================================================
 
         composable(Routes.EMERGENCY) {
 
             EmergencyScreen()
+        }
+
+
+        // ====================================================
+        // TEACHER DASHBOARD
+        // ====================================================
+
+        composable(Routes.TEACHER_DASHBOARD) {
+
+            TeacherDashboardScreen(
+
+                onItemClick = { item ->
+
+                    when (item) {
+
+
+                        // ------------------------------------
+                        // PROFILE
+                        // ------------------------------------
+
+                        "Profile" -> {
+
+                            navController.navigate(
+                                Routes.TEACHER_PROFILE
+                            )
+                        }
+
+
+                        // ------------------------------------
+                        // SCHEDULE
+                        // ------------------------------------
+
+                        "Schedule" -> {
+
+                            navController.navigate(
+                                Routes.TEACHER_SCHEDULE
+                            )
+                        }
+
+
+                        // ------------------------------------
+                        // NOTICES
+                        // ------------------------------------
+
+                        "Notices" -> {
+
+                            navController.navigate(
+                                Routes.TEACHER_NOTICES
+                            )
+                        }
+
+
+                        // ------------------------------------
+                        // DEPARTMENT
+                        // ------------------------------------
+
+                        "Department" -> {
+
+                            navController.navigate(
+                                Routes.TEACHER_DEPARTMENT
+                            )
+                        }
+
+
+                        // ------------------------------------
+                        // RESOURCES
+                        // ------------------------------------
+
+                        "Resources" -> {
+
+                            navController.navigate(
+                                Routes.TEACHER_RESOURCES
+                            )
+                        }
+                    }
+                }
+            )
+        }
+
+
+        // ====================================================
+        // TEACHER PROFILE
+        // ====================================================
+
+        composable(Routes.TEACHER_PROFILE) {
+
+            TeacherProfileScreen()
+        }
+
+
+        // ====================================================
+        // TEACHER SCHEDULE
+        // ====================================================
+
+        composable(Routes.TEACHER_SCHEDULE) {
+
+            TeacherScheduleScreen()
+        }
+
+
+        // ====================================================
+        // TEACHER NOTICES
+        // ====================================================
+
+        composable(Routes.TEACHER_NOTICES) {
+
+            TeacherNoticesScreen()
+        }
+
+
+        // ====================================================
+        // TEACHER DEPARTMENT
+        // ====================================================
+
+        composable(Routes.TEACHER_DEPARTMENT) {
+
+            DepartmentScreen()
+        }
+
+
+        // ====================================================
+        // TEACHER RESOURCES
+        // ====================================================
+
+        composable(Routes.TEACHER_RESOURCES) {
+
+            TeacherResourcesScreen()
         }
     }
 }
