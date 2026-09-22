@@ -31,61 +31,39 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+
 private data class HomeItem(
     val title: String,
-    val subtitle: String,
     val icon: String
 )
 
+
 private val homeItems = listOf(
-    HomeItem(
-        "University",
-        "University information",
-        "🏫"
-    ),
-    HomeItem(
-        "Academics",
-        "Departments & courses",
-        "📚"
-    ),
-    HomeItem(
-        "Hostel",
-        "Hostel information",
-        "🛏️"
-    ),
-    HomeItem(
-        "Facilities",
-        "Campus facilities",
-        "🏢"
-    ),
-    HomeItem(
-        "Activities",
-        "Student activities",
-        "🎭"
-    ),
-    HomeItem(
-        "Events",
-        "Upcoming events",
-        "📅"
-    ),
-    HomeItem(
-        "Campus Map",
-        "Find places on campus",
-        "🗺️"
-    ),
-    HomeItem(
-        "Emergency Contacts",
-        "Important contacts",
-        "🚨"
-    )
+
+    HomeItem("University", "🏛️"),
+
+    HomeItem("Academics", "🎓"),
+
+    HomeItem("Hostel", "🏠"),
+
+    HomeItem("Facilities", "🏢"),
+
+    HomeItem("Activities", "⚽"),
+
+    HomeItem("Events", "📅"),
+
+    HomeItem("Campus Map", "🗺️"),
+
+    HomeItem("Emergency Contacts", "🚨")
 )
+
 
 @Composable
 fun HomeScreen(
@@ -96,207 +74,249 @@ fun HomeScreen(
         mutableStateOf("")
     }
 
-    val filteredItems = homeItems.filter {
-        it.title.contains(searchText, ignoreCase = true)
+    val filteredItems = homeItems.filter { item ->
+        item.title.contains(
+            searchText,
+            ignoreCase = true
+        )
     }
+
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF7F9FC))
+            .background(
+                Color(0xFFF3FBFD)
+            )
     ) {
 
-        // -------------------------------
-        // TOP HEADER
-        // -------------------------------
+        // =================================================
+        // HEADER
+        // =================================================
 
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(235.dp)
                 .clip(
                     RoundedCornerShape(
-                        bottomStart = 32.dp,
-                        bottomEnd = 32.dp
+                        bottomStart = 40.dp,
+                        bottomEnd = 40.dp
                     )
                 )
                 .background(
-                    Brush.linearGradient(
+                    brush = Brush.horizontalGradient(
                         colors = listOf(
-                            Color(0xFF1769E0),
-                            Color(0xFF4F8EF7),
-                            Color(0xFF74B9FF)
+                            Color(0xFF08758A),
+                            Color(0xFF1498AA),
+                            Color(0xFF71D0D5)
                         )
                     )
+                )
+                .padding(
+                    start = 36.dp,
+                    end = 36.dp,
+                    top = 22.dp,
+                    bottom = 28.dp
                 )
         ) {
 
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(
-                        start = 24.dp,
-                        end = 24.dp,
-                        top = 28.dp
-                    )
+            // Logo + title
+            Row(
+                verticalAlignment = Alignment.CenterVertically
             ) {
 
-                // Logo / App name
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
+                Box(
+                    modifier = Modifier
+                        .size(72.dp)
+                        .clip(
+                            RoundedCornerShape(20.dp)
+                        )
+                        .background(Color.White),
+
+                    contentAlignment = Alignment.Center
                 ) {
 
-                    Box(
-                        modifier = Modifier
-                            .size(52.dp)
-                            .clip(RoundedCornerShape(16.dp))
-                            .background(Color.White),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "🎓",
-                            fontSize = 27.sp
-                        )
-                    }
-
-                    Spacer(
-                        modifier = Modifier.width(14.dp)
+                    Text(
+                        text = "🎓",
+                        fontSize = 34.sp
                     )
-
-                    Column {
-
-                        Text(
-                            text = "UniGuide",
-                            color = Color.White,
-                            fontSize = 25.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-
-                        Text(
-                            text = "Student Portal",
-                            color = Color.White.copy(alpha = 0.85f),
-                            fontSize = 13.sp
-                        )
-                    }
                 }
 
-                Spacer(
-                    modifier = Modifier.height(25.dp)
-                )
-
-                Text(
-                    text = "Hello, Student 👋",
-                    color = Color.White,
-                    fontSize = 29.sp,
-                    fontWeight = FontWeight.Bold
-                )
 
                 Spacer(
-                    modifier = Modifier.height(5.dp)
+                    modifier = Modifier.width(18.dp)
                 )
 
-                Text(
-                    text = "Everything you need to explore your university.",
-                    color = Color.White.copy(alpha = 0.9f),
-                    fontSize = 14.sp
-                )
+
+                Column {
+
+                    Text(
+                        text = "UniGuide",
+                        color = Color.White,
+                        fontSize = 27.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+
+                    Text(
+                        text = "Student Portal",
+                        color = Color.White.copy(
+                            alpha = 0.85f
+                        ),
+                        fontSize = 16.sp
+                    )
+                }
             }
+
+
+            Spacer(
+                modifier = Modifier.height(25.dp)
+            )
+
+
+            Text(
+                text = "Hello, Student 👋",
+                color = Color.White,
+                fontSize = 29.sp,
+                fontWeight = FontWeight.Bold
+            )
+
+
+            Spacer(
+                modifier = Modifier.height(7.dp)
+            )
+
+
+            Text(
+                text = "Everything you need to explore your university.",
+                color = Color.White.copy(
+                    alpha = 0.9f
+                ),
+                fontSize = 15.sp
+            )
         }
 
-        // -------------------------------
+
+        // =================================================
         // SEARCH
-        // -------------------------------
+        // =================================================
+
+        Spacer(
+            modifier = Modifier.height(18.dp)
+        )
+
 
         OutlinedTextField(
+
             value = searchText,
+
             onValueChange = {
                 searchText = it
             },
+
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    horizontal = 20.dp
+                    horizontal = 31.dp
                 )
-                .padding(top = 16.dp),
+                .height(68.dp),
+
             placeholder = {
+
                 Text(
-                    text = "Search UniGuide"
+                    text = "Search UniGuide",
+                    color = Color(0xFF65777B),
+                    fontSize = 17.sp
                 )
             },
+
             leadingIcon = {
+
                 Text(
                     text = "🔍",
-                    fontSize = 20.sp
+                    fontSize = 23.sp
                 )
             },
+
             singleLine = true,
-            shape = RoundedCornerShape(18.dp),
+
+            shape = RoundedCornerShape(22.dp),
+
             colors = TextFieldDefaults.colors(
+
                 focusedContainerColor = Color.White,
+
                 unfocusedContainerColor = Color.White,
-                focusedIndicatorColor = Color(0xFF3B82F6),
-                unfocusedIndicatorColor = Color(0xFFE1E7EF)
+
+                disabledContainerColor = Color.White,
+
+                focusedIndicatorColor = Color(0xFFD9E3E5),
+
+                unfocusedIndicatorColor = Color(0xFFD9E3E5),
+
+                cursorColor = Color(0xFF08758A)
             )
         )
 
+
+        // =================================================
+        // SECTION TITLE
+        // =================================================
+
         Spacer(
-            modifier = Modifier.height(20.dp)
+            modifier = Modifier.height(17.dp)
         )
 
-        // -------------------------------
-        // SECTION TITLE
-        // -------------------------------
 
-        Row(
+        Text(
+            text = "What would you like to explore?",
+
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 22.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+                .padding(
+                    horizontal = 31.dp
+                ),
 
-            Text(
-                text = "Explore UniGuide",
-                fontSize = 21.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF111827)
-            )
+            color = Color(0xFF07516A),
 
-            Spacer(
-                modifier = Modifier.weight(1f)
-            )
+            fontSize = 19.sp,
 
-            Text(
-                text = "${filteredItems.size} options",
-                fontSize = 12.sp,
-                color = Color(0xFF64748B)
-            )
-        }
-
-        Spacer(
-            modifier = Modifier.height(10.dp)
+            fontWeight = FontWeight.Bold
         )
 
-        // -------------------------------
-        // FEATURE CARDS
-        // -------------------------------
+
+        // =================================================
+        // CARDS
+        // =================================================
+
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
+
 
         LazyVerticalGrid(
+
             columns = GridCells.Fixed(2),
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f),
+
+            modifier = Modifier.fillMaxSize(),
+
             contentPadding = PaddingValues(
-                start = 18.dp,
-                end = 18.dp,
-                bottom = 25.dp
+                start = 30.dp,
+                end = 30.dp,
+                bottom = 18.dp
             ),
-            horizontalArrangement = Arrangement.spacedBy(14.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp)
+
+            horizontalArrangement = Arrangement.spacedBy(
+                16.dp
+            ),
+
+            verticalArrangement = Arrangement.spacedBy(
+                14.dp
+            )
         ) {
 
             items(filteredItems) { item ->
 
-                StylishHomeCard(
+                HomeFeatureCard(
                     item = item,
                     onClick = {
                         onItemClick(item.title)
@@ -307,87 +327,62 @@ fun HomeScreen(
     }
 }
 
+
 @Composable
-private fun StylishHomeCard(
+private fun HomeFeatureCard(
     item: HomeItem,
     onClick: () -> Unit
 ) {
 
     Card(
+
         modifier = Modifier
             .fillMaxWidth()
-            .height(165.dp)
-            .shadow(
-                elevation = 5.dp,
-                shape = RoundedCornerShape(24.dp)
-            )
+            .height(145.dp)
             .clickable {
                 onClick()
             },
+
         shape = RoundedCornerShape(24.dp),
+
         colors = CardDefaults.cardColors(
             containerColor = Color.White
+        ),
+
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 3.dp
         )
     ) {
 
         Column(
+
             modifier = Modifier
                 .fillMaxSize()
-                .padding(17.dp)
+                .padding(12.dp),
+
+            horizontalAlignment = Alignment.CenterHorizontally,
+
+            verticalArrangement = Arrangement.Center
         ) {
 
-            // Icon
-            Box(
-                modifier = Modifier
-                    .size(55.dp)
-                    .clip(RoundedCornerShape(17.dp))
-                    .background(
-                        Brush.linearGradient(
-                            colors = listOf(
-                                Color(0xFFEAF2FF),
-                                Color(0xFFF3F7FF)
-                            )
-                        )
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
+            Text(
+                text = item.icon,
+                fontSize = 38.sp,
+                textAlign = TextAlign.Center
+            )
 
-                Text(
-                    text = item.icon,
-                    fontSize = 28.sp
-                )
-            }
 
             Spacer(
-                modifier = Modifier.height(13.dp)
+                modifier = Modifier.height(9.dp)
             )
+
 
             Text(
                 text = item.title,
+                color = Color(0xFF07516A),
                 fontSize = 17.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFF111827)
-            )
-
-            Spacer(
-                modifier = Modifier.height(4.dp)
-            )
-
-            Text(
-                text = item.subtitle,
-                fontSize = 12.sp,
-                color = Color(0xFF64748B)
-            )
-
-            Spacer(
-                modifier = Modifier.weight(1f)
-            )
-
-            Text(
-                text = "Explore  →",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color(0xFF2563EB)
+                textAlign = TextAlign.Center
             )
         }
     }
