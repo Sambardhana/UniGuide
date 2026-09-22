@@ -30,7 +30,8 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun WelcomeScreen(
-    onStudentClick: () -> Unit
+    onStudentClick: () -> Unit,
+    onTeacherClick: () -> Unit
 ) {
 
     Box(
@@ -236,7 +237,10 @@ fun WelcomeScreen(
                             )
                             .background(
                                 Color(0xFFF1F5F9)
-                            ),
+                            )
+                            .clickable {
+                                onTeacherClick()
+                            },
                         contentAlignment = Alignment.Center
                     ) {
 

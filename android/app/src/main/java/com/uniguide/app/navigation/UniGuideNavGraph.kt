@@ -14,6 +14,7 @@ import com.uniguide.app.ui.home.HomeScreen
 import com.uniguide.app.ui.hostel.HostelScreen
 import com.uniguide.app.ui.university.UniversityScreen
 import com.uniguide.app.ui.welcome.WelcomeScreen
+import com.uniguide.app.ui.teacher.login.TeacherLoginScreen
 
 object Routes {
     const val WELCOME = "welcome"
@@ -26,6 +27,9 @@ object Routes {
     const val EVENTS = "events"
     const val CAMPUS_MAP = "campus_map"
     const val EMERGENCY = "emergency"
+
+    // Teacher
+    const val TEACHER_LOGIN = "teacher_login"
 }
 
 @Composable
@@ -43,6 +47,9 @@ fun UniGuideNavGraph() {
             WelcomeScreen(
                 onStudentClick = {
                     navController.navigate(Routes.HOME)
+                },
+                onTeacherClick = {
+                    navController.navigate(Routes.TEACHER_LOGIN)
                 }
             )
         }
@@ -128,6 +135,11 @@ fun UniGuideNavGraph() {
         // Emergency
         composable(Routes.EMERGENCY) {
             EmergencyScreen()
+        }
+
+        // Teacher Login
+        composable(Routes.TEACHER_LOGIN) {
+            TeacherLoginScreen()
         }
     }
 }
