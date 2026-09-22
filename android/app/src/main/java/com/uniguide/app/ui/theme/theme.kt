@@ -1,41 +1,66 @@
 package com.uniguide.app.ui.theme
 
-
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Typography
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-private val UniGuideColorScheme = lightColorScheme(
+// UniGuide colors
+val UniGuideTeal = Color(0xFF0F7187)
+val UniGuideTealLight = Color(0xFF5D9CA6)
+val UniGuideLightTeal = Color(0xFFCCE4E7)
 
-    primary = Color(0xFF0F7187),
+val UniGuideBackground = Color(0xFFF3FBFD)
 
-    onPrimary = Color.White,
+val UniGuideWhite = Color(0xFFFFFFFF)
 
-    primaryContainer = Color(0xFFCCE4E7),
+val UniGuideDarkText = Color(0xFF1E2A2E)
 
-    onPrimaryContainer = Color(0xFF1E2A2E),
+val UniGuideSecondaryText = Color(0xFF5D7379)
 
-    secondary = Color(0xFF5D9CA6),
+val UniGuideGreen = Color(0xFF607B5E)
 
-    onSecondary = Color.White,
+val UniGuideGold = Color(0xFFC4B77B)
 
-    background = Color(0xFFF3FBFD),
+private val UniGuideLightColorScheme = lightColorScheme(
 
-    onBackground = Color(0xFF1E2A2E),
+    primary = UniGuideTeal,
 
-    surface = Color.White,
+    onPrimary = UniGuideWhite,
 
-    onSurface = Color(0xFF1E2A2E)
+    primaryContainer = UniGuideLightTeal,
+
+    onPrimaryContainer = UniGuideDarkText,
+
+    secondary = UniGuideTealLight,
+
+    onSecondary = UniGuideWhite,
+
+    secondaryContainer = UniGuideLightTeal,
+
+    onSecondaryContainer = UniGuideDarkText,
+
+    background = UniGuideBackground,
+
+    onBackground = UniGuideDarkText,
+
+    surface = UniGuideWhite,
+
+    onSurface = UniGuideDarkText,
+
+    surfaceVariant = UniGuideLightTeal,
+
+    onSurfaceVariant = UniGuideSecondaryText
 )
 
 @Composable
 fun UniGuideTheme(
     content: @Composable () -> Unit
 ) {
-
     MaterialTheme(
-        colorScheme = UniGuideColorScheme,
+        colorScheme = UniGuideLightColorScheme,
+        typography = Typography(),
         content = content
     )
 }

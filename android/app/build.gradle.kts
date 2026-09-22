@@ -4,14 +4,9 @@ plugins {
 }
 
 android {
-
     namespace = "com.uniguide.app"
 
-    compileSdk {
-        version = release(37) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.uniguide.app"
@@ -23,16 +18,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures {
-        viewBinding = true
-        compose = true
-    }
-
     buildTypes {
         release {
             optimization {
                 enable = false
-
             }
         }
     }
@@ -45,64 +34,38 @@ android {
     buildFeatures {
         viewBinding = true
         compose = true
-
     }
 }
 
 dependencies {
-
-    // ==============================
-    // Member 1 - QR Scanner
-    // ==============================
-
+    // ML Kit & CameraX
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
     implementation("com.google.mlkit:barcode-scanning:17.3.0")
-
     implementation("androidx.camera:camera-core:1.6.2")
     implementation("androidx.camera:camera-camera2:1.6.2")
     implementation("androidx.camera:camera-lifecycle:1.6.2")
     implementation("androidx.camera:camera-view:1.6.2")
 
-
-    // ==============================
-    // Existing Android dependencies
-    // ==============================
-
+    // AndroidX & Material
+    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.core.ktx)
     implementation(libs.material)
 
-
-    // ==============================
-    // Member 2 - Jetpack Compose
-    // ==============================
-
-    val composeBom = platform(libs.androidx.compose.bom)
-
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
-
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.foundation:foundation")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-
-    debugImplementation("androidx.compose.ui:ui-tooling")
-
+    // Jetpack Compose
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
 
+    debugImplementation(libs.androidx.ui.tooling)
 
-    // ==============================
     // Testing
-    // ==============================
-
     testImplementation(libs.junit)
-
-    androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    androidTestImplementation(libs.androidx.espresso.core)
 }
