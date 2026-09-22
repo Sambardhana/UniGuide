@@ -1,8 +1,10 @@
 package com.uniguide.controller;
 
+import com.uniguide.dto.CourseResponse;
 import com.uniguide.dto.DepartmentResponse;
 import com.uniguide.exception.GlobalExceptionHandler;
 import com.uniguide.exception.ResourceNotFoundException;
+import com.uniguide.service.CourseService;
 import com.uniguide.service.DepartmentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -34,10 +36,14 @@ class DepartmentControllerTest {
     @Mock
     private DepartmentService departmentService;
 
+    @Mock
+    private CourseService courseService;
+
     @InjectMocks
     private DepartmentController departmentController;
 
     private DepartmentResponse sampleDepartment;
+    private CourseResponse sampleCourse;
 
     @BeforeEach
     void setUp() {
@@ -54,6 +60,17 @@ class DepartmentControllerTest {
                 .contactPhone("+1-555-100-2000")
                 .locationId(10L)
                 .locationName("Academic Block 1")
+                .build();
+
+        sampleCourse = CourseResponse.builder()
+                .id(101L)
+                .code("CSE101")
+                .title("Introduction to Programming")
+                .description("Basic programming concepts in Java and C")
+                .credits(3)
+                .semester(1)
+                .departmentId(1L)
+                .departmentName("Computer Science & Engineering")
                 .build();
     }
 
@@ -132,6 +149,40 @@ class DepartmentControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.status", is(404)))
                 .andExpect(jsonPath("$.error", is("Not Found")))
+                .andExpect(jsonPath("$.message", is("Department not found with id: '99'")));
+
+        verify(departmentService).getDepartmentById(99L);
+    }
+
+    @Test
+    @DisplayName("GET /api/departments/{id}/courses returns department courses")
+    void getCoursesByDepartment_Success() throws Exception {
+        when(departmentService.getDepartmentById(1L)).thenReturn(sampleDepartment);
+        when(courseService.getCoursesByDepartment(1L)).thenReturn(List.of(sampleCourse));
+
+        mockMvc.perform(get("/api/departments/1/courses")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].id", is(101)))
+                .andExpect(jsonPath("$[0].code", is("CSE101")))
+                .andExpect(jsonPath("$[0].departmentId", is(1)));
+
+        verify(departmentService).getDepartmentById(1L);
+        verify(courseService).getCoursesByDepartment(1L);
+    }
+
+    @Test
+    @DisplayName("GET /api/departments/{id}/courses returns 404 when department not found")
+    void getCoursesByDepartment_DepartmentNotFound() throws Exception {
+        when(departmentService.getDepartmentById(99L))
+                .thenThrow(new ResourceNotFoundException("Department", "id", 99L));
+
+        mockMvc.perform(get("/api/departments/99/courses")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.status", is(404)))
                 .andExpect(jsonPath("$.message", is("Department not found with id: '99'")));
 
         verify(departmentService).getDepartmentById(99L);

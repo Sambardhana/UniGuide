@@ -1,6 +1,8 @@
 package com.uniguide.controller;
 
+import com.uniguide.dto.CourseResponse;
 import com.uniguide.dto.DepartmentResponse;
+import com.uniguide.service.CourseService;
 import com.uniguide.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ import java.util.List;
 public class DepartmentController {
 
     private final DepartmentService departmentService;
+    private final CourseService courseService;
 
     /**
      * Retrieves all academic departments with optional filtering.
@@ -57,5 +60,17 @@ public class DepartmentController {
     @GetMapping("/{id}")
     public ResponseEntity<DepartmentResponse> getDepartmentById(@PathVariable Long id) {
         return ResponseEntity.ok(departmentService.getDepartmentById(id));
+    }
+
+    /**
+     * Retrieves all courses offered by a specific department.
+     *
+     * @param id the primary key identifier of the department
+     * @return list of course response DTOs
+     */
+    @GetMapping("/{id}/courses")
+    public ResponseEntity<List<CourseResponse>> getCoursesByDepartment(@PathVariable Long id) {
+        departmentService.getDepartmentById(id);
+        return ResponseEntity.ok(courseService.getCoursesByDepartment(id));
     }
 }
