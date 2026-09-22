@@ -10,6 +10,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.uniguide.app.navigation.UniGuideNavGraph
 import com.uniguide.app.ui.splash.SplashScreen
+import com.uniguide.app.navigation.UniGuideNavGraph
+
 
 class StudentActivity : ComponentActivity() {
 
@@ -36,6 +38,8 @@ class StudentActivity : ComponentActivity() {
 
                     UniGuideNavGraph()
                 }
+            MaterialTheme {
+                UniGuideNavGraph()
             }
         }
     }
