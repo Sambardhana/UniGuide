@@ -1,39 +1,76 @@
-//package com.uniguide.app.ui.navigation
-
 package com.uniguide.app.navigation
 
+
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.uniguide.app.ui.home.HomeScreen
+import com.uniguide.app.ui.splash.SplashScreen
 import com.uniguide.app.ui.welcome.WelcomeScreen
 
-object Routes {
+object UniGuideRoutes {
+    const val SPLASH = "splash"
     const val WELCOME = "welcome"
     const val HOME = "home"
 }
 
 @Composable
-fun UniGuideNavGraph() {
-
-    val navController = rememberNavController()
-
+fun UniGuideNavGraph(
+    navController: NavHostController = rememberNavController()
+) {
     NavHost(
         navController = navController,
-        startDestination = Routes.WELCOME
+        startDestination = UniGuideRoutes.SPLASH
     ) {
 
-        composable(Routes.WELCOME) {
-            WelcomeScreen(
-                onStudentClick = {
-                    navController.navigate(Routes.HOME)
+        // Splash Screen
+        composable(UniGuideRoutes.SPLASH) {
+
+            SplashScreen(
+                onSplashFinished = {
+
+                    navController.navigate(
+                        UniGuideRoutes.WELCOME
+                    ) {
+                        popUpTo(UniGuideRoutes.SPLASH) {
+                            inclusive = true
+                        }
+                    }
                 }
             )
         }
 
-        composable(Routes.HOME) {
-            HomeScreen()
+        // Welcome Screen
+        composable(UniGuideRoutes.WELCOME) {
+
+            WelcomeScreen(
+
+                onStudentClick = {
+                    navController.navigate(
+                        UniGuideRoutes.HOME
+                    )
+                },
+
+                onTeacherClick = {
+                    // Teacher section will be connected later.
+                },
+
+                onGetStartedClick = {
+                    navController.navigate(
+                        UniGuideRoutes.HOME
+                    )
+                }
+            )
+        }
+
+        // Student Home Screen
+        composable(UniGuideRoutes.HOME) {
+
+            HomeScreen(){
+
+            }
         }
     }
 }
