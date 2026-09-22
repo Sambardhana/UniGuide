@@ -21,5 +21,6 @@ public class ValidationErrorResponse {
     private int status;
     private String error;
     private String message;
+    private String path;
     private Map<String, String> errors;
 }
