@@ -1,4 +1,4 @@
-package com.uniguide.app.ui.home
+package com.uniguide.app.ui.teacher.dashboard
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -39,34 +39,43 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 
-private data class HomeItem(
+private data class TeacherItem(
     val title: String,
     val icon: String
 )
 
 
-private val homeItems = listOf(
+private val teacherItems = listOf(
 
-    HomeItem("University", "🏛️"),
+    TeacherItem(
+        title = "Profile",
+        icon = "👤"
+    ),
 
-    HomeItem("Academics", "🎓"),
+    TeacherItem(
+        title = "Schedule",
+        icon = "🗓️"
+    ),
 
-    HomeItem("Hostel", "🏠"),
+    TeacherItem(
+        title = "Notices",
+        icon = "📢"
+    ),
 
-    HomeItem("Facilities", "🏢"),
+    TeacherItem(
+        title = "Department",
+        icon = "🏢"
+    ),
 
-    HomeItem("Activities", "⚽"),
-
-    HomeItem("Events", "📅"),
-
-    HomeItem("Campus Map", "🗺️"),
-
-    HomeItem("Emergency Contacts", "🚨")
+    TeacherItem(
+        title = "Resources",
+        icon = "📚"
+    )
 )
 
 
 @Composable
-fun HomeScreen(
+fun TeacherDashboardScreen(
     onItemClick: (String) -> Unit
 ) {
 
@@ -74,7 +83,9 @@ fun HomeScreen(
         mutableStateOf("")
     }
 
-    val filteredItems = homeItems.filter { item ->
+
+    val filteredItems = teacherItems.filter { item ->
+
         item.title.contains(
             searchText,
             ignoreCase = true
@@ -90,11 +101,12 @@ fun HomeScreen(
             )
     ) {
 
-        // =================================================
+        // ==================================================
         // HEADER
-        // =================================================
+        // ==================================================
 
         Column(
+
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(
@@ -104,10 +116,15 @@ fun HomeScreen(
                     )
                 )
                 .background(
+
                     brush = Brush.horizontalGradient(
+
                         colors = listOf(
+
                             Color(0xFF08758A),
+
                             Color(0xFF1498AA),
+
                             Color(0xFF71D0D5)
                         )
                     )
@@ -120,24 +137,26 @@ fun HomeScreen(
                 )
         ) {
 
-            // Logo + title
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
                 Box(
+
                     modifier = Modifier
                         .size(72.dp)
                         .clip(
                             RoundedCornerShape(20.dp)
                         )
-                        .background(Color.White),
+                        .background(
+                            Color.White
+                        ),
 
                     contentAlignment = Alignment.Center
                 ) {
 
                     Text(
-                        text = "🎓",
+                        text = "👨‍🏫",
                         fontSize = 34.sp
                     )
                 }
@@ -158,7 +177,7 @@ fun HomeScreen(
                     )
 
                     Text(
-                        text = "Student Portal",
+                        text = "Teacher Portal",
                         color = Color.White.copy(
                             alpha = 0.85f
                         ),
@@ -174,7 +193,7 @@ fun HomeScreen(
 
 
             Text(
-                text = "Hello, Student 👋",
+                text = "Hello, Teacher 👋",
                 color = Color.White,
                 fontSize = 29.sp,
                 fontWeight = FontWeight.Bold
@@ -187,7 +206,7 @@ fun HomeScreen(
 
 
             Text(
-                text = "Everything you need to explore your university.",
+                text = "Everything you need to manage your university work.",
                 color = Color.White.copy(
                     alpha = 0.9f
                 ),
@@ -196,14 +215,14 @@ fun HomeScreen(
         }
 
 
-        // =================================================
-        // SEARCH
-        // =================================================
-
         Spacer(
             modifier = Modifier.height(18.dp)
         )
 
+
+        // ==================================================
+        // SEARCH
+        // ==================================================
 
         OutlinedTextField(
 
@@ -223,7 +242,7 @@ fun HomeScreen(
             placeholder = {
 
                 Text(
-                    text = "Search UniGuide",
+                    text = "Search Teacher Portal",
                     color = Color(0xFF65777B),
                     fontSize = 17.sp
                 )
@@ -258,17 +277,18 @@ fun HomeScreen(
         )
 
 
-        // =================================================
-        // SECTION TITLE
-        // =================================================
-
         Spacer(
             modifier = Modifier.height(17.dp)
         )
 
 
+        // ==================================================
+        // SECTION TITLE
+        // ==================================================
+
         Text(
-            text = "What would you like to explore?",
+
+            text = "What would you like to manage?",
 
             modifier = Modifier
                 .fillMaxWidth()
@@ -284,14 +304,14 @@ fun HomeScreen(
         )
 
 
-        // =================================================
-        // CARDS
-        // =================================================
-
         Spacer(
             modifier = Modifier.height(12.dp)
         )
 
+
+        // ==================================================
+        // TEACHER CARDS
+        // ==================================================
 
         LazyVerticalGrid(
 
@@ -300,8 +320,11 @@ fun HomeScreen(
             modifier = Modifier.fillMaxSize(),
 
             contentPadding = PaddingValues(
+
                 start = 30.dp,
+
                 end = 30.dp,
+
                 bottom = 18.dp
             ),
 
@@ -316,8 +339,10 @@ fun HomeScreen(
 
             items(filteredItems) { item ->
 
-                HomeFeatureCard(
+                TeacherFeatureCard(
+
                     item = item,
+
                     onClick = {
                         onItemClick(item.title)
                     }
@@ -328,9 +353,15 @@ fun HomeScreen(
 }
 
 
+// ==========================================================
+// TEACHER FEATURE CARD
+// ==========================================================
+
 @Composable
-private fun HomeFeatureCard(
-    item: HomeItem,
+private fun TeacherFeatureCard(
+
+    item: TeacherItem,
+
     onClick: () -> Unit
 ) {
 

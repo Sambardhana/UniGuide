@@ -17,23 +17,18 @@ class StudentActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-
             MaterialTheme {
-
                 var showSplash by remember {
                     mutableStateOf(true)
                 }
 
                 if (showSplash) {
-
                     SplashScreen(
                         onSplashFinished = {
                             showSplash = false
                         }
                     )
-
                 } else {
-
                     UniGuideNavGraph()
                 }
             }
