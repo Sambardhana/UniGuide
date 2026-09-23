@@ -10,8 +10,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.uniguide.app.navigation.UniGuideNavGraph
 import com.uniguide.app.ui.splash.SplashScreen
-import com.uniguide.app.navigation.UniGuideNavGraph
-
 
 class StudentActivity : ComponentActivity() {
 
@@ -19,27 +17,20 @@ class StudentActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-
             MaterialTheme {
-
                 var showSplash by remember {
                     mutableStateOf(true)
                 }
 
                 if (showSplash) {
-
                     SplashScreen(
                         onSplashFinished = {
                             showSplash = false
                         }
                     )
-
                 } else {
-
                     UniGuideNavGraph()
                 }
-            MaterialTheme {
-                UniGuideNavGraph()
             }
         }
     }

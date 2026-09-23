@@ -1,11 +1,8 @@
 package com.uniguide.app.ui.welcome
 
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,10 +11,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.School
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -32,6 +37,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.uniguide.app.R
+import com.uniguide.app.ui.theme.UniGuideBackground
+import com.uniguide.app.ui.theme.UniGuideDarkText
+import com.uniguide.app.ui.theme.UniGuideSecondaryText
+import com.uniguide.app.ui.theme.UniGuideTeal
+import com.uniguide.app.ui.theme.UniGuideWhite
 
 @Composable
 fun WelcomeScreen(
@@ -40,565 +50,230 @@ fun WelcomeScreen(
     onGetStartedClick: () -> Unit = {}
 ) {
 
-    // UNIGUIDE COLORS
-
-    val darkTeal = Color(0xFF08758A)
-    val mainTeal = Color(0xFF1498AA)
-    val lightTeal = Color(0xFFBFE8EC)
-
-    val background = Color(0xFFF3FCFD)
-    val darkText = Color(0xFF07516A)
-    val secondaryText = Color(0xFF5F7E86)
-
-    // MAIN SCREEN
-
-
-@Composable
-fun WelcomeScreen(
-    onStudentClick: () -> Unit
-) {
-
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(
-                Brush.verticalGradient(
+                brush = Brush.verticalGradient(
                     colors = listOf(
-                        Color(0xFFE7F8FA),
-                        background,
+                        UniGuideBackground,
                         Color.White
-                        Color(0xFFF5F9FF),
-                        Color.White,
-                        Color(0xFFF8FAFF)
                     )
                 )
+            )
+            .padding(
+                horizontal = 20.dp,
+                vertical = 18.dp
             )
     ) {
 
-        Column(
+        // Top language selector
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            Text(
+                text = "English",
+                color = UniGuideDarkText,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium
+            )
+
+            IconButton(
+                onClick = {
+                    // Language selection will be added later.
+                }
+            ) {
+
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowDown,
+                    contentDescription = "Select language",
+                    tint = UniGuideTeal
+                )
+            }
+        }
+
+        Spacer(
+            modifier = Modifier.height(4.dp)
+        )
+
+        // UniGuide Logo
+        Image(
+            painter = painterResource(
+                id = R.drawable.uniguide_logo
+            ),
+            contentDescription = "UniGuide Logo",
+            modifier = Modifier
+                .size(125.dp)
+                .align(Alignment.CenterHorizontally),
+            contentScale = ContentScale.Fit
+        )
+
+        Spacer(
+            modifier = Modifier.height(4.dp)
+        )
+
+        // Welcome text
+        Text(
+            text = "Welcome to",
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = UniGuideDarkText,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Medium
+        )
+
+        Text(
+            text = "UniGuide",
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = UniGuideTeal,
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
+
+        // Campus illustration
+        Image(
+            painter = painterResource(
+                id = R.drawable.campus_illustration
+            ),
+            contentDescription = "University Campus",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(190.dp)
+                .clip(
+                    RoundedCornerShape(22.dp)
+                ),
+            contentScale = ContentScale.Crop
+        )
+
+        Spacer(
+            modifier = Modifier.height(18.dp)
+        )
+
+        Text(
+            text = "Choose your role",
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = UniGuideDarkText,
+            fontSize = 17.sp,
+            fontWeight = FontWeight.SemiBold
+        )
+
+        Spacer(
+            modifier = Modifier.height(10.dp)
+        )
+
+        // Student and Teacher buttons
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+
+            RoleCard(
+                title = "Student",
+                icon = Icons.Default.School,
+                modifier = Modifier.weight(1f),
+                onClick = onStudentClick
+            )
+
+            RoleCard(
+                title = "Teacher",
+                icon = Icons.Default.Person,
+                modifier = Modifier.weight(1f),
+                onClick = onTeacherClick
+            )
+        }
+
+        Spacer(
+            modifier = Modifier.height(18.dp)
+        )
+
+        // Get Started
+        Button(
+            onClick = onGetStartedClick,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(54.dp),
+            shape = RoundedCornerShape(18.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = UniGuideTeal,
+                contentColor = UniGuideWhite
+            )
+        ) {
+
+            Text(
+                text = "Get Started →",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
+
+        Text(
+            text = "Your guide to university life",
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = UniGuideSecondaryText,
+            fontSize = 13.sp
+        )
+    }
+}
+
+@Composable
+private fun RoleCard(
+    title: String,
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    modifier: Modifier,
+    onClick: () -> Unit
+) {
+
+    Card(
+        modifier = modifier
+            .height(90.dp),
+        onClick = onClick,
+        shape = RoundedCornerShape(18.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = UniGuideWhite
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 3.dp
+        )
+    ) {
+
+        Row(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(
-                    horizontal = 20.dp,
-                    vertical = 25.dp
-                ),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
+                .padding(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         ) {
 
-            // LANGUAGE SELECTOR
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-                Box(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(20.dp))
-                        .background(Color.White)
-                        .padding(
-                            horizontal = 15.dp,
-                            vertical = 9.dp
-                        )
-                ) {
-
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-
-                        Text(
-                            text = "🌐",
-                            fontSize = 16.sp
-                        )
-
-                        Spacer(
-                            modifier = Modifier.size(6.dp)
-                        )
-
-                        Text(
-                            text = "English",
-                            fontSize = 13.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = darkText
-                        )
-
-                        Spacer(
-                            modifier = Modifier.size(5.dp)
-                        )
-
-                        Text(
-                            text = "⌄",
-                            fontSize = 17.sp,
-                            color = darkTeal
-                        )
-                    }
-                }
-            }
-
-            Spacer(
-                modifier = Modifier.height(20.dp)
-            )
-
-            // UNIGUIDE LOGO
-
-            Image(
-                painter = painterResource(
-                    id = R.drawable.uniguide_logo
-                ),
-                contentDescription = "UniGuide Logo",
-                modifier = Modifier.size(200.dp),
-                contentScale = ContentScale.Fit
+            Icon(
+                imageVector = icon,
+                contentDescription = title,
+                tint = UniGuideTeal,
+                modifier = Modifier.size(30.dp)
             )
 
             Spacer(
-                modifier = Modifier.height(5.dp)
-            )
-
-            // WELCOME TEXT
-
-
-            Text(
-                text = "Welcome to",
-                fontSize = 28.sp,
-                fontWeight = FontWeight.Medium,
-                color = mainTeal,
-                textAlign = TextAlign.Center
+                modifier = Modifier.width(10.dp)
             )
 
             Text(
-                text = "UniGuide",
-                fontSize = 31.sp,
-                fontWeight = FontWeight.ExtraBold,
-                color = darkTeal,
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(
-                modifier = Modifier.height(10.dp)
-            )
-
-            Text(
-                text = "Your university companion for campus information, academics, hostel, activities and more.",
-                fontSize = 14.sp,
-                color = secondaryText,
-                textAlign = TextAlign.Center,
-                lineHeight = 21.sp
-            )
-
-            Spacer(
-                modifier = Modifier.height(18.dp)
-            )
-
-            // CAMPUS IMAGE
-
-            Image(
-                painter = painterResource(
-                    id = R.drawable.campus_illustration
-                ),
-                contentDescription = "University Campus",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(155.dp)
-                    .clip(
-                        RoundedCornerShape(22.dp)
-                    ),
-                contentScale = ContentScale.Crop
-            )
-
-            Spacer(
-                modifier = Modifier.height(18.dp)
-            )
-
-            // -------------------------------------------------
-            // STUDENT + TEACHER CARDS
-            // -------------------------------------------------
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-
-                // STUDENT CARD
-
-                Card(
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(105.dp)
-                        .clickable {
-                            onStudentClick()
-                        },
-                    shape = RoundedCornerShape(20.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color(0xFFE9F9FB)
-                    ),
-                    elevation = CardDefaults.cardElevation(
-                        defaultElevation = 0.dp
-                    )
-                ) {
-
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    ) {
-
-                        Text(
-                            text = "🎓",
-                            fontSize = 34.sp
-                        )
-
-                        Spacer(
-                            modifier = Modifier.height(5.dp)
-                        )
-
-                        Text(
-                            text = "Student",
-                            fontSize = 17.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = darkText
-                        )
-                    }
-                }
-
-                // TEACHER CARD
-
-                Card(
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(105.dp)
-                        .clickable {
-                            onTeacherClick()
-                        },
-                    shape = RoundedCornerShape(20.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color(0xFFE9F9FB)
-                    ),
-                    elevation = CardDefaults.cardElevation(
-                        defaultElevation = 0.dp
-                    )
-                ) {
-
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    ) {
-
-                        Text(
-                            text = "👨‍🏫",
-                            fontSize = 34.sp
-                        )
-
-                        Spacer(
-                            modifier = Modifier.height(5.dp)
-                        )
-
-                        Text(
-                            text = "Teacher",
-                            fontSize = 17.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = darkText
-                        )
-                    }
-                }
-            }
-
-            Spacer(
-                modifier = Modifier.height(20.dp)
-            )
-
-            // GET STARTED BUTTON
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp)
-                    .clip(
-                        RoundedCornerShape(20.dp)
-                    )
-                    .background(
-                        Brush.horizontalGradient(
-                            colors = listOf(
-                                darkTeal,
-                                mainTeal
-                            )
-                        )
-                    )
-                    .clickable {
-                        onGetStartedClick()
-                    },
-                contentAlignment = Alignment.Center
-            ) {
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-
-                    Text(
-                        text = "Get Started",
-                        fontSize = 17.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White
-                    )
-
-                    Spacer(
-                        modifier = Modifier.size(10.dp)
-                    )
-
-                    Text(
-                        text = "→",
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White
-                    )
-                    start = 24.dp,
-                    end = 24.dp,
-                    top = 45.dp,
-                    bottom = 25.dp
-                ),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-
-            // -----------------------------
-            // TOP LOGO
-            // -----------------------------
-
-            Box(
-                modifier = Modifier
-                    .size(86.dp)
-                    .clip(CircleShape)
-                    .background(
-                        Brush.linearGradient(
-                            colors = listOf(
-                                Color(0xFF2563EB),
-                                Color(0xFF60A5FA)
-                            )
-                        )
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-
-                Text(
-                    text = "🎓",
-                    fontSize = 43.sp
-                )
-            }
-
-            Spacer(
-                modifier = Modifier.height(18.dp)
-            )
-
-            // -----------------------------
-            // APP NAME
-            // -----------------------------
-
-            Text(
-                text = "UniGuide",
-                fontSize = 38.sp,
-                fontWeight = FontWeight.ExtraBold,
-                color = Color(0xFF2563EB)
-            )
-
-            Spacer(
-                modifier = Modifier.height(8.dp)
-            )
-
-            Text(
-                text = "Your University, At Your Fingertips",
-                fontSize = 14.sp,
-                color = Color(0xFF64748B),
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(
-                modifier = Modifier.height(35.dp)
-            )
-
-            // -----------------------------
-            // WELCOME CARD
-            // -----------------------------
-
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                shape = RoundedCornerShape(28.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = Color.White
-                ),
-                elevation = CardDefaults.cardElevation(
-                    defaultElevation = 6.dp
-                )
-            ) {
-
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(25.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-
-                    Text(
-                        text = "Welcome to UniGuide 👋",
-                        fontSize = 25.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFF111827),
-                        textAlign = TextAlign.Center
-                    )
-
-                    Spacer(
-                        modifier = Modifier.height(12.dp)
-                    )
-
-                    Text(
-                        text = "Your university companion for campus information, academics, hostel, activities and more.",
-                        fontSize = 15.sp,
-                        color = Color(0xFF64748B),
-                        lineHeight = 23.sp,
-                        textAlign = TextAlign.Center
-                    )
-
-                    Spacer(
-                        modifier = Modifier.height(25.dp)
-                    )
-
-                    // -----------------------------
-                    // STUDENT BUTTON
-                    // -----------------------------
-
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(62.dp)
-                            .clip(
-                                RoundedCornerShape(18.dp)
-                            )
-                            .background(
-                                Brush.horizontalGradient(
-                                    colors = listOf(
-                                        Color(0xFF2563EB),
-                                        Color(0xFF4F8EF7)
-                                    )
-                                )
-                            )
-                            .clickable {
-                                onStudentClick()
-                            },
-                        contentAlignment = Alignment.Center
-                    ) {
-
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-
-                            Text(
-                                text = "🎓",
-                                fontSize = 24.sp
-                            )
-
-                            Spacer(
-                                modifier = Modifier.size(10.dp)
-                            )
-
-                            Text(
-                                text = "Continue as Student",
-                                color = Color.White,
-                                fontSize = 17.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-
-                            Spacer(
-                                modifier = Modifier.size(8.dp)
-                            )
-
-                            Text(
-                                text = "→",
-                                color = Color.White,
-                                fontSize = 22.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
-                    }
-
-                    Spacer(
-                        modifier = Modifier.height(15.dp)
-                    )
-
-                    // -----------------------------
-                    // TEACHER BUTTON
-                    // -----------------------------
-
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(58.dp)
-                            .clip(
-                                RoundedCornerShape(18.dp)
-                            )
-                            .background(
-                                Color(0xFFF1F5F9)
-                            ),
-                        contentAlignment = Alignment.Center
-                    ) {
-
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-
-                            Text(
-                                text = "👨‍🏫",
-                                fontSize = 21.sp
-                            )
-
-                            Spacer(
-                                modifier = Modifier.size(10.dp)
-                            )
-
-                            Text(
-                                text = "Teacher",
-                                color = Color(0xFF475569),
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                        }
-                    }
-                }
-            }
-
-            Spacer(
-                modifier = Modifier.height(16.dp)
-            )
-
-            // BOTTOM TEXT
-                modifier = Modifier.weight(1f)
-            )
-
-            // -----------------------------
-            // BOTTOM TAGLINE
-            // -----------------------------
-
-            Text(
-                text = "Explore • Connect • Build Your Future",
-                fontSize = 13.sp,
-                fontWeight = FontWeight.Medium,
-                color = mainTeal,
-                color = Color(0xFF94A3B8),
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(
-                modifier = Modifier.height(5.dp)
-                modifier = Modifier.height(8.dp)
-            )
-
-            Text(
-                text = "Your university information, all in one place.",
-                fontSize = 11.sp,
-                color = secondaryText,
-                fontSize = 12.sp,
-                color = Color(0xFFCBD5E1),
-                textAlign = TextAlign.Center
+                text = title,
+                color = UniGuideDarkText,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold
             )
         }
     }
