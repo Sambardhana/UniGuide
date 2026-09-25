@@ -157,7 +157,7 @@ fun TeacherDashboardScreen(
 
                     Text(
                         text = "👨‍🏫",
-                        fontSize = 34.sp
+                        fontSize = 28.sp
                     )
                 }
 
@@ -398,7 +398,7 @@ private fun TeacherFeatureCard(
 
             Text(
                 text = item.icon,
-                fontSize = 38.sp,
+                fontSize = 28.sp,
                 textAlign = TextAlign.Center
             )
 
