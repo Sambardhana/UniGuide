@@ -338,7 +338,7 @@ private fun HomeFeatureCard(
 
         modifier = Modifier
             .fillMaxWidth()
-            .height(145.dp)
+            .height(110.dp)
             .clickable {
                 onClick()
             },
@@ -367,7 +367,7 @@ private fun HomeFeatureCard(
 
             Text(
                 text = item.icon,
-                fontSize = 38.sp,
+                fontSize = 28.sp,
                 textAlign = TextAlign.Center
             )
 
