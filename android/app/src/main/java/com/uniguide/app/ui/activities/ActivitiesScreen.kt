@@ -1,64 +1,90 @@
 package com.uniguide.app.ui.activities
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.uniguide.app.ui.common.StylishInfoScreen
+import com.uniguide.app.ui.common.StylishItem
 
 @Composable
 fun ActivitiesScreen() {
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
+    StylishInfoScreen(
 
-        Text(
-            text = "Activities",
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF111827)
-        )
+        title = "Activities",
 
-        Text(
-            text = "Explore student activities",
-            fontSize = 16.sp,
-            color = Color(0xFF6B7280)
-        )
+        subtitle = "Student clubs & campus activities",
 
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xFFF3F6FF)
+        headerIcon = "🎭",
+
+        items = listOf(
+
+            StylishItem(
+                "🎵",
+                "Music Club",
+                "Music and performances",
+                details = "Students can participate in music activities, performances and cultural programmes."
+            ),
+
+            StylishItem(
+                "💃",
+                "Dance Club",
+                "Dance and cultural performances",
+                details = "Students can participate in dance practices, performances and cultural programmes."
+            ),
+
+            StylishItem(
+                "🎭",
+                "Drama Club",
+                "Theatre and acting",
+                details = "Students interested in acting, theatre and stage performances can participate in drama activities."
+            ),
+
+            StylishItem(
+                "🎨",
+                "Arts & Painting",
+                "Creative activities",
+                details = "Students can participate in painting, visual arts, handicrafts and other creative activities."
+            ),
+
+            StylishItem(
+                "📖",
+                "Literature Club",
+                "Reading and creative expression",
+                details = "Literary activities help students develop communication, reading and creative expression."
+            ),
+
+            StylishItem(
+                "🌱",
+                "Green Club",
+                "Environment and sustainability",
+                details = "Green activities encourage environmental awareness and sustainability among students."
+            ),
+
+            StylishItem(
+                "🔬",
+                "Science Club",
+                "Science and innovation",
+                details = "Students can participate in science-related learning, innovation and academic activities."
+            ),
+
+            StylishItem(
+                "🧘",
+                "Yoga & Fitness",
+                "Health and wellness",
+                details = "Yoga, gym and fitness activities encourage students to maintain physical health and wellness."
+            ),
+
+            StylishItem(
+                "🏀",
+                "Sports",
+                "Sports and competitions",
+                details = "Students can participate in basketball, kabaddi, swimming and other indoor and outdoor sports."
+            ),
+
+            StylishItem(
+                "🤝",
+                "Social Responsibility",
+                "Community activities",
+                details = "Students can participate in community service, awareness programmes and social responsibility activities."
             )
-        ) {
-            Column(
-                modifier = Modifier.padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-
-                Text(
-                    text = "Student Activities",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Text(
-                    text = "Clubs, societies, sports, cultural activities and other student activities will be available here."
-                )
-            }
-        }
-    }
+        ))
 }

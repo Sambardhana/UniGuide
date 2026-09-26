@@ -1,64 +1,91 @@
 package com.uniguide.app.ui.campusmap
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.uniguide.app.ui.common.StylishInfoScreen
+import com.uniguide.app.ui.common.StylishItem
 
 @Composable
 fun CampusMapScreen() {
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
+    StylishInfoScreen(
 
-        Text(
-            text = "Campus Map",
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF111827)
-        )
+        title = "Campus Map",
 
-        Text(
-            text = "Find your way around campus",
-            fontSize = 16.sp,
-            color = Color(0xFF6B7280)
-        )
+        subtitle = "Important locations at CUTM",
 
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xFFF3F6FF)
+        headerIcon = "📍",
+
+        items = listOf(
+
+            StylishItem(
+                "🏛️",
+                "Academic Buildings",
+                "Classrooms and academic blocks",
+                details = "Academic buildings contain classrooms, laboratories and spaces used for lectures and practical sessions."
+            ),
+
+            StylishItem(
+                "📚",
+                "Central Library",
+                "Books and digital resources",
+                details = "The library provides students with books, reference materials and digital learning resources."
+            ),
+
+            StylishItem(
+                "🏠",
+                "Hostel Area",
+                "Student residential area",
+                details = "Residential facilities are available for students, including separate accommodation facilities for female students."
+            ),
+
+            StylishItem(
+                "🏟️",
+                "Sports Complex",
+                "Sports and fitness",
+                details = "Sports areas support basketball, volleyball, cricket, football, swimming and other sports."
+            ),
+
+            StylishItem(
+                "🍴",
+                "Cafeteria",
+                "Food and convenience",
+                details = "Students can access campus food and convenience facilities including cafeteria and market areas."
+            ),
+
+            StylishItem(
+                "🩺",
+                "Medical Facility",
+                "Healthcare support",
+                details = "Medical facilities are available on campus to support student health needs."
+            ),
+
+            StylishItem(
+                "🏢",
+                "Auditorium",
+                "Events and programmes",
+                details = "The auditorium and event spaces are used for seminars, workshops, cultural programmes and university events."
+            ),
+
+            StylishItem(
+                "🏋️",
+                "Gym & Fitness Centre",
+                "Fitness activities",
+                details = "Fitness facilities are available for students interested in exercise and physical fitness."
+            ),
+
+            StylishItem(
+                "🚌",
+                "Transport Area",
+                "University transport",
+                details = "University transport facilities support movement between the campus and other locations."
+            ),
+
+            StylishItem(
+                "📍",
+                "Bhubaneswar Campus",
+                "Ramachandrapur, Jatni",
+                details = "Centurion University of Technology and Management, Ramachandrapur, P.O. Jatni, Bhubaneswar, Khurda, Odisha – 752050."
             )
-        ) {
-            Column(
-                modifier = Modifier.padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-
-                Text(
-                    text = "Campus Navigation",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Text(
-                    text = "Campus buildings, departments, hostels and important locations will be available here."
-                )
-            }
-        }
-    }
+        )
+    )
 }

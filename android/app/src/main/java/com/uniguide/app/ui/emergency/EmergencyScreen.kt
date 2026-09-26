@@ -1,64 +1,83 @@
 package com.uniguide.app.ui.emergency
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.uniguide.app.ui.common.StylishInfoScreen
+import com.uniguide.app.ui.common.StylishItem
 
 @Composable
 fun EmergencyScreen() {
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
+    StylishInfoScreen(
 
-        Text(
-            text = "Emergency Contacts",
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF111827)
-        )
+        title = "Emergency",
 
-        Text(
-            text = "Important emergency information",
-            fontSize = 16.sp,
-            color = Color(0xFF6B7280)
-        )
+        subtitle = "Important help & safety contacts",
 
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xFFFFF1F2)
+        headerIcon = "🚨",
+
+        items = listOf(
+
+            StylishItem(
+                "🚨",
+                "Emergency Services",
+                "112",
+                details = "India's unified emergency number for police, fire, ambulance and other emergency assistance."
+            ),
+
+            StylishItem(
+                "🚓",
+                "Police",
+                "100",
+                details = "Contact the police in case of a serious safety or security emergency."
+            ),
+
+            StylishItem(
+                "🚑",
+                "Ambulance",
+                "108",
+                details = "Emergency ambulance service for urgent medical situations."
+            ),
+
+            StylishItem(
+                "🔥",
+                "Fire & Rescue",
+                "101",
+                details = "Contact fire and rescue services in case of fire or related emergencies."
+            ),
+
+            StylishItem(
+                "🏫",
+                "CUTM Bhubaneswar",
+                "+91 82600 77222",
+                details = "Official university contact number for the Bhubaneswar campus."
+            ),
+
+            StylishItem(
+                "🛡️",
+                "Campus Security",
+                "Contact Campus Security",
+                details = "For immediate safety concerns, suspicious activity or security-related problems, contact the campus security team."
+            ),
+
+            StylishItem(
+                "🩺",
+                "Medical Support",
+                "Campus Medical Facility",
+                details = "For health-related emergencies, contact the campus medical facility or call an emergency ambulance."
+            ),
+
+            StylishItem(
+                "📞",
+                "Student Grievance",
+                "+91 9437280622",
+                details = "Published CUTM student grievance support contact."
+            ),
+
+            StylishItem(
+                "📍",
+                "Campus Address",
+                "Bhubaneswar Campus",
+                details = "Ramchandrapur, P.O. Jatni, Bhubaneswar, Khurda, Odisha – 752050."
             )
-        ) {
-            Column(
-                modifier = Modifier.padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-
-                Text(
-                    text = "Emergency Help",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Text(
-                    text = "Emergency contact numbers and important safety information will be available here."
-                )
-            }
-        }
-    }
+        ))
 }
