@@ -369,7 +369,7 @@ private fun TeacherFeatureCard(
 
         modifier = Modifier
             .fillMaxWidth()
-            .height(145.dp)
+            .height(110.dp)
             .clickable {
                 onClick()
             },
