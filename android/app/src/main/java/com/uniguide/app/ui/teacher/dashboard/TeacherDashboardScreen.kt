@@ -157,7 +157,7 @@ fun TeacherDashboardScreen(
 
                     Text(
                         text = "👨‍🏫",
-                        fontSize = 34.sp
+                        fontSize = 28.sp
                     )
                 }
 
@@ -369,7 +369,7 @@ private fun TeacherFeatureCard(
 
         modifier = Modifier
             .fillMaxWidth()
-            .height(145.dp)
+            .height(110.dp)
             .clickable {
                 onClick()
             },
@@ -398,7 +398,7 @@ private fun TeacherFeatureCard(
 
             Text(
                 text = item.icon,
-                fontSize = 38.sp,
+                fontSize = 23.sp,
                 textAlign = TextAlign.Center
             )
 

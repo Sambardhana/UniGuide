@@ -46,9 +46,9 @@ fun TeacherProfileScreen() {
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
-                            Color(0xFF1769E0),
-                            Color(0xFF4F8EF7),
-                            Color(0xFF74B9FF)
+                            Color(0xFF08758A),
+                            Color(0xFF1498AA),
+                            Color(0xFF71D0D5)
                         )
                     ),
                     shape = RoundedCornerShape(
@@ -74,7 +74,7 @@ fun TeacherProfileScreen() {
                 ) {
                     Text(
                         text = "👨‍🏫",
-                        fontSize = 45.sp
+                        fontSize = 36.sp
                     )
                 }
 
@@ -109,8 +109,8 @@ fun TeacherProfileScreen() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(
-                    horizontal = 20.dp,
-                    vertical = 20.dp
+                    horizontal = 17.dp,
+                    vertical = 17.dp
                 )
         ) {
 

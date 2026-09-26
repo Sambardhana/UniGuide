@@ -79,9 +79,9 @@ fun TeacherScheduleScreen() {
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
-                            Color(0xFF1769E0),
-                            Color(0xFF4F8EF7),
-                            Color(0xFF74B9FF)
+                            Color(0xFF08758A),
+                            Color(0xFF1498AA),
+                            Color(0xFF71D0D5)
                         )
                     ),
                     shape = RoundedCornerShape(
@@ -102,7 +102,7 @@ fun TeacherScheduleScreen() {
 
                 Text(
                     text = "📅",
-                    fontSize = 35.sp
+                    fontSize = 29.sp
                 )
 
                 Spacer(
@@ -185,7 +185,7 @@ fun ScheduleCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(18.dp),
+                .padding(15.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
@@ -193,7 +193,7 @@ fun ScheduleCard(
 
             Box(
                 modifier = Modifier
-                    .size(70.dp)
+                    .size(60.dp)
                     .background(
                         Color(0xFFEFF6FF),
                         RoundedCornerShape(16.dp)
