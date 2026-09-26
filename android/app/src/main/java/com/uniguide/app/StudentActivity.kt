@@ -7,11 +7,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.uniguide.app.navigation.UniGuideNavGraph
 
+
 class StudentActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        // Show Android Splash Screen only once
         installSplashScreen()
 
         super.onCreate(savedInstanceState)
