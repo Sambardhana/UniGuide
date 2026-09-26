@@ -45,18 +45,6 @@ android {
 dependencies {
 
     // ==============================
-    // Member 1 - QR Scanner
-    // ==============================
-
-    implementation("com.google.mlkit:barcode-scanning:17.3.0")
-
-    implementation("androidx.camera:camera-core:1.6.2")
-    implementation("androidx.camera:camera-camera2:1.6.2")
-    implementation("androidx.camera:camera-lifecycle:1.6.2")
-    implementation("androidx.camera:camera-view:1.6.2")
-
-
-    // ==============================
     // Existing Android dependencies
     // ==============================
 
@@ -69,7 +57,14 @@ dependencies {
 
 
     // ==============================
-    // Member 2 - Jetpack Compose
+    // Android Splash Screen
+    // ==============================
+
+    implementation("androidx.core:core-splashscreen:1.2.0")
+
+
+    // ==============================
+    // Jetpack Compose
     // ==============================
 
     val composeBom = platform(libs.androidx.compose.bom)
@@ -78,10 +73,14 @@ dependencies {
     androidTestImplementation(composeBom)
 
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
+
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.runtime)
+
     implementation("androidx.compose.foundation:foundation")
+
     implementation(libs.androidx.ui.tooling.preview)
 
     debugImplementation(libs.androidx.ui.tooling)
@@ -99,5 +98,6 @@ dependencies {
 
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
 }

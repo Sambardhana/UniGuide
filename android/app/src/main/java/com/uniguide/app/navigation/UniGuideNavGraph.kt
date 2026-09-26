@@ -1,14 +1,17 @@
 package com.uniguide.app.navigation
 
-import androidx.compose.runtime.Composable
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-
 // ============================================================
 // STUDENT SCREENS
 // ============================================================
 
+// ============================================================
+// TEACHER SCREENS
+// ============================================================
+
+import androidx.compose.runtime.Composable
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.uniguide.app.ui.academics.AcademicsScreen
 import com.uniguide.app.ui.activities.ActivitiesScreen
 import com.uniguide.app.ui.campusmap.CampusMapScreen
@@ -18,19 +21,14 @@ import com.uniguide.app.ui.facilities.FacilitiesScreen
 import com.uniguide.app.ui.home.HomeScreen
 import com.uniguide.app.ui.hostel.HostelScreen
 import com.uniguide.app.ui.splash.SplashScreen
-import com.uniguide.app.ui.university.UniversityScreen
-import com.uniguide.app.ui.welcome.WelcomeScreen
-
-// ============================================================
-// TEACHER SCREENS
-// ============================================================
-
 import com.uniguide.app.ui.teacher.dashboard.TeacherDashboardScreen
 import com.uniguide.app.ui.teacher.department.DepartmentScreen
 import com.uniguide.app.ui.teacher.notices.TeacherNoticesScreen
 import com.uniguide.app.ui.teacher.profile.TeacherProfileScreen
 import com.uniguide.app.ui.teacher.resources.TeacherResourcesScreen
 import com.uniguide.app.ui.teacher.schedule.TeacherScheduleScreen
+import com.uniguide.app.ui.university.UniversityScreen
+import com.uniguide.app.ui.welcome.WelcomeScreen
 
 
 // ============================================================

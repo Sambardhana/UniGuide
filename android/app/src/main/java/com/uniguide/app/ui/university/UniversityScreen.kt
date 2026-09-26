@@ -1,65 +1,70 @@
-
 package com.uniguide.app.ui.university
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.uniguide.app.ui.common.StylishInfoScreen
+import com.uniguide.app.ui.common.StylishItem
 
 @Composable
 fun UniversityScreen() {
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
+    StylishInfoScreen(
 
-        Text(
-            text = "University",
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF111827)
-        )
+        title = "University",
 
-        Text(
-            text = "University Information",
-            fontSize = 16.sp,
-            color = Color(0xFF6B7280)
-        )
+        subtitle = "Centurion University of Technology and Management",
 
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xFFF3F6FF)
+        headerIcon = "🏛️",
+
+        items = listOf(
+
+            StylishItem(
+                icon = "🏛️",
+                title = "About CUTM",
+                subtitle = "Centurion University of Technology and Management",
+                details = "Centurion University of Technology and Management (CUTM) is a skill-integrated university. The Bhubaneswar campus is located at Ramachandrapur, Jatni."
+            ),
+
+            StylishItem(
+                icon = "📍",
+                title = "Bhubaneswar Campus",
+                subtitle = "Ramachandrapur, P.O. Jatni",
+                details = "The Bhubaneswar campus is located at Ramachandrapur, P.O. Jatni, Bhubaneswar, Khurda, Odisha – 752050. The campus is spread across about 40 acres."
+            ),
+
+            StylishItem(
+                icon = "🎓",
+                title = "Academic Schools",
+                subtitle = "Multiple schools and departments",
+                details = "The university has academic areas including Engineering & Technology, Management, Applied Sciences, Pharmacy & Life Sciences, Media & Communication, Healthcare, Forensic Sciences, Biotechnology, Law, Nursing, Design and Maritime Studies."
+            ),
+
+            StylishItem(
+                icon = "💻",
+                title = "Learning Environment",
+                subtitle = "Modern academic facilities",
+                details = "Students have access to libraries, laboratories, lecture theatres, Wi-Fi, conference spaces and other learning facilities."
+            ),
+
+            StylishItem(
+                icon = "🏃",
+                title = "Student Life",
+                subtitle = "Sports, clubs and cultural activities",
+                details = "Students can participate in sports, fitness activities, cultural programmes, clubs, competitions and other campus activities."
+            ),
+
+            StylishItem(
+                icon = "🌱",
+                title = "Green Campus",
+                subtitle = "Sustainability initiatives",
+                details = "The campus includes sustainability initiatives such as rainwater harvesting, solar energy, e-vehicles and green facilities."
+            ),
+
+            StylishItem(
+                icon = "📞",
+                title = "University Contact",
+                subtitle = "+91 82600 77222",
+                details = "Bhubaneswar Campus: Ramchandrapur, P.O. Jatni, Bhubaneswar, Khurda, Odisha – 752050."
             )
-        ) {
-            Column(
-                modifier = Modifier.padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-
-                Text(
-                    text = "About the University",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Text(
-                    text = "University information will be available here."
-                )
-            }
-        }
-    }
+        )
+    )
 }

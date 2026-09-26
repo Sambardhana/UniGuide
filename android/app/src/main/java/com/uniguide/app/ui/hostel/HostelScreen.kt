@@ -1,64 +1,58 @@
 package com.uniguide.app.ui.hostel
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.uniguide.app.ui.common.StylishInfoScreen
+import com.uniguide.app.ui.common.StylishItem
 
 @Composable
 fun HostelScreen() {
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-
-        Text(
-            text = "Hostel",
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF111827)
-        )
-
-        Text(
-            text = "Hostel information and facilities",
-            fontSize = 16.sp,
-            color = Color(0xFF6B7280)
-        )
-
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xFFF3F6FF)
+    StylishInfoScreen(
+        title = "Hostel",
+        subtitle = "Student residential facilities",
+        headerIcon = "🏠",
+        items = listOf(
+            StylishItem(
+                "🏠",
+                "Hostel Accommodation",
+                "Residential accommodation for students",
+                details = "CUTM provides residential accommodation for students. Separate accommodation facilities are available for female students."
+            ),
+            StylishItem(
+                "🛏️",
+                "Student Living",
+                "Comfortable residential environment",
+                details = "Hostel accommodation provides students with a residential environment with supervision and support."
+            ),
+            StylishItem(
+                "⚡",
+                "24-Hour Power",
+                "Power supply for residential facilities",
+                details = "Residential facilities include 24-hour power supply to support students' academic and daily residential needs."
+            ),
+            StylishItem(
+                "📶",
+                "High-Speed Wi-Fi",
+                "Campus connectivity",
+                details = "Wi-Fi facilities help students access online learning resources, academic materials and internet-based services."
+            ),
+            StylishItem(
+                "🩺",
+                "Medical Facilities",
+                "Healthcare support",
+                details = "Medical facilities are available for students as part of the campus and residential support facilities."
+            ),
+            StylishItem(
+                "🛡️",
+                "Security",
+                "Safety and vigilance",
+                details = "Security and vigilance are maintained across the residential facilities to support student safety."
+            ),
+            StylishItem(
+                "🏧",
+                "ATM Facility",
+                "Convenience facility on campus",
+                details = "An ATM facility is available on campus for the convenience of students and residents."
             )
-        ) {
-            Column(
-                modifier = Modifier.padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-
-                Text(
-                    text = "Hostel Information",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Text(
-                    text = "Hostel details, rooms, rules, facilities and other accommodation information will be available here."
-                )
-            }
-        }
-    }
+        )
+    )
 }

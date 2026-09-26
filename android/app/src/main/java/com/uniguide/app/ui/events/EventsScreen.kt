@@ -1,64 +1,84 @@
 package com.uniguide.app.ui.events
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.uniguide.app.ui.common.StylishInfoScreen
+import com.uniguide.app.ui.common.StylishItem
 
 @Composable
 fun EventsScreen() {
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
+    StylishInfoScreen(
 
-        Text(
-            text = "Events & Notices",
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF111827)
-        )
+        title = "Events",
 
-        Text(
-            text = "Latest campus events and notices",
-            fontSize = 16.sp,
-            color = Color(0xFF6B7280)
-        )
+        subtitle = "CUTM events & activities",
 
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xFFF3F6FF)
+        headerIcon = "📅",
+
+        items = listOf(
+
+            StylishItem(
+                "🔬",
+                "Forensic Science Week 2026",
+                "25–26 September 2026",
+                "25–26 September 2026",
+                "The School of Forensic Sciences event includes lectures, crime-scene reconstruction activities, poster presentation, short-video challenge and a cyber-forensics quiz."
+            ),
+
+            StylishItem(
+                "💻",
+                "E-Flair 2026",
+                "May 2026",
+                "May 2026",
+                "An academic event associated with Electronics and Communication Engineering and Electrical & Electronics Engineering."
+            ),
+
+            StylishItem(
+                "🏭",
+                "Industry Expert Talk",
+                "May 2026",
+                "May 2026",
+                "An industry expert session focused on next-generation manufacturing and professional learning."
+            ),
+
+            StylishItem(
+                "🌍",
+                "GIS Day 2026",
+                "2026",
+                "2026",
+                "GIS Day is included in the university event calendar and focuses on Geographic Information Systems and related learning."
+            ),
+
+            StylishItem(
+                "🤖",
+                "AI & Machine Learning FDP",
+                "1–10 October 2026",
+                "1–10 October 2026",
+                "A Faculty Development Programme on AI and Machine Learning applications in core engineering."
+            ),
+
+            StylishItem(
+                "🎉",
+                "Gajajyoti",
+                "11–13 February 2026",
+                "11–13 February 2026",
+                "A university event featuring technology, management, science, literary, skill and cultural activities."
+            ),
+
+            StylishItem(
+                "🏆",
+                "University Sports",
+                "2026",
+                "2026",
+                "Inter-university and intra-university sports activities provide opportunities for students to participate in competitive sports."
+            ),
+
+            StylishItem(
+                "📚",
+                "Academic Events",
+                "Throughout the year",
+                "Throughout the year",
+                "CUTM conducts seminars, workshops, conferences, expert talks, competitions and other student-focused programmes."
             )
-        ) {
-            Column(
-                modifier = Modifier.padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-
-                Text(
-                    text = "Campus Updates",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Text(
-                    text = "Upcoming events, important notices and campus announcements will be available here."
-                )
-            }
-        }
-    }
+        ))
 }
