@@ -398,7 +398,7 @@ private fun TeacherFeatureCard(
 
             Text(
                 text = item.icon,
-                fontSize = 28.sp,
+                fontSize = 23.sp,
                 textAlign = TextAlign.Center
             )
 
