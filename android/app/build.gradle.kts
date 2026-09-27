@@ -73,7 +73,7 @@ dependencies {
     androidTestImplementation(composeBom)
 
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
-
+    implementation("androidx.core:core-splashscreen:1.2.0")
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
