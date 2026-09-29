@@ -2,8 +2,12 @@ package com.uniguide.app.data.model
 
 data class Course(
     val id: Long,
-    val name: String,
-    val code: String? = null,
+    val code: String,
+    val title: String,
     val description: String? = null,
-    val departmentId: Long? = null
+    val credits: Int? = null,
+    val semester: Int? = null,
+    val department: Department? = null,
+    val createdAt: String? = null,
+    val updatedAt: String? = null
 )

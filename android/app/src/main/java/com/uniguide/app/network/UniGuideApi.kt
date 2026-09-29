@@ -1,21 +1,12 @@
 package com.uniguide.app.network
 
 
-import com.uniguide.app.data.model.Activity
-import com.uniguide.app.data.model.CampusLocation
-import com.uniguide.app.data.model.Contact
-import com.uniguide.app.data.model.Course
-import com.uniguide.app.data.model.Department
-import com.uniguide.app.data.model.Event
-import com.uniguide.app.data.model.Facility
-import com.uniguide.app.data.model.Hostel
-import com.uniguide.app.data.model.Notice
+import com.uniguide.app.data.model.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface UniGuideApi {
 
-    // Departments
     @GET("api/departments")
     suspend fun getDepartments(): List<Department>
 
@@ -29,8 +20,6 @@ interface UniGuideApi {
         @Path("id") id: Long
     ): List<Course>
 
-
-    // Courses
     @GET("api/courses")
     suspend fun getCourses(): List<Course>
 
@@ -39,8 +28,6 @@ interface UniGuideApi {
         @Path("id") id: Long
     ): Course
 
-
-    // Hostels
     @GET("api/hostels")
     suspend fun getHostels(): List<Hostel>
 
@@ -49,8 +36,6 @@ interface UniGuideApi {
         @Path("id") id: Long
     ): Hostel
 
-
-    // Facilities
     @GET("api/facilities")
     suspend fun getFacilities(): List<Facility>
 
@@ -59,8 +44,6 @@ interface UniGuideApi {
         @Path("id") id: Long
     ): Facility
 
-
-    // Activities
     @GET("api/activities")
     suspend fun getActivities(): List<Activity>
 
@@ -69,8 +52,6 @@ interface UniGuideApi {
         @Path("id") id: Long
     ): Activity
 
-
-    // Events
     @GET("api/events")
     suspend fun getEvents(): List<Event>
 
@@ -82,8 +63,6 @@ interface UniGuideApi {
     @GET("api/events/upcoming")
     suspend fun getUpcomingEvents(): List<Event>
 
-
-    // Notices
     @GET("api/notices")
     suspend fun getNotices(): List<Notice>
 
@@ -95,8 +74,6 @@ interface UniGuideApi {
     @GET("api/notices/pinned")
     suspend fun getPinnedNotices(): List<Notice>
 
-
-    // Contacts
     @GET("api/contacts")
     suspend fun getContacts(): List<Contact>
 
@@ -108,8 +85,6 @@ interface UniGuideApi {
     @GET("api/contacts/emergency")
     suspend fun getEmergencyContacts(): List<Contact>
 
-
-    // Campus Locations
     @GET("api/campus-locations")
     suspend fun getCampusLocations(): List<CampusLocation>
 
