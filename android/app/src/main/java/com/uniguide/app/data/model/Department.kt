@@ -4,10 +4,11 @@ data class Department(
     val id: Long,
     val name: String,
     val code: String,
-    val description: String? = null,
-    val contactEmail: String? = null,
-    val contactPhone: String? = null,
-    val location: CampusLocation? = null,
-    val createdAt: String? = null,
-    val updatedAt: String? = null
+    val description: String?,
+    val contactEmail: String?,
+    val contactPhone: String?,
+    val locationId: Long?,
+    val locationName: String?,
+    val createdAt: String?,
+    val updatedAt: String?
 )

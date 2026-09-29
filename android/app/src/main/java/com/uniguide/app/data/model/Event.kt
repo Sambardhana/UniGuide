@@ -3,13 +3,14 @@ package com.uniguide.app.data.model
 data class Event(
     val id: Long,
     val title: String,
-    val description: String? = null,
+    val description: String?,
     val startDate: String,
-    val endDate: String? = null,
-    val venue: String? = null,
-    val organizer: String? = null,
-    val registrationLink: String? = null,
-    val location: CampusLocation? = null,
-    val createdAt: String? = null,
-    val updatedAt: String? = null
+    val endDate: String?,
+    val venue: String?,
+    val organizer: String?,
+    val registrationLink: String?,
+    val locationId: Long?,
+    val locationName: String?,
+    val createdAt: String?,
+    val updatedAt: String?
 )

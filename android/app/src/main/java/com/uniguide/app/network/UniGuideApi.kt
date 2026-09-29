@@ -1,6 +1,5 @@
 package com.uniguide.app.network
 
-
 import com.uniguide.app.data.model.*
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -8,7 +7,7 @@ import retrofit2.http.Path
 interface UniGuideApi {
 
     @GET("api/departments")
-    suspend fun getDepartments(): List<Department>
+    suspend fun getDepartments(): ApiResponse<Department>
 
     @GET("api/departments/{id}")
     suspend fun getDepartment(
@@ -18,42 +17,47 @@ interface UniGuideApi {
     @GET("api/departments/{id}/courses")
     suspend fun getDepartmentCourses(
         @Path("id") id: Long
-    ): List<Course>
+    ): ApiResponse<Course>
+
 
     @GET("api/courses")
-    suspend fun getCourses(): List<Course>
+    suspend fun getCourses(): ApiResponse<Course>
 
     @GET("api/courses/{id}")
     suspend fun getCourse(
         @Path("id") id: Long
     ): Course
 
+
     @GET("api/hostels")
-    suspend fun getHostels(): List<Hostel>
+    suspend fun getHostels(): ApiResponse<Hostel>
 
     @GET("api/hostels/{id}")
     suspend fun getHostel(
         @Path("id") id: Long
     ): Hostel
 
+
     @GET("api/facilities")
-    suspend fun getFacilities(): List<Facility>
+    suspend fun getFacilities(): ApiResponse<Facility>
 
     @GET("api/facilities/{id}")
     suspend fun getFacility(
         @Path("id") id: Long
     ): Facility
 
+
     @GET("api/activities")
-    suspend fun getActivities(): List<Activity>
+    suspend fun getActivities(): ApiResponse<Activity>
 
     @GET("api/activities/{id}")
     suspend fun getActivity(
         @Path("id") id: Long
     ): Activity
 
+
     @GET("api/events")
-    suspend fun getEvents(): List<Event>
+    suspend fun getEvents(): ApiResponse<Event>
 
     @GET("api/events/{id}")
     suspend fun getEvent(
@@ -61,10 +65,11 @@ interface UniGuideApi {
     ): Event
 
     @GET("api/events/upcoming")
-    suspend fun getUpcomingEvents(): List<Event>
+    suspend fun getUpcomingEvents(): ApiResponse<Event>
+
 
     @GET("api/notices")
-    suspend fun getNotices(): List<Notice>
+    suspend fun getNotices(): ApiResponse<Notice>
 
     @GET("api/notices/{id}")
     suspend fun getNotice(
@@ -72,10 +77,11 @@ interface UniGuideApi {
     ): Notice
 
     @GET("api/notices/pinned")
-    suspend fun getPinnedNotices(): List<Notice>
+    suspend fun getPinnedNotices(): ApiResponse<Notice>
+
 
     @GET("api/contacts")
-    suspend fun getContacts(): List<Contact>
+    suspend fun getContacts(): ApiResponse<Contact>
 
     @GET("api/contacts/{id}")
     suspend fun getContact(
@@ -83,10 +89,11 @@ interface UniGuideApi {
     ): Contact
 
     @GET("api/contacts/emergency")
-    suspend fun getEmergencyContacts(): List<Contact>
+    suspend fun getEmergencyContacts(): ApiResponse<Contact>
+
 
     @GET("api/campus-locations")
-    suspend fun getCampusLocations(): List<CampusLocation>
+    suspend fun getCampusLocations(): ApiResponse<CampusLocation>
 
     @GET("api/campus-locations/{id}")
     suspend fun getCampusLocation(

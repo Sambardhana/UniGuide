@@ -3,12 +3,13 @@ package com.uniguide.app.data.model
 data class Contact(
     val id: Long,
     val name: String,
-    val designation: String? = null,
-    val category: String? = null,
+    val designation: String?,
+    val category: String?,
     val phoneNumber: String,
-    val email: String? = null,
-    val officeLocation: String? = null,
-    val department: Department? = null,
-    val createdAt: String? = null,
-    val updatedAt: String? = null
+    val email: String?,
+    val officeLocation: String?,
+    val departmentId: Long?,
+    val departmentName: String?,
+    val createdAt: String?,
+    val updatedAt: String?
 )
