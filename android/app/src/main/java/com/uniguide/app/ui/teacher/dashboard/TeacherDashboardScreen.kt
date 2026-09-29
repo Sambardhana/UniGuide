@@ -48,13 +48,26 @@ private data class TeacherItem(
 private val teacherItems = listOf(
 
     TeacherItem(
-        title = "Profile",
-        icon = "👤"
+        title = "University information",
+        icon = "🏛️"
     ),
 
     TeacherItem(
-        title = "Schedule",
+        title = "Departments",
+        icon = "🏢"
+    ),
+
+    TeacherItem(
+        title = "Academic System ",
+        icon = "📚"
+    ),
+    TeacherItem(
+        title = "Academic Calendar",
         icon = "🗓️"
+    ),
+    TeacherItem(
+        title = "Faculty Guidelines",
+        icon = "📋"
     ),
 
     TeacherItem(
@@ -63,13 +76,14 @@ private val teacherItems = listOf(
     ),
 
     TeacherItem(
-        title = "Department",
-        icon = "🏢"
-    ),
+        title = "Campus Map",
+        icon = "🗺️"
 
+    ),
     TeacherItem(
-        title = "Resources",
-        icon = "📚"
+        title = "Emergency & Support ",
+        icon = "🆘"
+
     )
 )
 
