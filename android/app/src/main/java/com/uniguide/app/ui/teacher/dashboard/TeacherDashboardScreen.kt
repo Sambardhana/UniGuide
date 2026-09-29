@@ -37,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.uniguide.app.ui.common.FloatingAiButton
 
 
 private data class TeacherItem(
@@ -48,13 +49,26 @@ private data class TeacherItem(
 private val teacherItems = listOf(
 
     TeacherItem(
-        title = "Profile",
-        icon = "👤"
+        title = "University information",
+        icon = "🏛️"
     ),
 
     TeacherItem(
-        title = "Schedule",
+        title = "Departments",
+        icon = "🏢"
+    ),
+
+    TeacherItem(
+        title = "Academic System ",
+        icon = "📚"
+    ),
+    TeacherItem(
+        title = "Academic Calendar",
         icon = "🗓️"
+    ),
+    TeacherItem(
+        title = "Faculty Guidelines",
+        icon = "📋"
     ),
 
     TeacherItem(
@@ -63,20 +77,22 @@ private val teacherItems = listOf(
     ),
 
     TeacherItem(
-        title = "Department",
-        icon = "🏢"
-    ),
+        title = "Campus Map",
+        icon = "🗺️"
 
+    ),
     TeacherItem(
-        title = "Resources",
-        icon = "📚"
+        title = "Emergency & Support ",
+        icon = "🆘"
+
     )
 )
 
 
 @Composable
 fun TeacherDashboardScreen(
-    onItemClick: (String) -> Unit
+    onItemClick: (String) -> Unit,
+    onAiClick: () -> Unit
 ) {
 
     var searchText by remember {
@@ -93,7 +109,11 @@ fun TeacherDashboardScreen(
     }
 
 
-    Column(
+    // =================================================
+    // MAIN SCREEN
+    // =================================================
+
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .background(
@@ -101,261 +121,287 @@ fun TeacherDashboardScreen(
             )
     ) {
 
-        // ==================================================
-        // HEADER
-        // ==================================================
-
         Column(
-
             modifier = Modifier
-                .fillMaxWidth()
-                .clip(
-                    RoundedCornerShape(
-                        bottomStart = 40.dp,
-                        bottomEnd = 40.dp
-                    )
-                )
-                .background(
-
-                    brush = Brush.horizontalGradient(
-
-                        colors = listOf(
-
-                            Color(0xFF08758A),
-
-                            Color(0xFF1498AA),
-
-                            Color(0xFF71D0D5)
-                        )
-                    )
-                )
-                .padding(
-                    start = 36.dp,
-                    end = 36.dp,
-                    top = 22.dp,
-                    bottom = 28.dp
-                )
+                .fillMaxSize()
         ) {
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically
+            // =================================================
+            // HEADER
+            // =================================================
+
+            Column(
+
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(
+                        RoundedCornerShape(
+                            bottomStart = 40.dp,
+                            bottomEnd = 40.dp
+                        )
+                    )
+                    .background(
+
+                        brush = Brush.horizontalGradient(
+
+                            colors = listOf(
+
+                                Color(0xFF08758A),
+
+                                Color(0xFF1498AA),
+
+                                Color(0xFF71D0D5)
+                            )
+                        )
+                    )
+                    .padding(
+                        start = 36.dp,
+                        end = 36.dp,
+                        top = 22.dp,
+                        bottom = 28.dp
+                    )
             ) {
 
-                Box(
-
-                    modifier = Modifier
-                        .size(72.dp)
-                        .clip(
-                            RoundedCornerShape(20.dp)
-                        )
-                        .background(
-                            Color.White
-                        ),
-
-                    contentAlignment = Alignment.Center
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
 
-                    Text(
-                        text = "👨‍🏫",
-                        fontSize = 28.sp
+                    Box(
+
+                        modifier = Modifier
+                            .size(72.dp)
+                            .clip(
+                                RoundedCornerShape(20.dp)
+                            )
+                            .background(
+                                Color.White
+                            ),
+
+                        contentAlignment = Alignment.Center
+                    ) {
+
+                        Text(
+                            text = "👨‍🏫",
+                            fontSize = 28.sp
+                        )
+                    }
+
+
+                    Spacer(
+                        modifier = Modifier.width(18.dp)
                     )
+
+
+                    Column {
+
+                        Text(
+                            text = "UniGuide",
+                            color = Color.White,
+                            fontSize = 27.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+
+                        Text(
+                            text = "Teacher Portal",
+                            color = Color.White.copy(
+                                alpha = 0.85f
+                            ),
+                            fontSize = 16.sp
+                        )
+                    }
                 }
 
 
                 Spacer(
-                    modifier = Modifier.width(18.dp)
+                    modifier = Modifier.height(25.dp)
                 )
 
 
-                Column {
+                Text(
+                    text = "Hello, Teacher 👋",
+                    color = Color.White,
+                    fontSize = 29.sp,
+                    fontWeight = FontWeight.Bold
+                )
 
-                    Text(
-                        text = "UniGuide",
-                        color = Color.White,
-                        fontSize = 27.sp,
-                        fontWeight = FontWeight.Bold
-                    )
 
-                    Text(
-                        text = "Teacher Portal",
-                        color = Color.White.copy(
-                            alpha = 0.85f
-                        ),
-                        fontSize = 16.sp
-                    )
-                }
+                Spacer(
+                    modifier = Modifier.height(7.dp)
+                )
+
+
+                Text(
+                    text = "Everything you need to manage your university work.",
+                    color = Color.White.copy(
+                        alpha = 0.9f
+                    ),
+                    fontSize = 15.sp
+                )
             }
 
 
             Spacer(
-                modifier = Modifier.height(25.dp)
+                modifier = Modifier.height(18.dp)
             )
 
 
+            // =================================================
+            // SEARCH
+            // =================================================
+
+            OutlinedTextField(
+
+                value = searchText,
+
+                onValueChange = {
+                    searchText = it
+                },
+
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        horizontal = 31.dp
+                    )
+                    .height(68.dp),
+
+                placeholder = {
+
+                    Text(
+                        text = "Search Teacher Portal",
+                        color = Color(0xFF65777B),
+                        fontSize = 17.sp
+                    )
+                },
+
+                leadingIcon = {
+
+                    Text(
+                        text = "🔍",
+                        fontSize = 23.sp
+                    )
+                },
+
+                singleLine = true,
+
+                shape = RoundedCornerShape(22.dp),
+
+                colors = TextFieldDefaults.colors(
+
+                    focusedContainerColor = Color.White,
+
+                    unfocusedContainerColor = Color.White,
+
+                    disabledContainerColor = Color.White,
+
+                    focusedIndicatorColor = Color(0xFFD9E3E5),
+
+                    unfocusedIndicatorColor = Color(0xFFD9E3E5),
+
+                    cursorColor = Color(0xFF08758A)
+                )
+            )
+
+
+            Spacer(
+                modifier = Modifier.height(17.dp)
+            )
+
+
+            // =================================================
+            // SECTION TITLE
+            // =================================================
+
             Text(
-                text = "Hello, Teacher 👋",
-                color = Color.White,
-                fontSize = 29.sp,
+
+                text = "What would you like to manage?",
+
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        horizontal = 31.dp
+                    ),
+
+                color = Color(0xFF07516A),
+
+                fontSize = 19.sp,
+
                 fontWeight = FontWeight.Bold
             )
 
 
             Spacer(
-                modifier = Modifier.height(7.dp)
+                modifier = Modifier.height(12.dp)
             )
 
 
-            Text(
-                text = "Everything you need to manage your university work.",
-                color = Color.White.copy(
-                    alpha = 0.9f
-                ),
-                fontSize = 15.sp
-            )
-        }
+            // =================================================
+            // TEACHER CARDS
+            // =================================================
 
+            LazyVerticalGrid(
 
-        Spacer(
-            modifier = Modifier.height(18.dp)
-        )
+                columns = GridCells.Fixed(2),
 
+                modifier = Modifier.fillMaxSize(),
 
-        // ==================================================
-        // SEARCH
-        // ==================================================
+                contentPadding = PaddingValues(
 
-        OutlinedTextField(
+                    start = 30.dp,
 
-            value = searchText,
+                    end = 30.dp,
 
-            onValueChange = {
-                searchText = it
-            },
-
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    horizontal = 31.dp
-                )
-                .height(68.dp),
-
-            placeholder = {
-
-                Text(
-                    text = "Search Teacher Portal",
-                    color = Color(0xFF65777B),
-                    fontSize = 17.sp
-                )
-            },
-
-            leadingIcon = {
-
-                Text(
-                    text = "🔍",
-                    fontSize = 23.sp
-                )
-            },
-
-            singleLine = true,
-
-            shape = RoundedCornerShape(22.dp),
-
-            colors = TextFieldDefaults.colors(
-
-                focusedContainerColor = Color.White,
-
-                unfocusedContainerColor = Color.White,
-
-                disabledContainerColor = Color.White,
-
-                focusedIndicatorColor = Color(0xFFD9E3E5),
-
-                unfocusedIndicatorColor = Color(0xFFD9E3E5),
-
-                cursorColor = Color(0xFF08758A)
-            )
-        )
-
-
-        Spacer(
-            modifier = Modifier.height(17.dp)
-        )
-
-
-        // ==================================================
-        // SECTION TITLE
-        // ==================================================
-
-        Text(
-
-            text = "What would you like to manage?",
-
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    horizontal = 31.dp
+                    // Extra space for AI button
+                    bottom = 110.dp
                 ),
 
-            color = Color(0xFF07516A),
+                horizontalArrangement = Arrangement.spacedBy(
+                    16.dp
+                ),
 
-            fontSize = 19.sp,
-
-            fontWeight = FontWeight.Bold
-        )
-
-
-        Spacer(
-            modifier = Modifier.height(12.dp)
-        )
-
-
-        // ==================================================
-        // TEACHER CARDS
-        // ==================================================
-
-        LazyVerticalGrid(
-
-            columns = GridCells.Fixed(2),
-
-            modifier = Modifier.fillMaxSize(),
-
-            contentPadding = PaddingValues(
-
-                start = 30.dp,
-
-                end = 30.dp,
-
-                bottom = 18.dp
-            ),
-
-            horizontalArrangement = Arrangement.spacedBy(
-                16.dp
-            ),
-
-            verticalArrangement = Arrangement.spacedBy(
-                14.dp
-            )
-        ) {
-
-            items(filteredItems) { item ->
-
-                TeacherFeatureCard(
-
-                    item = item,
-
-                    onClick = {
-                        onItemClick(item.title)
-                    }
+                verticalArrangement = Arrangement.spacedBy(
+                    14.dp
                 )
+            ) {
+
+                items(filteredItems) { item ->
+
+                    TeacherFeatureCard(
+
+                        item = item,
+
+                        onClick = {
+                            onItemClick(item.title)
+                        }
+                    )
+                }
             }
         }
+
+
+        // =================================================
+        // FLOATING AI BUTTON
+        // =================================================
+
+        FloatingAiButton(
+
+            onClick = {
+                onAiClick()
+            },
+
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(
+                    end = 20.dp,
+                    bottom = 25.dp
+                )
+        )
     }
 }
 
 
-// ==========================================================
+// =================================================
 // TEACHER FEATURE CARD
-// ==========================================================
+// =================================================
 
 @Composable
 private fun TeacherFeatureCard(
