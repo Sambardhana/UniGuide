@@ -62,6 +62,13 @@ dependencies {
 
     implementation("androidx.core:core-splashscreen:1.2.0")
 
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
+
+// ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4")
+
 
     // ==============================
     // Jetpack Compose

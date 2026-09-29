@@ -12,6 +12,7 @@ import com.uniguide.app.ui.emergency.EmergencyScreen
 import com.uniguide.app.ui.events.EventsScreen
 import com.uniguide.app.ui.facilities.FacilitiesScreen
 import com.uniguide.app.ui.home.HomeScreen
+import com.uniguide.app.ui.chat.ChatScreen
 import com.uniguide.app.ui.hostel.HostelScreen
 import com.uniguide.app.ui.splash.SplashScreen
 
@@ -67,6 +68,8 @@ object Routes {
 
     const val EMERGENCY = "emergency"
 
+    const val STUDENT_CHAT = "student_chat"
+
 
     // --------------------------------------------------------
     // Teacher
@@ -91,6 +94,8 @@ object Routes {
     const val TEACHER_ACADEMIC_CALENDAR = "teacher_academic_calendar"
 
     const val TEACHER_FACULTY_GUIDELINES = "teacher_faculty_guidelines"
+
+    const val TEACHER_CHAT = "teacher_chat"
 }
 
 
@@ -250,6 +255,12 @@ fun UniGuideNavGraph() {
                             )
                         }
                     }
+                },
+
+                onAiClick = {
+                    navController.navigate(
+                        Routes.STUDENT_CHAT
+                    )
                 }
             )
         }
@@ -332,6 +343,18 @@ fun UniGuideNavGraph() {
         composable(Routes.EMERGENCY) {
 
             EmergencyScreen()
+        }
+
+
+        // ====================================================
+        // STUDENT AI CHAT
+        // ====================================================
+
+        composable(Routes.STUDENT_CHAT) {
+
+            ChatScreen(
+                userRole = "student"
+            )
         }
 
 
@@ -442,6 +465,12 @@ fun UniGuideNavGraph() {
                             )
                         }
                     }
+                },
+
+                onAiClick = {
+                    navController.navigate(
+                        Routes.TEACHER_CHAT
+                    )
                 }
             )
         }
@@ -550,6 +579,18 @@ fun UniGuideNavGraph() {
         composable(Routes.TEACHER_RESOURCES) {
 
             TeacherResourcesScreen()
+        }
+
+
+        // ====================================================
+        // TEACHER AI CHAT
+        // ====================================================
+
+        composable(Routes.TEACHER_CHAT) {
+
+            ChatScreen(
+                userRole = "teacher"
+            )
         }
     }
 }
