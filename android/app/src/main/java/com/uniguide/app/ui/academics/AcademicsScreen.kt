@@ -1,64 +1,56 @@
 package com.uniguide.app.ui.academics
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.uniguide.app.ui.common.StylishInfoScreen
+import com.uniguide.app.ui.common.StylishItem
 
 @Composable
 fun AcademicsScreen() {
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
+    StylishInfoScreen(
 
-        Text(
-            text = "Academics",
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF111827)
-        )
+        title = "Academics",
 
-        Text(
-            text = "Academic information and resources",
-            fontSize = 16.sp,
-            color = Color(0xFF6B7280)
-        )
+        subtitle = "Courses, departments and learning",
 
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xFFF3F6FF)
+        headerIcon = "🎓",
+
+        items = listOf(StylishItem(
+                "🎓",
+                "Programs Offered",
+                "B.Tech, M.Tech, MBA, BBA, BCA, MCA, B.Sc, M.Sc and more",
+                details = "CUTM offers various undergraduate, postgraduate and other academic programmes including Engineering, Management, Computer Applications, Sciences, Pharmacy, Nursing, Law and Design."
+            ), StylishItem(
+                "📚",
+                "Departments",
+                "Different academic schools and departments",
+                details = "Academic areas include Engineering, Management, Applied Sciences, Pharmacy, Healthcare, Law, Design, Maritime Studies and other disciplines."
+            ), StylishItem(
+                "🧪",
+                "Laboratories",
+                "Practical and technical learning",
+                details = "Students can use laboratories for practical sessions, experiments, technical learning and project work."
+            ), StylishItem(
+                "📖",
+                "Library",
+                "Books and digital learning resources",
+                details = "The library provides academic books, reference materials, journals and digital learning resources for students."
+            ), StylishItem(
+                "💻",
+                "Smart Learning",
+                "Digital learning facilities",
+                details = "Classrooms and learning spaces support digital learning, presentations, internet access and academic activities."
+            ), StylishItem(
+                "📝",
+                "Examinations",
+                "Internal and semester examinations",
+                details = "The university conducts internal assessments, practical examinations and semester examinations according to the academic schedule."
+            ), StylishItem(
+                "🏆",
+                "Skill Development",
+                "Practical and industry-oriented learning",
+                details = "Students can develop practical skills through projects, internships, workshops, training and industry-oriented learning."
             )
-        ) {
-            Column(
-                modifier = Modifier.padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-
-                Text(
-                    text = "Academic Resources",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Text(
-                    text = "Courses, departments, timetable and other academic information will be available here."
-                )
-            }
-        }
-    }
+        )
+    )
 }

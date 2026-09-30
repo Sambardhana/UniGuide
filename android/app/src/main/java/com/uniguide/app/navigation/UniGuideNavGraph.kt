@@ -5,10 +5,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
-// ============================================================
-// STUDENT SCREENS
-// ============================================================
-
 import com.uniguide.app.ui.academics.AcademicsScreen
 import com.uniguide.app.ui.activities.ActivitiesScreen
 import com.uniguide.app.ui.campusmap.CampusMapScreen
@@ -16,21 +12,23 @@ import com.uniguide.app.ui.emergency.EmergencyScreen
 import com.uniguide.app.ui.events.EventsScreen
 import com.uniguide.app.ui.facilities.FacilitiesScreen
 import com.uniguide.app.ui.home.HomeScreen
+import com.uniguide.app.ui.chat.ChatScreen
 import com.uniguide.app.ui.hostel.HostelScreen
 import com.uniguide.app.ui.splash.SplashScreen
-import com.uniguide.app.ui.university.UniversityScreen
-import com.uniguide.app.ui.welcome.WelcomeScreen
 
-// ============================================================
-// TEACHER SCREENS
-// ============================================================
-
+import com.uniguide.app.ui.teacher.academiccalendar.TeacherAcademicCalendarScreen
+import com.uniguide.app.ui.teacher.academicsystem.TeacherAcademicSystemScreen
 import com.uniguide.app.ui.teacher.dashboard.TeacherDashboardScreen
 import com.uniguide.app.ui.teacher.department.DepartmentScreen
+import com.uniguide.app.ui.teacher.department.SchoolDetailScreen
+import com.uniguide.app.ui.teacher.facultyguidelines.TeacherFacultyGuidelinesScreen
 import com.uniguide.app.ui.teacher.notices.TeacherNoticesScreen
 import com.uniguide.app.ui.teacher.profile.TeacherProfileScreen
 import com.uniguide.app.ui.teacher.resources.TeacherResourcesScreen
 import com.uniguide.app.ui.teacher.schedule.TeacherScheduleScreen
+
+import com.uniguide.app.ui.university.UniversityScreen
+import com.uniguide.app.ui.welcome.WelcomeScreen
 
 
 // ============================================================
@@ -70,6 +68,8 @@ object Routes {
 
     const val EMERGENCY = "emergency"
 
+    const val STUDENT_CHAT = "student_chat"
+
 
     // --------------------------------------------------------
     // Teacher
@@ -86,6 +86,16 @@ object Routes {
     const val TEACHER_DEPARTMENT = "teacher_department"
 
     const val TEACHER_RESOURCES = "teacher_resources"
+
+    const val TEACHER_SCHOOL_DETAIL = "teacher_school_detail"
+
+    const val TEACHER_ACADEMIC_SYSTEM = "teacher_academic_system"
+
+    const val TEACHER_ACADEMIC_CALENDAR = "teacher_academic_calendar"
+
+    const val TEACHER_FACULTY_GUIDELINES = "teacher_faculty_guidelines"
+
+    const val TEACHER_CHAT = "teacher_chat"
 }
 
 
@@ -100,9 +110,7 @@ fun UniGuideNavGraph() {
 
 
     NavHost(
-
         navController = navController,
-
         startDestination = Routes.SPLASH
     ) {
 
@@ -166,13 +174,13 @@ fun UniGuideNavGraph() {
 
 
                 // --------------------------------------------
-                // GET STARTED
+                // CAMPUS MAP
                 // --------------------------------------------
 
-                onGetStartedClick = {
+                onCampusMapClick = {
 
                     navController.navigate(
-                        Routes.HOME
+                        Routes.CAMPUS_MAP
                     )
                 }
             )
@@ -198,14 +206,12 @@ fun UniGuideNavGraph() {
                             )
                         }
 
-
                         "Academics" -> {
 
                             navController.navigate(
                                 Routes.ACADEMICS
                             )
                         }
-
 
                         "Hostel" -> {
 
@@ -214,14 +220,12 @@ fun UniGuideNavGraph() {
                             )
                         }
 
-
                         "Facilities" -> {
 
                             navController.navigate(
                                 Routes.FACILITIES
                             )
                         }
-
 
                         "Activities" -> {
 
@@ -230,22 +234,12 @@ fun UniGuideNavGraph() {
                             )
                         }
 
-
                         "Events" -> {
 
                             navController.navigate(
                                 Routes.EVENTS
                             )
                         }
-
-
-                        "Campus Map" -> {
-
-                            navController.navigate(
-                                Routes.CAMPUS_MAP
-                            )
-                        }
-
 
                         "Emergency Contacts" -> {
 
@@ -254,6 +248,13 @@ fun UniGuideNavGraph() {
                             )
                         }
                     }
+                },
+
+                onAiClick = {
+
+                    navController.navigate(
+                        Routes.STUDENT_CHAT
+                    )
                 }
             )
         }
@@ -340,6 +341,18 @@ fun UniGuideNavGraph() {
 
 
         // ====================================================
+        // STUDENT AI CHAT
+        // ====================================================
+
+        composable(Routes.STUDENT_CHAT) {
+
+            ChatScreen(
+                userRole = "student"
+            )
+        }
+
+
+        // ====================================================
         // TEACHER DASHBOARD
         // ====================================================
 
@@ -351,27 +364,62 @@ fun UniGuideNavGraph() {
 
                     when (item) {
 
-
                         // ------------------------------------
-                        // PROFILE
+                        // UNIVERSITY INFORMATION
                         // ------------------------------------
 
-                        "Profile" -> {
+                        "University information" -> {
 
                             navController.navigate(
-                                Routes.TEACHER_PROFILE
+                                Routes.UNIVERSITY
                             )
                         }
 
 
                         // ------------------------------------
-                        // SCHEDULE
+                        // DEPARTMENTS
                         // ------------------------------------
 
-                        "Schedule" -> {
+                        "Departments" -> {
 
                             navController.navigate(
-                                Routes.TEACHER_SCHEDULE
+                                Routes.TEACHER_DEPARTMENT
+                            )
+                        }
+
+
+                        // ------------------------------------
+                        // ACADEMIC SYSTEM
+                        // ------------------------------------
+
+                        "Academic System " -> {
+
+                            navController.navigate(
+                                Routes.TEACHER_ACADEMIC_SYSTEM
+                            )
+                        }
+
+
+                        // ------------------------------------
+                        // ACADEMIC CALENDAR
+                        // ------------------------------------
+
+                        "Academic Calendar" -> {
+
+                            navController.navigate(
+                                Routes.TEACHER_ACADEMIC_CALENDAR
+                            )
+                        }
+
+
+                        // ------------------------------------
+                        // FACULTY GUIDELINES
+                        // ------------------------------------
+
+                        "Faculty Guidelines" -> {
+
+                            navController.navigate(
+                                Routes.TEACHER_FACULTY_GUIDELINES
                             )
                         }
 
@@ -389,28 +437,23 @@ fun UniGuideNavGraph() {
 
 
                         // ------------------------------------
-                        // DEPARTMENT
+                        // EMERGENCY & SUPPORT
                         // ------------------------------------
 
-                        "Department" -> {
+                        "Emergency & Support " -> {
 
                             navController.navigate(
-                                Routes.TEACHER_DEPARTMENT
-                            )
-                        }
-
-
-                        // ------------------------------------
-                        // RESOURCES
-                        // ------------------------------------
-
-                        "Resources" -> {
-
-                            navController.navigate(
-                                Routes.TEACHER_RESOURCES
+                                Routes.EMERGENCY
                             )
                         }
                     }
+                },
+
+                onAiClick = {
+
+                    navController.navigate(
+                        Routes.TEACHER_CHAT
+                    )
                 }
             )
         }
@@ -452,7 +495,63 @@ fun UniGuideNavGraph() {
 
         composable(Routes.TEACHER_DEPARTMENT) {
 
-            DepartmentScreen()
+            DepartmentScreen(
+
+                onSchoolClick = { schoolId ->
+
+                    navController.navigate(
+                        "${Routes.TEACHER_SCHOOL_DETAIL}/$schoolId"
+                    )
+                }
+            )
+        }
+
+
+        // ====================================================
+        // TEACHER SCHOOL DETAIL
+        // ====================================================
+
+        composable(
+            route = "${Routes.TEACHER_SCHOOL_DETAIL}/{schoolId}"
+        ) { backStackEntry ->
+
+            val schoolId = backStackEntry.arguments
+                ?.getString("schoolId")
+                ?: ""
+
+            SchoolDetailScreen(
+                schoolId = schoolId
+            )
+        }
+
+
+        // ====================================================
+        // TEACHER ACADEMIC SYSTEM
+        // ====================================================
+
+        composable(Routes.TEACHER_ACADEMIC_SYSTEM) {
+
+            TeacherAcademicSystemScreen()
+        }
+
+
+        // ====================================================
+        // TEACHER ACADEMIC CALENDAR
+        // ====================================================
+
+        composable(Routes.TEACHER_ACADEMIC_CALENDAR) {
+
+            TeacherAcademicCalendarScreen()
+        }
+
+
+        // ====================================================
+        // TEACHER FACULTY GUIDELINES
+        // ====================================================
+
+        composable(Routes.TEACHER_FACULTY_GUIDELINES) {
+
+            TeacherFacultyGuidelinesScreen()
         }
 
 
@@ -464,5 +563,18 @@ fun UniGuideNavGraph() {
 
             TeacherResourcesScreen()
         }
+
+
+        // ====================================================
+        // TEACHER AI CHAT
+        // ====================================================
+
+        composable(Routes.TEACHER_CHAT) {
+
+            ChatScreen(
+                userRole = "teacher"
+            )
+        }
+
     }
 }

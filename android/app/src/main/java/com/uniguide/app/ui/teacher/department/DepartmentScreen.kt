@@ -1,6 +1,7 @@
 package com.uniguide.app.ui.teacher.department
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,251 +12,427 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+
+data class SchoolItem(
+    val id: String,
+    val name: String,
+    val icon: String
+)
+
+
+private val cutmSchools = listOf(
+
+    SchoolItem(
+        id = "engineering",
+        name = "School of Engineering & Technology",
+        icon = "⚙️"
+    ),
+
+    SchoolItem(
+        id = "fisheries",
+        name = "School of Fisheries",
+        icon = "🐟"
+    ),
+
+    SchoolItem(
+        id = "media",
+        name = "School of Media & Communication",
+        icon = "🎙️"
+    ),
+
+    SchoolItem(
+        id = "agriculture",
+        name = "M.S. Swaminathan School of Agriculture",
+        icon = "🌾"
+    ),
+
+    SchoolItem(
+        id = "management",
+        name = "School of Management",
+        icon = "💼"
+    ),
+
+    SchoolItem(
+        id = "forensic",
+        name = "School of Forensic Sciences",
+        icon = "🔬"
+    ),
+
+    SchoolItem(
+        id = "law",
+        name = "School of Law",
+        icon = "⚖️"
+    ),
+
+    SchoolItem(
+        id = "applied_sciences",
+        name = "School of Applied Sciences",
+        icon = "🧪"
+    ),
+
+    SchoolItem(
+        id = "pharmacy",
+        name = "School of Pharmacy & Life Sciences",
+        icon = "💊"
+    ),
+
+    SchoolItem(
+        id = "agri_bio",
+        name = "School of Agriculture & Bio-Engineering",
+        icon = "🌱"
+    ),
+
+    SchoolItem(
+        id = "allied_health",
+        name = "School of Allied & Healthcare Sciences",
+        icon = "🏥"
+    ),
+
+    SchoolItem(
+        id = "biotechnology",
+        name = "School of Biotechnology",
+        icon = "🧬"
+    ),
+
+    SchoolItem(
+        id = "bachelor",
+        name = "School of Bachelor Studies",
+        icon = "🎓"
+    ),
+
+    SchoolItem(
+        id = "veterinary",
+        name = "School of Veterinary & Animal Sciences",
+        icon = "🐾"
+    ),
+
+    SchoolItem(
+        id = "nursing",
+        name = "School of Nursing",
+        icon = "🩺"
+    ),
+
+    SchoolItem(
+        id = "design",
+        name = "School of Design Studies",
+        icon = "🎨"
+    ),
+
+    SchoolItem(
+        id = "vocational",
+        name = "School of Vocational Education & Training",
+        icon = "🛠️"
+    )
+)
+
+
 @Composable
-fun DepartmentScreen() {
+fun DepartmentScreen(
+    onSchoolClick: (String) -> Unit
+) {
+
+    var searchText by remember {
+        mutableStateOf("")
+    }
+
+
+    val filteredSchools = cutmSchools.filter { school ->
+
+        school.name.contains(
+            searchText,
+            ignoreCase = true
+        )
+    }
+
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF7F9FC))
+            .background(
+                Color(0xFFF3FBFD)
+            )
     ) {
 
-        // -----------------------------
+        // ==================================================
         // HEADER
-        // -----------------------------
+        // ==================================================
 
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(205.dp)
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(
-                            Color(0xFF08758A),
-
-                            Color(0xFF1498AA),
-
-                            Color(0xFF71D0D5)
-                        )
-                    ),
-                    shape = RoundedCornerShape(
+                .clip(
+                    RoundedCornerShape(
                         bottomStart = 32.dp,
                         bottomEnd = 32.dp
                     )
                 )
-        ) {
-
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        horizontal = 24.dp,
-                        vertical = 40.dp
+                .background(
+                    brush = Brush.horizontalGradient(
+                        colors = listOf(
+                            Color(0xFF08758A),
+                            Color(0xFF1498AA),
+                            Color(0xFF71D0D5)
+                        )
                     )
-            ) {
-
-                Text(
-                    text = "🏢",
-                    fontSize = 35.sp
                 )
-
-                Spacer(
-                    modifier = Modifier.height(8.dp)
-                )
-
-                Text(
-                    text = "Department",
-                    color = Color.White,
-                    fontSize = 28.sp,
-                    fontWeight = FontWeight.ExtraBold
-                )
-
-                Spacer(
-                    modifier = Modifier.height(4.dp)
-                )
-
-                Text(
-                    text = "Department information and faculty details",
-                    color = Color.White.copy(alpha = 0.9f),
-                    fontSize = 14.sp
-                )
-            }
-        }
-
-        // -----------------------------
-        // DEPARTMENT CONTENT
-        // -----------------------------
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
                 .padding(
-                    horizontal = 20.dp,
-                    vertical = 20.dp
+                    start = 26.dp,
+                    end = 26.dp,
+                    top = 38.dp,
+                    bottom = 28.dp
                 )
         ) {
 
             Text(
-                text = "Department Information",
-                fontSize = 21.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF111827)
+                text = "🏢",
+                fontSize = 29.sp
             )
 
             Spacer(
-                modifier = Modifier.height(15.dp)
+                modifier = Modifier.height(8.dp)
             )
 
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(24.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = Color.White
+            Text(
+                text = "Departments",
+                color = Color.White,
+                fontSize = 28.sp,
+                fontWeight = FontWeight.ExtraBold
+            )
+
+            Spacer(
+                modifier = Modifier.height(5.dp)
+            )
+
+            Text(
+                text = "Explore CUTM academic schools",
+                color = Color.White.copy(
+                    alpha = 0.9f
                 ),
-                elevation = CardDefaults.cardElevation(
-                    defaultElevation = 4.dp
+                fontSize = 14.sp
+            )
+        }
+
+
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
+
+
+        // ==================================================
+        // SEARCH
+        // ==================================================
+
+        OutlinedTextField(
+
+            value = searchText,
+
+            onValueChange = {
+                searchText = it
+            },
+
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    horizontal = 22.dp
                 )
-            ) {
+                .height(62.dp),
 
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(20.dp)
-                ) {
+            placeholder = {
 
-                    Text(
-                        text = "Computer Science & Engineering",
-                        fontSize = 19.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFF2563EB)
-                    )
+                Text(
+                    text = "Search schools",
+                    color = Color(0xFF65777B),
+                    fontSize = 16.sp
+                )
+            },
 
-                    Spacer(
-                        modifier = Modifier.height(8.dp)
-                    )
+            leadingIcon = {
 
-                    Text(
-                        text = "The department provides academic and technical education in computer science, software development and related technologies.",
-                        fontSize = 13.sp,
-                        color = Color(0xFF64748B),
-                        lineHeight = 19.sp
-                    )
-                }
+                Text(
+                    text = "🔍",
+                    fontSize = 21.sp
+                )
+            },
+
+            singleLine = true,
+
+            shape = RoundedCornerShape(20.dp),
+
+            colors = TextFieldDefaults.colors(
+
+                focusedContainerColor = Color.White,
+
+                unfocusedContainerColor = Color.White,
+
+                disabledContainerColor = Color.White,
+
+                focusedIndicatorColor = Color(0xFFD9E3E5),
+
+                unfocusedIndicatorColor = Color(0xFFD9E3E5),
+
+                cursorColor = Color(0xFF08758A)
+            )
+        )
+
+
+        Spacer(
+            modifier = Modifier.height(15.dp)
+        )
+
+
+        Text(
+            text = "CUTM Academic Schools",
+
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    horizontal = 22.dp
+                ),
+
+            color = Color(0xFF07516A),
+
+            fontSize = 19.sp,
+
+            fontWeight = FontWeight.Bold
+        )
+
+
+        Spacer(
+            modifier = Modifier.height(10.dp)
+        )
+
+
+        // ==================================================
+        // SCHOOL LIST
+        // ==================================================
+
+        LazyColumn(
+
+            modifier = Modifier.fillMaxSize(),
+
+            verticalArrangement = Arrangement.spacedBy(
+                12.dp
+            ),
+
+            contentPadding = androidx.compose.foundation.layout.PaddingValues(
+                start = 22.dp,
+                end = 22.dp,
+                bottom = 22.dp
+            )
+        ) {
+
+            items(filteredSchools) { school ->
+
+                SchoolCard(
+                    school = school,
+                    onClick = {
+                        onSchoolClick(school.id)
+                    }
+                )
             }
-
-            Spacer(
-                modifier = Modifier.height(16.dp)
-            )
-
-            // Department details
-
-            DepartmentDetailCard(
-                icon = "👨‍🏫",
-                title = "Faculty",
-                value = "Faculty members and teaching staff"
-            )
-
-            Spacer(
-                modifier = Modifier.height(12.dp)
-            )
-
-            DepartmentDetailCard(
-                icon = "🎓",
-                title = "Programs",
-                value = "B.Tech Computer Science & Engineering"
-            )
-
-            Spacer(
-                modifier = Modifier.height(12.dp)
-            )
-
-            DepartmentDetailCard(
-                icon = "🧪",
-                title = "Laboratories",
-                value = "Computer labs and technical laboratories"
-            )
-
-            Spacer(
-                modifier = Modifier.height(12.dp)
-            )
-
-            DepartmentDetailCard(
-                icon = "📚",
-                title = "Courses",
-                value = "View courses offered by the department"
-            )
         }
     }
 }
 
+
+// ==========================================================
+// SCHOOL CARD
+// ==========================================================
+
 @Composable
-fun DepartmentDetailCard(
-    icon: String,
-    title: String,
-    value: String
+private fun SchoolCard(
+    school: SchoolItem,
+    onClick: () -> Unit
 ) {
 
     Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(22.dp),
+
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable {
+                onClick()
+            },
+
+        shape = RoundedCornerShape(20.dp),
+
         colors = CardDefaults.cardColors(
             containerColor = Color.White
         ),
+
         elevation = CardDefaults.cardElevation(
             defaultElevation = 3.dp
         )
     ) {
 
         Row(
+
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(18.dp),
+                .padding(16.dp),
+
             verticalAlignment = Alignment.CenterVertically
         ) {
 
             Box(
+
                 modifier = Modifier
-                    .size(50.dp)
-                    .background(
-                        Color(0xFFEFF6FF),
+                    .size(52.dp)
+                    .clip(
                         RoundedCornerShape(15.dp)
+                    )
+                    .background(
+                        Color(0xFFE8F7F9)
                     ),
+
                 contentAlignment = Alignment.Center
             ) {
 
                 Text(
-                    text = icon,
-                    fontSize = 24.sp
+                    text = school.icon,
+                    fontSize = 24.sp,
+                    textAlign = TextAlign.Center
                 )
             }
 
+
             Spacer(
-                modifier = Modifier.size(15.dp)
+                modifier = Modifier.width(14.dp)
             )
+
 
             Column(
                 modifier = Modifier.weight(1f)
             ) {
 
                 Text(
-                    text = title,
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF111827)
+                    text = school.name,
+                    color = Color(0xFF07516A),
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold
                 )
 
                 Spacer(
@@ -263,17 +440,19 @@ fun DepartmentDetailCard(
                 )
 
                 Text(
-                    text = value,
-                    fontSize = 13.sp,
-                    color = Color(0xFF64748B)
+                    text = "Tap to view school details",
+                    color = Color(0xFF64777B),
+                    fontSize = 13.sp
                 )
             }
+
+
+            Text(
+                text = "›",
+                color = Color(0xFF08758A),
+                fontSize = 30.sp,
+                fontWeight = FontWeight.Light
+            )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DepartmentScreenPreview() {
-    DepartmentScreen()
 }

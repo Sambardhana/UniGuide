@@ -50,9 +50,9 @@ fun TeacherResourcesScreen() {
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
-                            Color(0xFF1769E0),
-                            Color(0xFF4F8EF7),
-                            Color(0xFF74B9FF)
+                            Color(0xFF08758A),
+                            Color(0xFF1498AA),
+                            Color(0xFF71D0D5)
                         )
                     )
                 )
@@ -157,7 +157,7 @@ fun ResourceAdminCard(
             ) {
                 Text(
                     text = emoji,
-                    fontSize = 24.sp
+                    fontSize = 19.sp
                 )
             }
 

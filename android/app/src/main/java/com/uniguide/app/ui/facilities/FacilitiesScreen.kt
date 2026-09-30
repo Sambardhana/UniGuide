@@ -1,64 +1,76 @@
 package com.uniguide.app.ui.facilities
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.uniguide.app.ui.common.StylishInfoScreen
+import com.uniguide.app.ui.common.StylishItem
 
 @Composable
 fun FacilitiesScreen() {
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-
-        Text(
-            text = "Facilities",
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF111827)
-        )
-
-        Text(
-            text = "Explore campus facilities",
-            fontSize = 16.sp,
-            color = Color(0xFF6B7280)
-        )
-
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xFFF3F6FF)
+    StylishInfoScreen(
+        title = "Facilities",
+        subtitle = "Campus facilities at CUTM",
+        headerIcon = "🏢",
+        items = listOf(
+            StylishItem(
+                "📚",
+                "Library",
+                "Academic and digital resources",
+                details = "The campus library provides books, reference materials, periodicals and digital learning resources."
+            ),
+            StylishItem(
+                "📶",
+                "Wi-Fi",
+                "Campus internet connectivity",
+                details = "Wi-Fi facilities are available on campus to support academic work, online learning and digital resources."
+            ),
+            StylishItem(
+                "🏛️",
+                "Auditorium",
+                "Events and academic programmes",
+                details = "Auditorium and lecture spaces are used for seminars, workshops, conferences, cultural programmes and university events."
+            ),
+            StylishItem(
+                "🏋️",
+                "Gym & Fitness",
+                "Health and fitness facilities",
+                details = "Students can participate in fitness activities using gymnasium and open fitness facilities."
+            ),
+            StylishItem(
+                "🏀",
+                "Sports Facilities",
+                "Indoor and outdoor sports",
+                details = "Sports facilities include basketball, volleyball, cricket, football, swimming and other sports."
+            ),
+            StylishItem(
+                "🍴",
+                "Food & Cafeteria",
+                "Food and convenience facilities",
+                details = "Students can access campus food, mess, cafeteria and convenience facilities."
+            ),
+            StylishItem(
+                "🩺",
+                "Healthcare",
+                "Medical support",
+                details = "Healthcare facilities are available to support student medical needs."
+            ),
+            StylishItem(
+                "🚌",
+                "Transport",
+                "University transportation",
+                details = "University transport services support transportation requirements of students and staff."
+            ),
+            StylishItem(
+                "🛡️",
+                "Security",
+                "Campus safety",
+                details = "Security services and CCTV facilities support a safe campus environment."
+            ),
+            StylishItem(
+                "🌱",
+                "Green Campus",
+                "Sustainability facilities",
+                details = "The university lists sustainability initiatives including solar systems, rainwater harvesting, sewage treatment and green spaces."
             )
-        ) {
-            Column(
-                modifier = Modifier.padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-
-                Text(
-                    text = "Campus Facilities",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Text(
-                    text = "Library, laboratories, sports facilities, cafeteria and other campus facilities will be available here."
-                )
-            }
-        }
-    }
+        )
+    )
 }

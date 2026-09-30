@@ -45,18 +45,6 @@ android {
 dependencies {
 
     // ==============================
-    // Member 1 - QR Scanner
-    // ==============================
-
-    implementation("com.google.mlkit:barcode-scanning:17.3.0")
-
-    implementation("androidx.camera:camera-core:1.6.2")
-    implementation("androidx.camera:camera-camera2:1.6.2")
-    implementation("androidx.camera:camera-lifecycle:1.6.2")
-    implementation("androidx.camera:camera-view:1.6.2")
-
-
-    // ==============================
     // Existing Android dependencies
     // ==============================
 
@@ -64,12 +52,29 @@ dependencies {
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
-
     implementation(libs.material)
 
+    // ==============================
+    // Android Splash Screen
+    // ==============================
+
+    implementation("androidx.core:core-splashscreen:1.2.0")
 
     // ==============================
-    // Member 2 - Jetpack Compose
+    // Retrofit
+    // ==============================
+
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
+
+    // ==============================
+    // ViewModel
+    // ==============================
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4")
+
+    // ==============================
+    // Jetpack Compose
     // ==============================
 
     val composeBom = platform(libs.androidx.compose.bom)
@@ -81,7 +86,10 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.runtime)
+
     implementation("androidx.compose.foundation:foundation")
+
     implementation(libs.androidx.ui.tooling.preview)
 
     debugImplementation(libs.androidx.ui.tooling)
@@ -90,7 +98,17 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
 
+    // ==============================
+// OpenStreetMap
+// ==============================
 
+    implementation("org.osmdroid:osmdroid-android:6.1.20")
+
+// ==============================
+// Device Location
+// ==============================
+
+    implementation("com.google.android.gms:play-services-location:21.3.0")
     // ==============================
     // Testing
     // ==============================
