@@ -1,4 +1,5 @@
 val buildDirBase = file("${System.getProperty("user.home")}/.gradle-builds/${rootProject.name}")
+
 layout.buildDirectory.set(file("$buildDirBase/root"))
 
 subprojects {

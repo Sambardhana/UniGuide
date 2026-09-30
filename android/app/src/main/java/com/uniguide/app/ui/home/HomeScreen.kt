@@ -1,7 +1,5 @@
 package com.uniguide.app.ui.home
 
-import com.uniguide.app.ui.common.FloatingAiButton
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +24,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,6 +38,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.uniguide.app.ui.common.FloatingAiButton
+import com.uniguide.app.ui.viewmodel.UniGuideViewModel
+import com.uniguide.app.ui.viewmodel.UniGuideViewModelFactory
 
 
 private data class HomeItem(
@@ -61,8 +64,6 @@ private val homeItems = listOf(
 
     HomeItem("Events", "📅"),
 
-    HomeItem("Campus Map", "🗺️"),
-
     HomeItem("Emergency Contacts", "🚨")
 )
 
@@ -73,11 +74,42 @@ fun HomeScreen(
     onAiClick: () -> Unit
 ) {
 
+    /*
+     * ViewModel
+     *
+     * This connects the Home screen to:
+     *
+     * PostgreSQL
+     *      ↓
+     * Spring Boot
+     *      ↓
+     * Retrofit
+     *      ↓
+     * Repository
+     *      ↓
+     * ViewModel
+     */
+    val viewModel: UniGuideViewModel = viewModel(
+        factory = UniGuideViewModelFactory()
+    )
+
+
+    /*
+     * Load database data when HomeScreen
+     * is first displayed.
+     */
+    LaunchedEffect(Unit) {
+        viewModel.loadAllStudentData()
+    }
+
+
     var searchText by remember {
         mutableStateOf("")
     }
 
+
     val filteredItems = homeItems.filter { item ->
+
         item.title.contains(
             searchText,
             ignoreCase = true
@@ -127,7 +159,6 @@ fun HomeScreen(
                     )
             ) {
 
-                // Logo + title
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -333,13 +364,22 @@ fun HomeScreen(
             }
         }
 
-        // Floating AI Assistant button
+
+        // =================================================
+        // FLOATING AI BUTTON
+        // =================================================
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(end = 20.dp, bottom = 24.dp),
+                .padding(
+                    end = 20.dp,
+                    bottom = 24.dp
+                ),
+
             contentAlignment = Alignment.BottomEnd
         ) {
+
             FloatingAiButton(
                 onClick = onAiClick
             )

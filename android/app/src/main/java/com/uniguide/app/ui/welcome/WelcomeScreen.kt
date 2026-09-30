@@ -27,7 +27,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -37,6 +36,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.uniguide.app.R
+import androidx.compose.ui.draw.clip
 import com.uniguide.app.ui.theme.UniGuideBackground
 import com.uniguide.app.ui.theme.UniGuideDarkText
 import com.uniguide.app.ui.theme.UniGuideSecondaryText
@@ -47,7 +47,7 @@ import com.uniguide.app.ui.theme.UniGuideWhite
 fun WelcomeScreen(
     onStudentClick: () -> Unit,
     onTeacherClick: () -> Unit = {},
-    onGetStartedClick: () -> Unit = {}
+    onCampusMapClick: () -> Unit = {}
 ) {
 
     Column(
@@ -195,9 +195,9 @@ fun WelcomeScreen(
             modifier = Modifier.height(18.dp)
         )
 
-        // Get Started
+        // Campus Map
         Button(
-            onClick = onGetStartedClick,
+            onClick = onCampusMapClick,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(54.dp),
@@ -209,7 +209,7 @@ fun WelcomeScreen(
         ) {
 
             Text(
-                text = "Get Started →",
+                text = "Campus Map 🗺️",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )
