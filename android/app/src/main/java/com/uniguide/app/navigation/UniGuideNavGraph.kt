@@ -174,13 +174,13 @@ fun UniGuideNavGraph() {
 
 
                 // --------------------------------------------
-                // GET STARTED
+                // CAMPUS MAP
                 // --------------------------------------------
 
-                onGetStartedClick = {
+                onCampusMapClick = {
 
                     navController.navigate(
-                        Routes.HOME
+                        Routes.CAMPUS_MAP
                     )
                 }
             )
@@ -241,13 +241,6 @@ fun UniGuideNavGraph() {
                             )
                         }
 
-                        "Campus Map" -> {
-
-                            navController.navigate(
-                                Routes.CAMPUS_MAP
-                            )
-                        }
-
                         "Emergency Contacts" -> {
 
                             navController.navigate(
@@ -258,6 +251,7 @@ fun UniGuideNavGraph() {
                 },
 
                 onAiClick = {
+
                     navController.navigate(
                         Routes.STUDENT_CHAT
                     )
@@ -443,18 +437,6 @@ fun UniGuideNavGraph() {
 
 
                         // ------------------------------------
-                        // CAMPUS MAP
-                        // ------------------------------------
-
-                        "Campus Map" -> {
-
-                            navController.navigate(
-                                Routes.CAMPUS_MAP
-                            )
-                        }
-
-
-                        // ------------------------------------
                         // EMERGENCY & SUPPORT
                         // ------------------------------------
 
@@ -468,6 +450,7 @@ fun UniGuideNavGraph() {
                 },
 
                 onAiClick = {
+
                     navController.navigate(
                         Routes.TEACHER_CHAT
                     )
@@ -592,5 +575,6 @@ fun UniGuideNavGraph() {
                 userRole = "teacher"
             )
         }
+
     }
 }

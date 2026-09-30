@@ -64,8 +64,6 @@ private val homeItems = listOf(
 
     HomeItem("Events", "📅"),
 
-    HomeItem("Campus Map", "🗺️"),
-
     HomeItem("Emergency Contacts", "🚨")
 )
 

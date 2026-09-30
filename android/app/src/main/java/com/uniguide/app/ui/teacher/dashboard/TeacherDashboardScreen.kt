@@ -77,11 +77,6 @@ private val teacherItems = listOf(
     ),
 
     TeacherItem(
-        title = "Campus Map",
-        icon = "🗺️"
-
-    ),
-    TeacherItem(
         title = "Emergency & Support ",
         icon = "🆘"
 

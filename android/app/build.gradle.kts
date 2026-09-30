@@ -52,9 +52,7 @@ dependencies {
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
-
     implementation(libs.material)
-
 
     // ==============================
     // Android Splash Screen
@@ -62,13 +60,18 @@ dependencies {
 
     implementation("androidx.core:core-splashscreen:1.2.0")
 
+    // ==============================
     // Retrofit
+    // ==============================
+
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
 
-// ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4")
+    // ==============================
+    // ViewModel
+    // ==============================
 
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4")
 
     // ==============================
     // Jetpack Compose
@@ -80,7 +83,6 @@ dependencies {
     androidTestImplementation(composeBom)
 
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
-    implementation("androidx.core:core-splashscreen:1.2.0")
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
@@ -96,7 +98,17 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
 
+    // ==============================
+// OpenStreetMap
+// ==============================
 
+    implementation("org.osmdroid:osmdroid-android:6.1.20")
+
+// ==============================
+// Device Location
+// ==============================
+
+    implementation("com.google.android.gms:play-services-location:21.3.0")
     // ==============================
     // Testing
     // ==============================
@@ -105,6 +117,5 @@ dependencies {
 
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
-
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
 }
