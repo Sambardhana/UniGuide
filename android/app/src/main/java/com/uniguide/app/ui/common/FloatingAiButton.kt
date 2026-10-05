@@ -32,8 +32,8 @@ fun FloatingAiButton(
             .background(
                 brush = Brush.radialGradient(
                     colors = listOf(
-                        Color(0xFF263238),
-                        Color(0xFF101820)
+                        Color.White,
+                        Color(0xFFF3E8FF)
                     )
                 ),
                 shape = CircleShape
@@ -42,8 +42,8 @@ fun FloatingAiButton(
                 width = 2.dp,
                 brush = Brush.linearGradient(
                     colors = listOf(
-                        Color(0xFFFF6B35),
-                        Color(0xFF9C5CFF)
+                        Color(0xFF9C5CFF),
+                        Color(0xFF0B7285)
                     )
                 ),
                 shape = CircleShape
@@ -56,8 +56,8 @@ fun FloatingAiButton(
 
         Text(
             text = "✦",
-            color = Color(0xFFFF6B35),
-            fontSize = 30.sp
+            color = Color(0xFF0B7285),
+            fontSize = 32.sp
         )
     }
 }

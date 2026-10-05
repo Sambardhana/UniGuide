@@ -1,7 +1,7 @@
 package com.uniguide.app.ui.common
 
-import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,12 +12,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -35,29 +37,43 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
+
+// ============================================================
+// DATA MODELS
+// ============================================================
+
+data class InfoSection(
+    val icon: String,
+    val title: String,
+    val description: String,
+    val skills: List<String>
+)
 
 data class StylishItem(
     val icon: String,
     val title: String,
     val subtitle: String,
     val date: String = "",
-    val details: String
+    val details: String,
+    val sections: List<InfoSection> = emptyList()
 )
+
+// ============================================================
+// MAIN SCREEN
+// ============================================================
 
 @Composable
 fun StylishInfoScreen(
     title: String,
     subtitle: String,
     headerIcon: String,
-    items: List<StylishItem>
+    items: List<StylishItem>,
+    onItemClick: ((StylishItem) -> Boolean)? = null
 ) {
 
     var selectedItem by remember {
         mutableStateOf<StylishItem?>(null)
-    }
-
-    var expandedTitle by remember {
-        mutableStateOf<String?>(null)
     }
 
     Column(
@@ -66,23 +82,25 @@ fun StylishInfoScreen(
             .background(Color(0xFFF6F8FC))
     ) {
 
-        // ---------------- HEADER ----------------
+        // ====================================================
+        // HEADER
+        // ====================================================
 
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(300.dp)
+                .height(275.dp)
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
-                            Color(0xFF008FA3),
-                            Color(0xFF36B8C4),
-                            Color(0xFF75D6D9)
+                            Color(0xFF08758A),
+                            Color(0xFF1498AA),
+                            Color(0xFF71D0D5)
                         )
                     ),
                     shape = RoundedCornerShape(
-                        bottomStart = 52.dp,
-                        bottomEnd = 52.dp
+                        bottomStart = 45.dp,
+                        bottomEnd = 45.dp
                     )
                 )
         ) {
@@ -91,26 +109,39 @@ fun StylishInfoScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(
-                        start = 30.dp,
-                        end = 30.dp,
-                        top = 38.dp,
-                        bottom = 28.dp
+                        start = 28.dp,
+                        end = 28.dp,
+                        top = 35.dp,
+                        bottom = 30.dp
                     ),
                 verticalArrangement = Arrangement.Bottom
             ) {
 
-                Text(
-                    text = headerIcon,
-                    fontSize = 42.sp
-                )
+                // HEADER ICON
+
+                Box(
+                    modifier = Modifier
+                        .size(68.dp)
+                        .background(
+                            Color.White.copy(alpha = 0.18f),
+                            RoundedCornerShape(22.dp)
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+
+                    Text(
+                        text = headerIcon,
+                        fontSize = 38.sp
+                    )
+                }
 
                 Spacer(
-                    modifier = Modifier.height(10.dp)
+                    modifier = Modifier.height(15.dp)
                 )
 
                 Text(
                     text = title,
-                    fontSize = 38.sp,
+                    fontSize = 36.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
                 )
@@ -121,249 +152,532 @@ fun StylishInfoScreen(
 
                 Text(
                     text = subtitle,
-                    fontSize = 17.sp,
-                    color = Color.White.copy(alpha = 0.95f),
+                    fontSize = 16.sp,
+                    color = Color.White.copy(alpha = 0.92f),
                     lineHeight = 23.sp
                 )
             }
         }
 
-        // ---------------- CONTENT ----------------
+        // ====================================================
+        // CONTENT
+        // ====================================================
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
+
             contentPadding = PaddingValues(
                 start = 20.dp,
                 end = 20.dp,
-                top = 28.dp,
-                bottom = 30.dp
+                top = 25.dp,
+                bottom = 35.dp
             ),
-            verticalArrangement = Arrangement.spacedBy(18.dp)
+
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
             item {
 
-                Text(
-                    text = "Recent Information",
-                    fontSize = 27.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF172033),
-                    modifier = Modifier.padding(
-                        start = 10.dp,
-                        bottom = 2.dp
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            start = 5.dp,
+                            bottom = 3.dp
+                        ),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    Text(
+                        text = "Explore Academics",
+                        fontSize = 25.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF172033)
                     )
-                )
+                }
             }
 
             items(items) { item ->
 
-                val expanded = expandedTitle == item.title
+                AcademicCard(
+                    item = item,
+                    onClick = {
 
-                Card(
+                        val handled =
+                            onItemClick?.invoke(item) ?: false
+
+                        if (!handled) {
+                            selectedItem = item
+                        }
+                    }
+                )
+            }
+        }
+    }
+
+    // =========================================================
+    // DETAIL DIALOG
+    // =========================================================
+
+    selectedItem?.let { item ->
+
+        StylishDetailDialog(
+            item = item,
+            onDismiss = {
+                selectedItem = null
+            }
+        )
+    }
+}
+
+// ============================================================
+// ACADEMIC CARD
+// ============================================================
+
+@Composable
+private fun AcademicCard(
+    item: StylishItem,
+    onClick: () -> Unit
+) {
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .shadow(
+                elevation = 4.dp,
+                shape = RoundedCornerShape(24.dp)
+            )
+            .clickable {
+                onClick()
+            },
+
+        shape = RoundedCornerShape(24.dp),
+
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        )
+    ) {
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp),
+
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            // =================================================
+            // ICON
+            // =================================================
+
+            Box(
+                modifier = Modifier
+                    .size(62.dp)
+                    .background(
+                        brush = Brush.linearGradient(
+                            colors = listOf(
+                                Color(0xFFE8F8FA),
+                                Color(0xFFD5F1F4)
+                            )
+                        ),
+                        shape = RoundedCornerShape(20.dp)
+                    ),
+
+                contentAlignment = Alignment.Center
+            ) {
+
+                Text(
+                    text = item.icon,
+                    fontSize = 30.sp
+                )
+            }
+
+            Spacer(
+                modifier = Modifier.width(16.dp)
+            )
+
+            // =================================================
+            // TEXT
+            // =================================================
+
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+
+                Text(
+                    text = item.title,
+                    fontSize = 19.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF172033)
+                )
+
+                Spacer(
+                    modifier = Modifier.height(5.dp)
+                )
+
+                Text(
+                    text = item.subtitle,
+                    fontSize = 14.sp,
+                    lineHeight = 20.sp,
+                    color = Color(0xFF667085)
+                )
+
+                Spacer(
+                    modifier = Modifier.height(8.dp)
+                )
+
+                Text(
+                    text = "Tap to explore  →",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xFF07516A)
+                )
+            }
+        }
+    }
+}
+
+// ============================================================
+// DETAIL DIALOG
+// ============================================================
+
+@Composable
+private fun StylishDetailDialog(
+    item: StylishItem,
+    onDismiss: () -> Unit
+) {
+
+    Dialog(
+        onDismissRequest = onDismiss
+    ) {
+
+        Card(
+            modifier = Modifier
+                .fillMaxWidth(0.96f)
+                .widthIn(max = 450.dp)
+                .heightIn(max = 680.dp),
+
+            shape = RoundedCornerShape(30.dp),
+
+            colors = CardDefaults.cardColors(
+                containerColor = Color.White
+            ),
+
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp
+            )
+        ) {
+
+            Column(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+
+                // =================================================
+                // DIALOG HEADER
+                // =================================================
+
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .animateContentSize()
-                        .shadow(
-                            elevation = if (expanded) 8.dp else 3.dp,
-                            shape = RoundedCornerShape(25.dp)
+                        .background(
+                            brush = Brush.linearGradient(
+                                colors = listOf(
+                                    Color(0xFF08758A),
+                                    Color(0xFF1498AA)
+                                )
+                            ),
+                            shape = RoundedCornerShape(
+                                topStart = 30.dp,
+                                topEnd = 30.dp
+                            )
                         )
-                        .clickable {
-
-                            expandedTitle =
-                                if (expanded) {
-                                    null
-                                } else {
-                                    item.title
-                                }
-
-                            selectedItem = item
-                        },
-                    shape = RoundedCornerShape(25.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color.White
-                    ),
-                    elevation = CardDefaults.cardElevation(
-                        defaultElevation = 1.dp
-                    )
+                        .padding(
+                            start = 22.dp,
+                            end = 18.dp,
+                            top = 22.dp,
+                            bottom = 22.dp
+                        )
                 ) {
 
-                    Column(
-                        modifier = Modifier.padding(22.dp)
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
 
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically
+                        // ICON
+
+                        Box(
+                            modifier = Modifier
+                                .size(58.dp)
+                                .background(
+                                    Color.White.copy(alpha = 0.18f),
+                                    RoundedCornerShape(18.dp)
+                                ),
+                            contentAlignment = Alignment.Center
                         ) {
 
-                            // ICON BOX
-                            Box(
-                                modifier = Modifier
-                                    .size(58.dp)
-                                    .background(
-                                        Color(0xFFF0F6FF),
-                                        RoundedCornerShape(18.dp)
-                                    ),
-                                contentAlignment = Alignment.Center
-                            ) {
-
-                                Text(
-                                    text = item.icon,
-                                    fontSize = 28.sp
-                                )
-                            }
-
-                            Spacer(
-                                modifier = Modifier.size(16.dp)
+                            Text(
+                                text = item.icon,
+                                fontSize = 30.sp
                             )
-
-                            Column(
-                                modifier = Modifier.weight(1f)
-                            ) {
-
-                                Text(
-                                    text = item.title,
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = Color(0xFF172033)
-                                )
-
-                                if (item.date.isNotEmpty()) {
-
-                                    Spacer(
-                                        modifier = Modifier.height(5.dp)
-                                    )
-
-                                    Text(
-                                        text = item.date,
-                                        fontSize = 13.sp,
-                                        color = Color(0xFF667085)
-                                    )
-                                }
-                            }
                         }
 
                         Spacer(
-                            modifier = Modifier.height(15.dp)
+                            modifier = Modifier.width(14.dp)
                         )
 
-                        Text(
-                            text = item.subtitle,
-                            fontSize = 16.sp,
-                            color = Color(0xFF667085),
-                            lineHeight = 24.sp
-                        )
+                        Column(
+                            modifier = Modifier.weight(1f)
+                        ) {
 
-                        // Expanded part
-
-                        if (expanded) {
-
-                            Spacer(
-                                modifier = Modifier.height(15.dp)
+                            Text(
+                                text = item.title,
+                                fontSize = 23.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White
                             )
 
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .background(
-                                        Color(0xFFF3FAFB),
-                                        RoundedCornerShape(16.dp)
-                                    )
-                                    .padding(15.dp)
-                            ) {
-
-                                Text(
-                                    text = item.details,
-                                    fontSize = 15.sp,
-                                    color = Color(0xFF344054),
-                                    lineHeight = 23.sp
-                                )
-                            }
-
                             Spacer(
-                                modifier = Modifier.height(10.dp)
+                                modifier = Modifier.height(3.dp)
                             )
 
                             Text(
-                                text = "Tap again to close",
+                                text = "Explore opportunities",
                                 fontSize = 13.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = Color(0xFF008FA3)
+                                color = Color.White.copy(alpha = 0.88f)
                             )
                         }
+
+                        // CLOSE BUTTON
+
+                        Text(
+                            text = "✕",
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White,
+                            modifier = Modifier
+                                .clickable {
+                                    onDismiss()
+                                }
+                                .padding(8.dp)
+                        )
+                    }
+                }
+
+                // =================================================
+                // SCROLLABLE CONTENT
+                // =================================================
+
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f, fill = false)
+                        .heightIn(max = 500.dp),
+
+                    contentPadding = PaddingValues(
+                        start = 20.dp,
+                        end = 20.dp,
+                        top = 20.dp,
+                        bottom = 15.dp
+                    ),
+
+                    verticalArrangement = Arrangement.spacedBy(15.dp)
+                ) {
+
+                    // ------------------------------------------------
+                    // INTRODUCTION
+                    // ------------------------------------------------
+
+                    item {
+
+                        Text(
+                            text = item.details,
+                            fontSize = 15.sp,
+                            lineHeight = 23.sp,
+                            color = Color(0xFF475467)
+                        )
+                    }
+
+                    // ------------------------------------------------
+                    // SKILL CATEGORIES
+                    // ------------------------------------------------
+
+                    if (item.sections.isNotEmpty()) {
+
+                        items(item.sections) { section ->
+
+                            SkillCategoryCard(
+                                section = section
+                            )
+                        }
+                    }
+                }
+
+                // =================================================
+                // BOTTOM BUTTON
+                // =================================================
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            start = 20.dp,
+                            end = 20.dp,
+                            bottom = 18.dp
+                        )
+                ) {
+
+                    TextButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+
+                        Text(
+                            text = "Close",
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF08758A)
+                        )
                     }
                 }
             }
         }
     }
+}
 
-    // ---------------- POPUP ----------------
+// ============================================================
+// SKILL CATEGORY CARD
+// ============================================================
 
-    selectedItem?.let { item ->
+@Composable
+private fun SkillCategoryCard(
+    section: InfoSection
+) {
 
-        AlertDialog(
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                Color(0xFFF3FBFD),
+                RoundedCornerShape(20.dp)
+            )
+            .border(
+                width = 1.dp,
+                color = Color(0xFFD5F1F4),
+                shape = RoundedCornerShape(20.dp)
+            )
+            .padding(16.dp)
+    ) {
 
-            onDismissRequest = {
-                selectedItem = null
-            },
+        // =====================================================
+        // CATEGORY HEADER
+        // =====================================================
 
-            icon = {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            Box(
+                modifier = Modifier
+                    .size(46.dp)
+                    .background(
+                        Color(0xFFE8F8FA),
+                        RoundedCornerShape(15.dp)
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+
                 Text(
-                    text = item.icon,
-                    fontSize = 40.sp
+                    text = section.icon,
+                    fontSize = 24.sp
                 )
-            },
+            }
 
-            title = {
-                Text(
-                    text = item.title,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 22.sp
-                )
-            },
+            Spacer(
+                modifier = Modifier.width(12.dp)
+            )
 
-            text = {
+            Text(
+                text = section.title,
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF07516A)
+            )
+        }
 
-                Column {
+        Spacer(
+            modifier = Modifier.height(10.dp)
+        )
 
-                    if (item.date.isNotEmpty()) {
+        // =====================================================
+        // DESCRIPTION
+        // =====================================================
 
-                        Text(
-                            text = item.date,
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFF008FA3)
-                        )
+        Text(
+            text = section.description,
+            fontSize = 13.sp,
+            lineHeight = 19.sp,
+            color = Color(0xFF667085)
+        )
 
-                        Spacer(
-                            modifier = Modifier.height(10.dp)
-                        )
-                    }
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
 
-                    Text(
-                        text = item.details,
-                        fontSize = 16.sp,
-                        lineHeight = 24.sp,
-                        color = Color(0xFF475467)
-                    )
-                }
-            },
+        // =====================================================
+        // SKILL CHIPS
+        // =====================================================
 
-            confirmButton = {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(7.dp)
+        ) {
 
-                TextButton(
-                    onClick = {
-                        selectedItem = null
-                    }
+            section.skills.chunked(2).forEach { rowSkills ->
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(7.dp)
                 ) {
 
-                    Text(
-                        text = "Close",
-                        color = Color(0xFF008FA3),
-                        fontWeight = FontWeight.Bold
-                    )
+                    rowSkills.forEach { skill ->
+
+                        Box(
+                            modifier = Modifier
+                                .weight(1f)
+                                .background(
+                                    Color.White,
+                                    RoundedCornerShape(12.dp)
+                                )
+                                .border(
+                                    width = 1.dp,
+                                    color = Color(0xFFE5E7EB),
+                                    shape = RoundedCornerShape(12.dp)
+                                )
+                                .padding(
+                                    horizontal = 9.dp,
+                                    vertical = 8.dp
+                                )
+                        ) {
+
+                            Text(
+                                text = skill,
+                                fontSize = 12.sp,
+                                lineHeight = 16.sp,
+                                color = Color(0xFF344054),
+                                fontWeight = FontWeight.Medium
+                            )
+                        }
+                    }
+
+                    // Keep the last item from becoming too wide
+                    if (rowSkills.size == 1) {
+
+                        Spacer(
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
                 }
             }
-        )
+        }
     }
 }
