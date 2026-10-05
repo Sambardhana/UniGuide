@@ -93,9 +93,9 @@ fun StylishInfoScreen(
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
-                            Color(0xFF5B2EFF),
-                            Color(0xFF7B4DFF),
-                            Color(0xFF9B7BFF)
+                            Color(0xFF08758A),
+                            Color(0xFF1498AA),
+                            Color(0xFF71D0D5)
                         )
                     ),
                     shape = RoundedCornerShape(
@@ -276,8 +276,8 @@ private fun AcademicCard(
                     .background(
                         brush = Brush.linearGradient(
                             colors = listOf(
-                                Color(0xFFF0EBFF),
-                                Color(0xFFE7DEFF)
+                                Color(0xFFE8F8FA),
+                                Color(0xFFD5F1F4)
                             )
                         ),
                         shape = RoundedCornerShape(20.dp)
@@ -330,7 +330,7 @@ private fun AcademicCard(
                     text = "Tap to explore  →",
                     fontSize = 12.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = Color(0xFF6842E8)
+                    color = Color(0xFF07516A)
                 )
             }
         }
@@ -382,8 +382,8 @@ private fun StylishDetailDialog(
                         .background(
                             brush = Brush.linearGradient(
                                 colors = listOf(
-                                    Color(0xFF5B2EFF),
-                                    Color(0xFF8A68FF)
+                                    Color(0xFF08758A),
+                                    Color(0xFF1498AA)
                                 )
                             ),
                             shape = RoundedCornerShape(
@@ -536,7 +536,7 @@ private fun StylishDetailDialog(
                             text = "Close",
                             fontSize = 15.sp,
                             fontWeight = FontWeight.Bold,
-                            color = Color(0xFF6842E8)
+                            color = Color(0xFF08758A)
                         )
                     }
                 }
@@ -558,12 +558,12 @@ private fun SkillCategoryCard(
         modifier = Modifier
             .fillMaxWidth()
             .background(
-                Color(0xFFF8F7FF),
+                Color(0xFFF3FBFD),
                 RoundedCornerShape(20.dp)
             )
             .border(
                 width = 1.dp,
-                color = Color(0xFFE8E2FF),
+                color = Color(0xFFD5F1F4),
                 shape = RoundedCornerShape(20.dp)
             )
             .padding(16.dp)
@@ -581,7 +581,7 @@ private fun SkillCategoryCard(
                 modifier = Modifier
                     .size(46.dp)
                     .background(
-                        Color(0xFFECE6FF),
+                        Color(0xFFE8F8FA),
                         RoundedCornerShape(15.dp)
                     ),
                 contentAlignment = Alignment.Center
@@ -601,7 +601,7 @@ private fun SkillCategoryCard(
                 text = section.title,
                 fontSize = 17.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFF24213A)
+                color = Color(0xFF07516A)
             )
         }
 
