@@ -181,13 +181,17 @@ fun DepartmentScreen(
         // HEADER
         // ==================================================
 
+// ==================================================
+// HEADER - SAME AS HOME SCREEN
+// ==================================================
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(
                     RoundedCornerShape(
-                        bottomStart = 32.dp,
-                        bottomEnd = 32.dp
+                        bottomStart = 40.dp,
+                        bottomEnd = 40.dp
                     )
                 )
                 .background(
@@ -200,47 +204,75 @@ fun DepartmentScreen(
                     )
                 )
                 .padding(
-                    start = 26.dp,
-                    end = 26.dp,
-                    top = 38.dp,
+                    start = 36.dp,
+                    end = 36.dp,
+                    top = 22.dp,
                     bottom = 28.dp
                 )
         ) {
 
-            Text(
-                text = "🏢",
-                fontSize = 29.sp
-            )
+            // TOP ROW - SAME AS HOME
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                Box(
+                    modifier = Modifier
+                        .size(72.dp)
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(Color.White),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "🏢",
+                        fontSize = 34.sp
+                    )
+                }
+
+                Spacer(
+                    modifier = Modifier.width(18.dp)
+                )
+
+                Column {
+
+                    Text(
+                        text = "UniGuide",
+                        color = Color.White,
+                        fontSize = 27.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+
+                    Text(
+                        text = "Teacher Portal",
+                        color = Color.White.copy(alpha = 0.85f),
+                        fontSize = 16.sp
+                    )
+                }
+            }
 
             Spacer(
-                modifier = Modifier.height(8.dp)
+                modifier = Modifier.height(25.dp)
             )
 
+            // PAGE TITLE
             Text(
                 text = "Departments",
                 color = Color.White,
-                fontSize = 28.sp,
-                fontWeight = FontWeight.ExtraBold
+                fontSize = 29.sp,
+                fontWeight = FontWeight.Bold
             )
 
             Spacer(
-                modifier = Modifier.height(5.dp)
+                modifier = Modifier.height(7.dp)
             )
 
+            // PAGE SUBTITLE
             Text(
-                text = "Explore CUTM academic schools",
-                color = Color.White.copy(
-                    alpha = 0.9f
-                ),
-                fontSize = 14.sp
+                text = "Explore CUTM academic schools.",
+                color = Color.White.copy(alpha = 0.9f),
+                fontSize = 15.sp
             )
         }
-
-
-        Spacer(
-            modifier = Modifier.height(16.dp)
-        )
-
 
         // ==================================================
         // SEARCH

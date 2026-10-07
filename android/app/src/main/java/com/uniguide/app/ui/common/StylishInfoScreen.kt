@@ -31,6 +31,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -39,9 +40,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 
-// ============================================================
-// DATA MODELS
-// ============================================================
 
 data class InfoSection(
     val icon: String,
@@ -49,6 +47,7 @@ data class InfoSection(
     val description: String,
     val skills: List<String>
 )
+
 
 data class StylishItem(
     val icon: String,
@@ -59,9 +58,6 @@ data class StylishItem(
     val sections: List<InfoSection> = emptyList()
 )
 
-// ============================================================
-// MAIN SCREEN
-// ============================================================
 
 @Composable
 fun StylishInfoScreen(
@@ -76,94 +72,140 @@ fun StylishInfoScreen(
         mutableStateOf<StylishItem?>(null)
     }
 
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF6F8FC))
+            .background(
+                Color(0xFFF3FBFD)
+            )
     ) {
 
-        // ====================================================
-        // HEADER
-        // ====================================================
+        // =====================================================
+        // SAME HEADER STYLE AS HOMESCREEN
+        // =====================================================
 
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(275.dp)
+                .clip(
+                    RoundedCornerShape(
+                        bottomStart = 40.dp,
+                        bottomEnd = 40.dp
+                    )
+                )
                 .background(
-                    brush = Brush.verticalGradient(
+                    brush = Brush.horizontalGradient(
                         colors = listOf(
                             Color(0xFF08758A),
                             Color(0xFF1498AA),
                             Color(0xFF71D0D5)
                         )
-                    ),
-                    shape = RoundedCornerShape(
-                        bottomStart = 45.dp,
-                        bottomEnd = 45.dp
                     )
+                )
+                .padding(
+                    start = 36.dp,
+                    end = 36.dp,
+                    top = 22.dp,
+                    bottom = 28.dp
                 )
         ) {
 
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(
-                        start = 28.dp,
-                        end = 28.dp,
-                        top = 35.dp,
-                        bottom = 30.dp
-                    ),
-                verticalArrangement = Arrangement.Bottom
-            ) {
+            // =================================================
+            // HEADER TOP ROW
+            // =================================================
 
-                // HEADER ICON
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
 
                 Box(
                     modifier = Modifier
-                        .size(68.dp)
+                        .size(72.dp)
+                        .clip(
+                            RoundedCornerShape(20.dp)
+                        )
                         .background(
-                            Color.White.copy(alpha = 0.18f),
-                            RoundedCornerShape(22.dp)
+                            Color.White
                         ),
+
                     contentAlignment = Alignment.Center
                 ) {
 
                     Text(
                         text = headerIcon,
-                        fontSize = 38.sp
+                        fontSize = 34.sp
                     )
                 }
 
-                Spacer(
-                    modifier = Modifier.height(15.dp)
-                )
-
-                Text(
-                    text = title,
-                    fontSize = 36.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
-                )
 
                 Spacer(
-                    modifier = Modifier.height(6.dp)
+                    modifier = Modifier.width(18.dp)
                 )
 
-                Text(
-                    text = subtitle,
-                    fontSize = 16.sp,
-                    color = Color.White.copy(alpha = 0.92f),
-                    lineHeight = 23.sp
-                )
+
+                Column {
+
+                    Text(
+                        text = title,
+                        color = Color.White,
+                        fontSize = 27.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+
+                    Text(
+                        text = "Student Portal",
+                        color = Color.White.copy(
+                            alpha = 0.85f
+                        ),
+                        fontSize = 16.sp
+                    )
+                }
             }
+
+
+            Spacer(
+                modifier = Modifier.height(25.dp)
+            )
+
+
+            // =================================================
+            // PAGE TITLE
+            // =================================================
+
+            Text(
+                text = title,
+                color = Color.White,
+                fontSize = 29.sp,
+                fontWeight = FontWeight.Bold
+            )
+
+
+            Spacer(
+                modifier = Modifier.height(7.dp)
+            )
+
+
+            // =================================================
+            // PAGE SUBTITLE
+            // =================================================
+
+            Text(
+                text = subtitle,
+                color = Color.White.copy(
+                    alpha = 0.9f
+                ),
+                fontSize = 15.sp
+            )
         }
 
-        // ====================================================
+
+        // =====================================================
         // CONTENT
-        // ====================================================
+        // =====================================================
 
         LazyColumn(
+
             modifier = Modifier.fillMaxSize(),
 
             contentPadding = PaddingValues(
@@ -173,29 +215,30 @@ fun StylishInfoScreen(
                 bottom = 35.dp
             ),
 
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(
+                16.dp
+            )
         ) {
 
             item {
 
-                Row(
+                Text(
+                    text = "What would you like to explore?",
+
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(
-                            start = 5.dp,
-                            bottom = 3.dp
+                            horizontal = 11.dp
                         ),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
 
-                    Text(
-                        text = "Explore Academics",
-                        fontSize = 25.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFF172033)
-                    )
-                }
+                    color = Color(0xFF07516A),
+
+                    fontSize = 19.sp,
+
+                    fontWeight = FontWeight.Bold
+                )
             }
+
 
             items(items) { item ->
 
@@ -215,6 +258,7 @@ fun StylishInfoScreen(
         }
     }
 
+
     // =========================================================
     // DETAIL DIALOG
     // =========================================================
@@ -230,9 +274,10 @@ fun StylishInfoScreen(
     }
 }
 
-// ============================================================
+
+// =============================================================
 // ACADEMIC CARD
-// ============================================================
+// =============================================================
 
 @Composable
 private fun AcademicCard(
@@ -241,6 +286,7 @@ private fun AcademicCard(
 ) {
 
     Card(
+
         modifier = Modifier
             .fillMaxWidth()
             .shadow(
@@ -259,6 +305,7 @@ private fun AcademicCard(
     ) {
 
         Row(
+
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
@@ -266,11 +313,8 @@ private fun AcademicCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-            // =================================================
-            // ICON
-            // =================================================
-
             Box(
+
                 modifier = Modifier
                     .size(62.dp)
                     .background(
@@ -292,13 +336,11 @@ private fun AcademicCard(
                 )
             }
 
+
             Spacer(
                 modifier = Modifier.width(16.dp)
             )
 
-            // =================================================
-            // TEXT
-            // =================================================
 
             Column(
                 modifier = Modifier.weight(1f)
@@ -311,9 +353,11 @@ private fun AcademicCard(
                     color = Color(0xFF172033)
                 )
 
+
                 Spacer(
                     modifier = Modifier.height(5.dp)
                 )
+
 
                 Text(
                     text = item.subtitle,
@@ -322,9 +366,11 @@ private fun AcademicCard(
                     color = Color(0xFF667085)
                 )
 
+
                 Spacer(
                     modifier = Modifier.height(8.dp)
                 )
+
 
                 Text(
                     text = "Tap to explore  →",
@@ -337,9 +383,10 @@ private fun AcademicCard(
     }
 }
 
-// ============================================================
+
+// =============================================================
 // DETAIL DIALOG
-// ============================================================
+// =============================================================
 
 @Composable
 private fun StylishDetailDialog(
@@ -352,10 +399,15 @@ private fun StylishDetailDialog(
     ) {
 
         Card(
+
             modifier = Modifier
                 .fillMaxWidth(0.96f)
-                .widthIn(max = 450.dp)
-                .heightIn(max = 680.dp),
+                .widthIn(
+                    max = 450.dp
+                )
+                .heightIn(
+                    max = 680.dp
+                ),
 
             shape = RoundedCornerShape(30.dp),
 
@@ -372,11 +424,8 @@ private fun StylishDetailDialog(
                 modifier = Modifier.fillMaxWidth()
             ) {
 
-                // =================================================
-                // DIALOG HEADER
-                // =================================================
-
                 Box(
+
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(
@@ -404,15 +453,17 @@ private fun StylishDetailDialog(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
 
-                        // ICON
-
                         Box(
+
                             modifier = Modifier
                                 .size(58.dp)
                                 .background(
-                                    Color.White.copy(alpha = 0.18f),
+                                    Color.White.copy(
+                                        alpha = 0.18f
+                                    ),
                                     RoundedCornerShape(18.dp)
                                 ),
+
                             contentAlignment = Alignment.Center
                         ) {
 
@@ -422,9 +473,11 @@ private fun StylishDetailDialog(
                             )
                         }
 
+
                         Spacer(
                             modifier = Modifier.width(14.dp)
                         )
+
 
                         Column(
                             modifier = Modifier.weight(1f)
@@ -437,24 +490,28 @@ private fun StylishDetailDialog(
                                 color = Color.White
                             )
 
+
                             Spacer(
                                 modifier = Modifier.height(3.dp)
                             )
 
+
                             Text(
                                 text = "Explore opportunities",
                                 fontSize = 13.sp,
-                                color = Color.White.copy(alpha = 0.88f)
+                                color = Color.White.copy(
+                                    alpha = 0.88f
+                                )
                             )
                         }
 
-                        // CLOSE BUTTON
 
                         Text(
                             text = "✕",
                             fontSize = 22.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.White,
+
                             modifier = Modifier
                                 .clickable {
                                     onDismiss()
@@ -464,15 +521,18 @@ private fun StylishDetailDialog(
                     }
                 }
 
-                // =================================================
-                // SCROLLABLE CONTENT
-                // =================================================
 
                 LazyColumn(
+
                     modifier = Modifier
                         .fillMaxWidth()
-                        .weight(1f, fill = false)
-                        .heightIn(max = 500.dp),
+                        .weight(
+                            1f,
+                            fill = false
+                        )
+                        .heightIn(
+                            max = 500.dp
+                        ),
 
                     contentPadding = PaddingValues(
                         start = 20.dp,
@@ -481,12 +541,10 @@ private fun StylishDetailDialog(
                         bottom = 15.dp
                     ),
 
-                    verticalArrangement = Arrangement.spacedBy(15.dp)
+                    verticalArrangement = Arrangement.spacedBy(
+                        15.dp
+                    )
                 ) {
-
-                    // ------------------------------------------------
-                    // INTRODUCTION
-                    // ------------------------------------------------
 
                     item {
 
@@ -498,9 +556,6 @@ private fun StylishDetailDialog(
                         )
                     }
 
-                    // ------------------------------------------------
-                    // SKILL CATEGORIES
-                    // ------------------------------------------------
 
                     if (item.sections.isNotEmpty()) {
 
@@ -513,9 +568,6 @@ private fun StylishDetailDialog(
                     }
                 }
 
-                // =================================================
-                // BOTTOM BUTTON
-                // =================================================
 
                 Box(
                     modifier = Modifier
@@ -545,9 +597,10 @@ private fun StylishDetailDialog(
     }
 }
 
-// ============================================================
+
+// =============================================================
 // SKILL CATEGORY CARD
-// ============================================================
+// =============================================================
 
 @Composable
 private fun SkillCategoryCard(
@@ -555,6 +608,7 @@ private fun SkillCategoryCard(
 ) {
 
     Column(
+
         modifier = Modifier
             .fillMaxWidth()
             .background(
@@ -569,21 +623,19 @@ private fun SkillCategoryCard(
             .padding(16.dp)
     ) {
 
-        // =====================================================
-        // CATEGORY HEADER
-        // =====================================================
-
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
 
             Box(
+
                 modifier = Modifier
                     .size(46.dp)
                     .background(
                         Color(0xFFE8F8FA),
                         RoundedCornerShape(15.dp)
                     ),
+
                 contentAlignment = Alignment.Center
             ) {
 
@@ -593,9 +645,11 @@ private fun SkillCategoryCard(
                 )
             }
 
+
             Spacer(
                 modifier = Modifier.width(12.dp)
             )
+
 
             Text(
                 text = section.title,
@@ -605,13 +659,11 @@ private fun SkillCategoryCard(
             )
         }
 
+
         Spacer(
             modifier = Modifier.height(10.dp)
         )
 
-        // =====================================================
-        // DESCRIPTION
-        // =====================================================
 
         Text(
             text = section.description,
@@ -620,64 +672,67 @@ private fun SkillCategoryCard(
             color = Color(0xFF667085)
         )
 
+
         Spacer(
             modifier = Modifier.height(12.dp)
         )
 
-        // =====================================================
-        // SKILL CHIPS
-        // =====================================================
 
         Column(
             verticalArrangement = Arrangement.spacedBy(7.dp)
         ) {
 
-            section.skills.chunked(2).forEach { rowSkills ->
+            section.skills
+                .chunked(2)
+                .forEach { rowSkills ->
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(7.dp)
-                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
 
-                    rowSkills.forEach { skill ->
+                        horizontalArrangement =
+                            Arrangement.spacedBy(7.dp)
+                    ) {
 
-                        Box(
-                            modifier = Modifier
-                                .weight(1f)
-                                .background(
-                                    Color.White,
-                                    RoundedCornerShape(12.dp)
+                        rowSkills.forEach { skill ->
+
+                            Box(
+
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .background(
+                                        Color.White,
+                                        RoundedCornerShape(12.dp)
+                                    )
+                                    .border(
+                                        width = 1.dp,
+                                        color = Color(0xFFE5E7EB),
+                                        shape = RoundedCornerShape(12.dp)
+                                    )
+                                    .padding(
+                                        horizontal = 9.dp,
+                                        vertical = 8.dp
+                                    )
+                            ) {
+
+                                Text(
+                                    text = skill,
+                                    fontSize = 12.sp,
+                                    lineHeight = 16.sp,
+                                    color = Color(0xFF344054),
+                                    fontWeight = FontWeight.Medium
                                 )
-                                .border(
-                                    width = 1.dp,
-                                    color = Color(0xFFE5E7EB),
-                                    shape = RoundedCornerShape(12.dp)
-                                )
-                                .padding(
-                                    horizontal = 9.dp,
-                                    vertical = 8.dp
-                                )
-                        ) {
+                            }
+                        }
 
-                            Text(
-                                text = skill,
-                                fontSize = 12.sp,
-                                lineHeight = 16.sp,
-                                color = Color(0xFF344054),
-                                fontWeight = FontWeight.Medium
+
+                        if (rowSkills.size == 1) {
+
+                            Spacer(
+                                modifier = Modifier.weight(1f)
                             )
                         }
                     }
-
-                    // Keep the last item from becoming too wide
-                    if (rowSkills.size == 1) {
-
-                        Spacer(
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
                 }
-            }
         }
     }
 }

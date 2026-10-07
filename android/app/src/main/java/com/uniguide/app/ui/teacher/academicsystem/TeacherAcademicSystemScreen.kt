@@ -3,6 +3,7 @@ package com.uniguide.app.ui.teacher.academicsystem
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -34,12 +35,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 
+// ==========================================================
+// ACADEMIC TOPIC MODEL
+// ==========================================================
+
 private data class AcademicTopic(
     val icon: String,
     val title: String,
     val description: String
 )
 
+
+// ==========================================================
+// ACADEMIC TOPICS
+// ==========================================================
 
 private val academicTopics = listOf(
 
@@ -140,6 +149,10 @@ private val academicTopics = listOf(
 )
 
 
+// ==========================================================
+// TEACHER ACADEMIC SYSTEM SCREEN
+// ==========================================================
+
 @Composable
 fun TeacherAcademicSystemScreen() {
 
@@ -153,6 +166,7 @@ fun TeacherAcademicSystemScreen() {
 
         // ==================================================
         // HEADER
+        // SAME STYLE AS HOME / DEPARTMENT
         // ==================================================
 
         Column(
@@ -160,8 +174,8 @@ fun TeacherAcademicSystemScreen() {
                 .fillMaxWidth()
                 .clip(
                     RoundedCornerShape(
-                        bottomStart = 32.dp,
-                        bottomEnd = 32.dp
+                        bottomStart = 40.dp,
+                        bottomEnd = 40.dp
                     )
                 )
                 .background(
@@ -174,42 +188,108 @@ fun TeacherAcademicSystemScreen() {
                     )
                 )
                 .padding(
-                    start = 26.dp,
-                    end = 26.dp,
-                    top = 36.dp,
+                    start = 36.dp,
+                    end = 36.dp,
+                    top = 22.dp,
                     bottom = 28.dp
                 )
         ) {
 
-            Text(
-                text = "📚",
-                fontSize = 30.sp
-            )
+            // ----------------------------------------------
+            // TOP ROW
+            // ----------------------------------------------
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                Box(
+                    modifier = Modifier
+                        .size(72.dp)
+                        .clip(
+                            RoundedCornerShape(20.dp)
+                        )
+                        .background(Color.White),
+                    contentAlignment = Alignment.Center
+                ) {
+
+                    Text(
+                        text = "📚",
+                        fontSize = 34.sp
+                    )
+                }
+
+                Spacer(
+                    modifier = Modifier.width(18.dp)
+                )
+
+                Column {
+
+                    Text(
+                        text = "UniGuide",
+                        color = Color.White,
+                        fontSize = 27.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+
+                    Text(
+                        text = "Teacher Portal",
+                        color = Color.White.copy(
+                            alpha = 0.85f
+                        ),
+                        fontSize = 16.sp
+                    )
+                }
+            }
+
+
+            // ----------------------------------------------
+            // SPACE
+            // ----------------------------------------------
 
             Spacer(
-                modifier = Modifier.height(8.dp)
+                modifier = Modifier.height(25.dp)
             )
+
+
+            // ----------------------------------------------
+            // PAGE TITLE
+            // ----------------------------------------------
 
             Text(
                 text = "Academic System",
                 color = Color.White,
-                fontSize = 28.sp,
-                fontWeight = FontWeight.ExtraBold
+                fontSize = 29.sp,
+                fontWeight = FontWeight.Bold
             )
 
+
+            // ----------------------------------------------
+            // SPACE
+            // ----------------------------------------------
+
             Spacer(
-                modifier = Modifier.height(5.dp)
+                modifier = Modifier.height(7.dp)
             )
+
+
+            // ----------------------------------------------
+            // PAGE SUBTITLE
+            // ----------------------------------------------
 
             Text(
                 text = "Academic information for teachers",
                 color = Color.White.copy(
                     alpha = 0.9f
                 ),
-                fontSize = 14.sp
+                fontSize = 15.sp
             )
         }
 
+
+        // ==================================================
+        // SPACE AFTER HEADER
+        // ==================================================
 
         Spacer(
             modifier = Modifier.height(16.dp)
@@ -263,6 +343,10 @@ fun TeacherAcademicSystemScreen() {
         }
 
 
+        // ==================================================
+        // SPACE
+        // ==================================================
+
         Spacer(
             modifier = Modifier.height(16.dp)
         )
@@ -288,6 +372,10 @@ fun TeacherAcademicSystemScreen() {
             fontWeight = FontWeight.Bold
         )
 
+
+        // ==================================================
+        // SPACE
+        // ==================================================
 
         Spacer(
             modifier = Modifier.height(10.dp)
@@ -372,7 +460,7 @@ private fun AcademicTopicCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
-                androidx.compose.foundation.layout.Box(
+                Box(
                     modifier = Modifier
                         .size(52.dp)
                         .clip(
@@ -423,6 +511,10 @@ private fun AcademicTopicCard(
                     )
                 }
 
+
+                // ----------------------------------------
+                // EXPAND / COLLAPSE ICON
+                // ----------------------------------------
 
                 Text(
                     text = if (expanded) {

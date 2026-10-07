@@ -496,7 +496,6 @@ fun TeacherAcademicCalendarScreen() {
         mutableStateOf<String?>(null)
     }
 
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -507,6 +506,7 @@ fun TeacherAcademicCalendarScreen() {
 
         // ==================================================
         // HEADER
+        // SAME STYLE AS HOME / DEPARTMENT
         // ==================================================
 
         Column(
@@ -514,8 +514,8 @@ fun TeacherAcademicCalendarScreen() {
                 .fillMaxWidth()
                 .clip(
                     RoundedCornerShape(
-                        bottomStart = 32.dp,
-                        bottomEnd = 32.dp
+                        bottomStart = 40.dp,
+                        bottomEnd = 40.dp
                     )
                 )
                 .background(
@@ -528,39 +528,102 @@ fun TeacherAcademicCalendarScreen() {
                     )
                 )
                 .padding(
-                    start = 26.dp,
-                    end = 26.dp,
-                    top = 36.dp,
+                    start = 36.dp,
+                    end = 36.dp,
+                    top = 22.dp,
                     bottom = 28.dp
                 )
         ) {
 
-            Text(
-                text = "🗓️",
-                fontSize = 30.sp
-            )
+            // ----------------------------------------------
+            // TOP ROW
+            // ----------------------------------------------
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                Box(
+                    modifier = Modifier
+                        .size(72.dp)
+                        .clip(
+                            RoundedCornerShape(20.dp)
+                        )
+                        .background(Color.White),
+
+                    contentAlignment = Alignment.Center
+                ) {
+
+                    Text(
+                        text = "🗓️",
+                        fontSize = 34.sp
+                    )
+                }
+
+                Spacer(
+                    modifier = Modifier.width(18.dp)
+                )
+
+                Column {
+
+                    Text(
+                        text = "UniGuide",
+                        color = Color.White,
+                        fontSize = 27.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+
+                    Text(
+                        text = "Teacher Portal",
+                        color = Color.White.copy(
+                            alpha = 0.85f
+                        ),
+                        fontSize = 16.sp
+                    )
+                }
+            }
+
+
+            // ----------------------------------------------
+            // SPACE
+            // ----------------------------------------------
 
             Spacer(
-                modifier = Modifier.height(8.dp)
+                modifier = Modifier.height(25.dp)
             )
+
+
+            // ----------------------------------------------
+            // PAGE TITLE
+            // ----------------------------------------------
 
             Text(
                 text = "Academic Calendar",
                 color = Color.White,
-                fontSize = 28.sp,
-                fontWeight = FontWeight.ExtraBold
+                fontSize = 29.sp,
+                fontWeight = FontWeight.Bold
             )
 
+
+            // ----------------------------------------------
+            // SPACE
+            // ----------------------------------------------
+
             Spacer(
-                modifier = Modifier.height(5.dp)
+                modifier = Modifier.height(7.dp)
             )
+
+
+            // ----------------------------------------------
+            // PAGE SUBTITLE
+            // ----------------------------------------------
 
             Text(
                 text = "Academic Year 2026–27",
                 color = Color.White.copy(
                     alpha = 0.9f
                 ),
-                fontSize = 14.sp
+                fontSize = 15.sp
             )
         }
 
@@ -592,6 +655,7 @@ fun TeacherAcademicCalendarScreen() {
                 ProgrammeCalendarCard(
                     programme = programme,
                     isSelected = selectedProgramme == programme.title,
+
                     onClick = {
 
                         selectedProgramme =
@@ -605,7 +669,6 @@ fun TeacherAcademicCalendarScreen() {
                             }
                     }
                 )
-
 
                 if (
                     selectedProgramme ==
