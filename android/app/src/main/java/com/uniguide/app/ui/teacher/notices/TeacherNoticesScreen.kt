@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -18,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -25,31 +27,45 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+
+// ==========================================================
+// TEACHER NOTICE MODEL
+// ==========================================================
+
 data class TeacherNotice(
     val title: String,
     val description: String,
     val date: String
 )
 
+
+// ==========================================================
+// TEACHER NOTICES SCREEN
+// ==========================================================
+
 @Composable
 fun TeacherNoticesScreen() {
 
     val notices = listOf(
+
         TeacherNotice(
             "Faculty Meeting",
             "Department faculty meeting will be held in the conference room.",
             "Today"
         ),
+
         TeacherNotice(
             "Internal Assessment",
             "Please submit internal assessment marks before the deadline.",
             "18 Sep 2026"
         ),
+
         TeacherNotice(
             "Semester Examination",
             "End semester examination schedule has been released.",
             "15 Sep 2026"
         ),
+
         TeacherNotice(
             "Department Workshop",
             "A technical workshop is scheduled for next week.",
@@ -57,75 +73,143 @@ fun TeacherNoticesScreen() {
         )
     )
 
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF7F9FC))
+            .background(
+                Color(0xFFF3FBFD)
+            )
     ) {
 
-        // -----------------------------
+        // ==================================================
         // HEADER
-        // -----------------------------
+        // SAME STYLE AS HOME / DEPARTMENT
+        // ==================================================
 
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(190.dp)
+                .clip(
+                    RoundedCornerShape(
+                        bottomStart = 40.dp,
+                        bottomEnd = 40.dp
+                    )
+                )
                 .background(
-                    brush = Brush.verticalGradient(
+                    brush = Brush.horizontalGradient(
                         colors = listOf(
                             Color(0xFF08758A),
                             Color(0xFF1498AA),
                             Color(0xFF71D0D5)
                         )
-                    ),
-                    shape = RoundedCornerShape(
-                        bottomStart = 32.dp,
-                        bottomEnd = 32.dp
                     )
+                )
+                .padding(
+                    start = 36.dp,
+                    end = 36.dp,
+                    top = 22.dp,
+                    bottom = 28.dp
                 )
         ) {
 
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        horizontal = 24.dp,
-                        vertical = 40.dp
-                    )
+            // ----------------------------------------------
+            // TOP ROW
+            // ----------------------------------------------
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
             ) {
 
-                Text(
-                    text = "📢",
-                    fontSize = 28.sp
-                )
+                Box(
+                    modifier = Modifier
+                        .size(72.dp)
+                        .clip(
+                            RoundedCornerShape(20.dp)
+                        )
+                        .background(Color.White),
+                    contentAlignment = Alignment.Center
+                ) {
+
+                    Text(
+                        text = "📢",
+                        fontSize = 34.sp
+                    )
+                }
+
 
                 Spacer(
-                    modifier = Modifier.height(8.dp)
+                    modifier = Modifier.width(18.dp)
                 )
 
-                Text(
-                    text = "Notices",
-                    color = Color.White,
-                    fontSize = 28.sp,
-                    fontWeight = FontWeight.ExtraBold
-                )
 
-                Spacer(
-                    modifier = Modifier.height(4.dp)
-                )
+                Column {
 
-                Text(
-                    text = "Important updates and announcements",
-                    color = Color.White.copy(alpha = 0.9f),
-                    fontSize = 14.sp
-                )
+                    Text(
+                        text = "UniGuide",
+                        color = Color.White,
+                        fontSize = 27.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+
+                    Text(
+                        text = "Teacher Portal",
+                        color = Color.White.copy(
+                            alpha = 0.85f
+                        ),
+                        fontSize = 16.sp
+                    )
+                }
             }
+
+
+            // ----------------------------------------------
+            // SPACE
+            // ----------------------------------------------
+
+            Spacer(
+                modifier = Modifier.height(25.dp)
+            )
+
+
+            // ----------------------------------------------
+            // PAGE TITLE
+            // ----------------------------------------------
+
+            Text(
+                text = "Notices",
+                color = Color.White,
+                fontSize = 29.sp,
+                fontWeight = FontWeight.Bold
+            )
+
+
+            // ----------------------------------------------
+            // SPACE
+            // ----------------------------------------------
+
+            Spacer(
+                modifier = Modifier.height(7.dp)
+            )
+
+
+            // ----------------------------------------------
+            // PAGE SUBTITLE
+            // ----------------------------------------------
+
+            Text(
+                text = "Important updates and announcements.",
+                color = Color.White.copy(
+                    alpha = 0.9f
+                ),
+                fontSize = 15.sp
+            )
         }
 
-        // -----------------------------
+
+        // ==================================================
         // NOTICE CONTENT
-        // -----------------------------
+        // ==================================================
 
         Column(
             modifier = Modifier
@@ -143,9 +227,11 @@ fun TeacherNoticesScreen() {
                 color = Color(0xFF111827)
             )
 
+
             Spacer(
                 modifier = Modifier.height(15.dp)
             )
+
 
             notices.forEach { notice ->
 
@@ -161,6 +247,11 @@ fun TeacherNoticesScreen() {
     }
 }
 
+
+// ==========================================================
+// NOTICE CARD
+// ==========================================================
+
 @Composable
 fun NoticeCard(
     notice: TeacherNotice
@@ -168,10 +259,13 @@ fun NoticeCard(
 
     Card(
         modifier = Modifier.fillMaxWidth(),
+
         shape = RoundedCornerShape(18.dp),
+
         colors = CardDefaults.cardColors(
             containerColor = Color.White
         ),
+
         elevation = CardDefaults.cardElevation(
             defaultElevation = 3.dp
         )
@@ -183,15 +277,25 @@ fun NoticeCard(
                 .padding(16.dp)
         ) {
 
+            // ----------------------------------------------
+            // NOTICE HEADER
+            // ----------------------------------------------
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
+
                 verticalAlignment = Alignment.CenterVertically,
+
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+
+                    // ------------------------------------------
+                    // NOTICE ICON
+                    // ------------------------------------------
 
                     Box(
                         modifier = Modifier
@@ -200,17 +304,25 @@ fun NoticeCard(
                                 Color(0xFFEFF6FF),
                                 RoundedCornerShape(14.dp)
                             ),
+
                         contentAlignment = Alignment.Center
                     ) {
+
                         Text(
                             text = "📢",
                             fontSize = 18.sp
                         )
                     }
 
+
                     Spacer(
                         modifier = Modifier.size(12.dp)
                     )
+
+
+                    // ------------------------------------------
+                    // NOTICE TITLE
+                    // ------------------------------------------
 
                     Text(
                         text = notice.title,
@@ -220,6 +332,11 @@ fun NoticeCard(
                     )
                 }
 
+
+                // ------------------------------------------
+                // DATE
+                // ------------------------------------------
+
                 Text(
                     text = notice.date,
                     fontSize = 11.sp,
@@ -227,9 +344,19 @@ fun NoticeCard(
                 )
             }
 
+
+            // ----------------------------------------------
+            // SPACE
+            // ----------------------------------------------
+
             Spacer(
                 modifier = Modifier.height(12.dp)
             )
+
+
+            // ----------------------------------------------
+            // DESCRIPTION
+            // ----------------------------------------------
 
             Text(
                 text = notice.description,
@@ -241,8 +368,14 @@ fun NoticeCard(
     }
 }
 
+
+// ==========================================================
+// PREVIEW
+// ==========================================================
+
 @Preview(showBackground = true)
 @Composable
 fun TeacherNoticesScreenPreview() {
+
     TeacherNoticesScreen()
 }
