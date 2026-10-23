@@ -18,3 +18,11 @@
 .externalNativeBuild
 .cxx
 local.properties
+.idea/workspace.xml
+.env
+.env.*
+!.env.example
+application-local.properties
+application-local.yml
+*.pem
+*.key

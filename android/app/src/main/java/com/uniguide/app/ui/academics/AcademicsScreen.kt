@@ -262,7 +262,167 @@ The university conducts internal assessments, practical examinations and semeste
 
 Students are evaluated through different academic and practical assessment methods.
                 """.trimIndent()
+            ),
+
+                    // =====================================================
+                    // 7. FEES
+                    // =====================================================
+
+            StylishItem(
+                icon = "💰",
+                title = "Fees",
+                subtitle = "Course-wise tuition fee structure",
+                details = """
+CENTURION UNIVERSITY OF TECHNOLOGY AND MANAGEMENT
+Bhubaneswar Campus
+
+💰 TUITION FEE STRUCTURE
+━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎓 UNDERGRADUATE PROGRAMMES
+━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔹 B.E. / B.Tech
+   📚 10 Courses
+   💵 ₹6.2 Lakhs – ₹8 Lakhs
+
+🔹 B.Sc.
+   📚 25 Courses
+   💵 ₹1.4 Lakhs – ₹4.8 Lakhs
+
+🔹 B.Des
+   📚 1 Course
+   💵 ₹10 Lakhs
+
+🔹 BMLT
+   📚 2 Courses
+   💵 ₹2 Lakhs – ₹3 Lakhs
+
+🔹 BBA
+   📚 4 Courses
+   💵 ₹1.8 Lakhs – ₹4 Lakhs
+
+🔹 B.Pharma
+   📚 1 Course
+   💵 ₹6 Lakhs
+
+🔹 BPT
+   📚 1 Course
+   💵 ₹4 Lakhs
+
+🔹 BCA
+   📚 1 Course
+   💵 ₹3.4 Lakhs
+
+🔹 B.Com
+   📚 1 Course
+   💵 ₹3 Lakhs
+
+🔹 B.A. LL.B.
+   📚 1 Course
+   💵 ₹5.8 Lakhs
+
+🔹 BBA LL.B.
+   📚 1 Course
+   💵 ₹5.8 Lakhs
+
+🔹 BBM / BMS
+   📚 1 Course
+   💵 ₹4.8 Lakhs
+
+🔹 B.M.C.
+   📚 1 Course
+   💵 ₹66.4 Thousand
+
+
+🎓 POSTGRADUATE PROGRAMMES
+━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔹 M.Sc.
+   📚 17 Courses
+   💵 ₹1.5 Lakhs – ₹2.4 Lakhs
+
+🔹 MBA / PGDM
+   📚 3 Courses
+   💵 ₹4.8 Lakhs
+
+🔹 MCA
+   📚 1 Course
+   💵 ₹1.9 Lakhs
+
+🔹 M.E. / M.Tech
+   📚 8 Courses
+   💵 ₹1.7 Lakhs – ₹1.8 Lakhs
+
+🔹 M.Pharma
+   📚 4 Courses
+   💵 ₹3.4 Lakhs
+
+🔹 LL.M.
+   📚 3 Courses
+   💵 ₹1.8 Lakhs
+
+🔹 M.F.Sc.
+   📚 1 Course
+   💵 ₹2.2 Lakhs
+
+🔹 MPH
+   📚 1 Course
+   💵 ₹2.4 Lakhs
+
+🔹 M.M.C.
+   📚 1 Course
+   💵 ₹1.2 Lakhs
+
+
+🎓 DIPLOMA PROGRAMMES
+━━━━━━━━━━━━━━━━━━━━
+
+🔹 UG Diploma
+   📚 8 Courses
+   💵 ₹1.2 Lakhs – ₹1.4 Lakhs
+
+🔹 After 10th Diploma
+   📚 8 Courses
+   💵 ₹1.9 Lakhs
+
+🔹 D.Pharma
+   📚 1 Course
+   💵 ₹1.6 Lakhs
+
+
+🎓 DOCTORAL PROGRAMMES
+━━━━━━━━━━━━━━━━━━━━━
+
+🔹 Ph.D.
+   📚 11 Courses
+   💵 ₹4 Lakhs
+
+
+🎓 CERTIFICATE PROGRAMMES
+━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔹 Certificate
+   📚 18 Courses
+   💵 ₹45 Thousand – ₹1.8 Lakhs
+
+
+ℹ️ IMPORTANT INFORMATION
+━━━━━━━━━━━━━━━━━━━━━━━
+
+• Fees shown are tuition fees.
+
+• Hostel, examination, registration and
+  other charges are separate.
+
+. Additional First-Year Fees ₹25,000 extra for the first year.
+   
+━━━━━━━━━━━━━━━━━━━━━━━
+📌 Fee information may be updated
+   by the university from time to time.
+    """.trimIndent()
             )
+
         ),
 
         // =========================================================

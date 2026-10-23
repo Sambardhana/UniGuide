@@ -1,77 +1,84 @@
 package com.uniguide.app.ui.chat
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.uniguide.app.network.ChatMessage
+import com.uniguide.app.network.ChatRequest
+import com.uniguide.app.network.ChatResponse
 import com.uniguide.app.network.RetrofitClient
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ChatViewModel : ViewModel() {
 
-    private val _messages =
-        MutableStateFlow<List<ChatMessage>>(emptyList())
+    var chatResponseState by mutableStateOf(
+        "Ready to chat with UniGuide AI!"
+    )
+        private set
 
-    val messages: StateFlow<List<ChatMessage>> =
-        _messages
+    var isLoading by mutableStateOf(false)
+        private set
 
-    private val _isLoading =
-        MutableStateFlow(false)
+    fun sendMessage(userMessage: String) {
+        if (userMessage.isBlank() || isLoading) return
 
-    val isLoading: StateFlow<Boolean> =
-        _isLoading
+        chatResponseState = "Thinking..."
+        isLoading = true
 
-    fun sendMessage(
-        message: String,
-        userRole: String
-    ) {
-
-        if (message.isBlank()) return
-
-        val userMessage = ChatMessage(
-            role = "user",
-            content = message
+        val request = ChatRequest(
+            messages = listOf(
+                ChatMessage(
+                    role = "user",
+                    content = userMessage.trim()
+                )
+            )
         )
 
-        _messages.value =
-            _messages.value + userMessage
+        RetrofitClient.chatApi.sendChatMessage(request)
+            .enqueue(object : Callback<ChatResponse> {
 
-        viewModelScope.launch {
+                override fun onResponse(
+                    call: Call<ChatResponse>,
+                    response: Response<ChatResponse>
+                ) {
+                    isLoading = false
 
-            _isLoading.value = true
+                    if (response.isSuccessful) {
+                        val reply = response.body()?.reply
 
-            try {
+                        chatResponseState = if (!reply.isNullOrBlank()) {
+                            reply
+                        } else {
+                            "The server returned an empty reply."
+                        }
+                    } else {
+                        val errorDetails = response.errorBody()
+                            ?.string()
+                            ?.takeIf { it.isNotBlank() }
 
-                val response =
-                    RetrofitClient.chatApi.sendMessage(
+                        chatResponseState = buildString {
+                            append("Server error: ${response.code()}")
+                            if (errorDetails != null) {
+                                append("\n")
+                                append(errorDetails)
+                            }
+                        }
+                    }
+                }
 
-                        ChatRequest(
-                            role = userRole,
-                            messages = _messages.value
-                        )
-                    )
-
-                val aiMessage = ChatMessage(
-                    role = "assistant",
-                    content = response.reply
-                )
-
-                _messages.value =
-                    _messages.value + aiMessage
-
-            } catch (e: Exception) {
-
-                val errorMessage = ChatMessage(
-                    role = "assistant",
-                    content =
-                        "Sorry, I couldn't connect to the UniGuide AI server."
-                )
-
-                _messages.value =
-                    _messages.value + errorMessage
-            }
-
-            _isLoading.value = false
-        }
+                override fun onFailure(
+                    call: Call<ChatResponse>,
+                    t: Throwable
+                ) {
+                    isLoading = false
+                    chatResponseState =
+                        "Connection failed: ${
+                            t.localizedMessage ?: "Unable to connect to the server."
+                        }"
+                }
+            })
     }
 }

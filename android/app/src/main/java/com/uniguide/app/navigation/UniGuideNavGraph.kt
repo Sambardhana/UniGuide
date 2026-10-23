@@ -267,11 +267,8 @@ fun UniGuideNavGraph() {
         // ====================================================
 
         composable(Routes.STUDENT_CHAT) {
-            ChatScreen(
-                userRole = "student"
-            )
+            ChatScreen()
         }
-
         // ====================================================
         // TEACHER DASHBOARD
         // ====================================================
@@ -414,9 +411,7 @@ fun UniGuideNavGraph() {
         // ====================================================
 
         composable(Routes.TEACHER_CHAT) {
-            ChatScreen(
-                userRole = "teacher"
-            )
+            ChatScreen()
         }
     }
 }
