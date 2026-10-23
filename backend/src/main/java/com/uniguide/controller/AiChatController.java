@@ -1,21 +1,47 @@
 package com.uniguide.controller;
 
-import com.uniguide.dto.ChatRequest;
-import com.uniguide.dto.ChatResponse;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.uniguide.service.AiChatService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/ai")
 public class AiChatController {
 
+    private final AiChatService aiChatService;
+
+    public AiChatController(AiChatService aiChatService) {
+        this.aiChatService = aiChatService;
+    }
+
     @PostMapping("/chat")
     public ChatResponse chat(@RequestBody ChatRequest request) {
 
-        return new ChatResponse(
-                "Hello! UniGuide AI backend is connected successfully."
-        );
+        String message = "";
+
+        if (request.messages() != null && !request.messages().isEmpty()) {
+            message = request.messages()
+                    .get(request.messages().size() - 1)
+                    .content();
+        }
+
+        String reply = aiChatService.getAiResponse(message);
+
+        return new ChatResponse(reply);
     }
+
+    public record ChatRequest(
+            String role,
+            List<ChatMessage> messages
+    ) {}
+
+    public record ChatMessage(
+            String role,
+            String content
+    ) {}
+
+    public record ChatResponse(
+            String reply
+    ) {}
 }

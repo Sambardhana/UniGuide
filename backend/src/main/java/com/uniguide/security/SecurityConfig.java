@@ -55,6 +55,7 @@ public class SecurityConfig {
                         // Public Authentication & Health endpoints
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/health/**").permitAll()
+                        .requestMatchers("/api/ai/**").permitAll()
 
                         // Public read-oriented Student Information APIs
                         .requestMatchers(HttpMethod.GET, "/api/courses/**").permitAll()
